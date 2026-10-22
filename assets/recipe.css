@@ -1,0 +1,94 @@
+/* Recipe detail — product documentation layout, same tokens as homepage */
+.crumb{padding-top:96px;font-size:12.5px;color:var(--muted);display:flex;align-items:center;flex-wrap:wrap;gap:2px}
+.crumb a{color:var(--ink-soft);padding:3px 4px;border-radius:5px}.crumb a:hover{color:var(--accent);background:var(--accent-soft)}
+.crumb span{margin:0 4px;opacity:.55}
+.r-hero{padding:30px 0 8px;max-width:860px}
+.r-eyebrow{font-size:12px;color:var(--ink-soft);font-weight:500;margin-bottom:16px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.r-eyebrow span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:3px 9px;line-height:1.6}
+.r-hero h1{font-family:var(--latin);font-weight:700;font-size:clamp(38px,6vw,66px);line-height:1.02;letter-spacing:-.035em;color:var(--ink)}
+.r-hero .fa-sub{font-size:16.5px;color:var(--ink-soft);margin-top:17px;font-weight:400;max-width:760px;line-height:2}
+.r-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);margin:26px 0 8px;overflow:hidden}
+.r-stat{display:flex;align-items:flex-start;gap:10px;padding:14px 15px;border-inline-start:1px solid var(--line);min-width:0}
+.r-stat:first-child{border-inline-start:0}
+.r-stat .ic{display:none}
+.r-stat .k{font-size:11px;color:var(--muted);letter-spacing:.02em}
+.r-stat .v{font-size:13.5px;font-weight:650;line-height:1.65}
+.r-cover{margin:28px 0 8px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);background:var(--bg-soft)}
+.r-cover img{width:100%;aspect-ratio:21/9;object-fit:cover}
+.r-cover .ph{aspect-ratio:21/9;border:0}
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 2px}
+.toc a{font-size:12.5px;color:var(--ink-soft);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 11px;transition:.2s;line-height:1.7}
+.toc a:hover{border-color:var(--line-strong);color:var(--ink);background:var(--bg-soft)}
+.r-body{display:grid;grid-template-columns:330px minmax(0,1fr);gap:46px;align-items:start;padding:38px 0 24px}
+.r-aside{position:sticky;top:84px}
+.ing-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow)}
+.ing-card h3{font-family:var(--sans);font-size:19px;font-weight:750;margin-bottom:5px}
+.ing-card .note{font-size:12.5px;color:var(--ink-soft);margin-bottom:14px;line-height:1.8}
+.ing-card .note a{color:var(--accent);font-weight:600}
+table.ing{width:100%;border-collapse:collapse;font-size:13.5px}
+table.ing caption{text-align:right;font-weight:700;color:var(--ink);font-size:12.5px;padding:15px 0 7px;border-top:1px solid var(--line);margin-top:9px}
+table.ing caption:first-of-type{border-top:none;margin-top:0;padding-top:0}
+table.ing th,table.ing td{text-align:right;padding:8px 4px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.7}
+table.ing th{font-weight:500;color:var(--ink)}
+table.ing td.amt{color:var(--accent);font-weight:650;white-space:nowrap;width:38%;font-family:var(--sans)}
+table.ing tr:last-child th,table.ing tr:last-child td{border-bottom:none}
+.r-main{min-width:0}
+.r-main>p.muted{line-height:2!important}
+.phase{margin-bottom:44px;scroll-margin-top:84px}
+.phase-head{display:flex;align-items:center;gap:12px;margin-bottom:8px;border-bottom:1px solid var(--line);padding-bottom:13px}
+.phase-no{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:3px 9px;flex:0 0 auto;line-height:1.6}
+.phase-head h2{font-family:var(--sans);font-size:clamp(21px,3vw,27px);font-weight:750;line-height:1.35;letter-spacing:-.015em}
+.phase-when{font-size:12.5px;color:var(--muted);margin:8px 0 20px;display:flex;align-items:flex-start;gap:7px;line-height:1.8}
+.phase-when .ic{color:var(--accent)}
+ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:17px}
+ol.steps>li{counter-increment:s;position:relative;padding-inline-start:43px}
+ol.steps>li::before{content:counter(s,decimal-leading-zero);position:absolute;inset-inline-start:0;top:1px;width:30px;height:30px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--latin);direction:ltr}
+ol.steps>li h4{font-size:15.5px;font-weight:700;margin-bottom:3px;line-height:1.7}
+ol.steps>li p{font-size:15px;color:var(--ink-soft);font-weight:400;line-height:1.95}
+ol.steps>li p b,ul.sub>li b{color:var(--ink);font-weight:650}
+ul.sub{list-style:none;margin:10px 0 2px;display:flex;flex-direction:column;gap:8px}
+ul.sub>li{position:relative;padding-inline-start:18px;font-size:14.5px;color:var(--ink-soft);font-weight:400;line-height:1.85}
+ul.sub>li::before{content:"";position:absolute;inset-inline-start:2px;top:12px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.callout{border-radius:var(--radius-lg);padding:15px 17px;margin:16px 0;font-size:14px;line-height:1.9;border:1px solid var(--line);position:relative;background:var(--surface)}
+.callout .lbl{font-weight:750;display:block;margin-bottom:3px;font-size:13px}
+.callout a{color:var(--accent);font-weight:750;text-decoration:underline;text-underline-offset:3px}
+.callout.tip{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 24%,var(--line))}
+.callout.tip .lbl{color:var(--accent)}
+.callout.warn{background:var(--warning-bg);border-color:color-mix(in srgb,var(--warning) 26%,var(--line))}
+.callout.warn .lbl{color:var(--warning)}
+.callout.rule{background:var(--bg-soft);border-style:solid}
+.callout.rule .lbl{color:var(--ink)}
+.tbl-wrap{overflow-x:auto;margin:18px 0 8px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface)}
+table.tbl{width:100%;border-collapse:collapse;font-size:13.5px;min-width:520px}
+table.tbl th,table.tbl td{padding:10px 13px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.75}
+table.tbl thead th{background:var(--bg-soft);color:var(--ink);font-weight:700;font-size:12.5px;white-space:nowrap}
+table.tbl tbody tr:last-child th,table.tbl tbody tr:last-child td{border-bottom:none}
+table.tbl td.amt,table.tbl th.amt{color:var(--accent);font-weight:700;white-space:nowrap}
+table.tbl td{color:var(--ink-soft)}table.tbl td b,table.tbl th b{color:var(--ink)}
+.r-foot{border-top:1px solid var(--line);margin-top:42px;padding:26px 0 8px;text-align:center}
+.r-foot a.back{font-size:13.5px;font-weight:650;color:var(--accent)}
+.to-top{position:fixed;bottom:20px;inset-inline-start:20px;width:40px;height:40px;border-radius:8px;background:var(--ink);color:var(--bg);border:1px solid var(--ink);cursor:pointer;font-size:17px;opacity:0;pointer-events:none;transition:.25s;box-shadow:var(--shadow);z-index:40}
+.to-top.show{opacity:1;pointer-events:auto}.to-top:hover{background:var(--accent-hover)}
+@media(max-width:900px){.r-body{grid-template-columns:1fr;gap:30px}.r-aside{position:static}.r-cover img,.r-cover .ph{aspect-ratio:16/10}}
+@media(max-width:620px){.crumb{padding-top:78px}.r-hero{padding-top:22px}.r-hero h1{font-size:42px}.r-stats{grid-template-columns:1fr 1fr}.r-stat{border-top:1px solid var(--line)}.r-stat:nth-child(-n+2){border-top:0}.r-cover{margin-top:20px}.phase-head{align-items:flex-start}.phase-no{margin-top:3px}}
+
+/* Ingredient photos inside long guide pages */
+.topping-photo{margin:14px 0 18px;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;background:var(--bg-soft)}
+.topping-photo img{width:100%;aspect-ratio:16/8;object-fit:cover;display:block}
+.topping-photo figcaption{padding:9px 12px;font-size:12px;color:var(--muted);background:var(--surface)}
+@media(max-width:640px){.topping-photo img{aspect-ratio:16/10}}
+
+/* ---------- English LTR overrides for recipe pages ---------- */
+html[dir="ltr"] .r-hero .fa-sub{font-family:var(--latin);line-height:1.75}
+html[dir="ltr"] .ing-card h3,
+html[dir="ltr"] .phase-head h2{font-family:var(--latin);letter-spacing:-.02em}
+html[dir="ltr"] table.ing caption{text-align:left}
+html[dir="ltr"] table.ing th,
+html[dir="ltr"] table.ing td{text-align:left;line-height:1.55}
+html[dir="ltr"] table.ing td.amt{text-align:right;font-family:var(--latin)}
+html[dir="ltr"] table.tbl th,
+html[dir="ltr"] table.tbl td{text-align:left;line-height:1.55}
+html[dir="ltr"] ol.steps>li p,
+html[dir="ltr"] ul.sub>li,
+html[dir="ltr"] .callout{line-height:1.7}
+html[dir="ltr"] .mode-tab{text-align:left!important}
