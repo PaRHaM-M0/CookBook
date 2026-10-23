@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>PaRHaM's CookBook!</title>
+<meta content="Personal culinary notebook &amp; precision recipe archive — searchable, categorized, and available offline." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&amp;family=Vazirmatn:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/theme.css" rel="stylesheet"/>
+<link href="../assets/home.css" rel="stylesheet"/>
+<link href="../manifest.json" rel="manifest"/>
+<meta content="#0f5867" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="CookBook" name="apple-mobile-web-app-title"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="../icons/favicon-64.png" rel="icon" sizes="64x64" type="image/png"/>
+</head>
+<body>
+<nav id="nav">
+<div class="nav-in">
+<a class="logo" href="index.html"><span class="logo-mark">MK</span><span>My Kitchen</span><small>CookBook</small></a>
+<div class="nav-links">
+<a class="always" href="#gallery">Recipes</a>
+<a href="#about">About</a>
+<button class="btn btn-primary install-btn" hidden="" id="installApp" type="button">Install CookBook</button>
+<a aria-label="فارسی" class="toggle lang-toggle" href="../index.html" id="langToggle" title="فارسی"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg></a>
+<button aria-label="Toggle theme" class="toggle" id="themeToggle" title="Light / Dark">◐</button>
+</div>
+</div>
+</nav>
+<header class="hero">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="eyebrow reveal">Personal Culinary Archive</div>
+<h1 class="reveal">The recipes I <em>actually</em> cook.</h1>
+<p class="sub reveal">A structured, zero-fluff reference library for everyday favorites and deep culinary projects — complete with precision weights, temperatures, and offline access.</p>
+<div class="search-wrap reveal">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+<input aria-label="Search recipes" autocomplete="off" id="search" placeholder="Search: Pizza, Alfredo, Gochujang, Carnitas…" type="search"/>
+</div>
+<p class="search-hint reveal">Search by English title, ingredient, technique, or Persian alias.</p>
+</div>
+<div aria-label="Library stats" class="hero-stats reveal">
+<div class="hero-stat"><strong data-stat="recipes">—</strong><span>Recipes</span></div>
+<div class="hero-stat"><strong data-stat="featured">—</strong><span>Featured</span></div>
+<div class="hero-stat"><strong data-stat="categories">—</strong><span>Categories</span></div>
+</div>
+</div>
+</header>
+<section aria-label="Quick categories" class="quick-section">
+<div class="wrap">
+<div class="quick-head"><h2>Browse by Category</h2><span>Jump straight to what you're craving</span></div>
+<div class="quick-rail" id="quickCats"></div>
+</div>
+</section>
+<section class="gallery" id="gallery">
+<div class="wrap">
+<div class="filters-head reveal">
+<div>
+<h2>Recipe Library</h2>
+<p>Start with a category, then narrow down by cuisine, ingredient, time, or skill level.</p>
+</div>
+</div>
+<div class="library-layout">
+<aside class="filters-panel reveal">
+<div class="filters-panel-head">
+<strong>Filters</strong>
+<div class="filters-panel-actions">
+<button id="clearFilters" type="button">Reset all</button>
+<button aria-controls="filters" aria-expanded="false" class="filters-toggle" id="filtersToggle" type="button">
+<span id="filtersToggleText">Open</span>
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg>
+</button>
+</div>
+</div>
+<div aria-label="Recipe filters" class="filters" id="filters"></div>
+</aside>
+<div class="results-main">
+<div class="results-toolbar">
+<div class="results-title"><strong id="resultsTitle">All Recipes</strong><span aria-live="polite" class="count" id="count"></span></div>
+<label class="sort-wrap"><span>Sort</span>
+<select aria-label="Sort results" id="sortSelect">
+<option value="default">Grouped by Category</option>
+<option value="featured">Featured First</option>
+<option value="name">Name (A to Z)</option>
+<option value="quickest">Quickest First</option>
+<option value="easiest">Easiest First</option>
+</select>
+</label>
+</div>
+<div aria-live="polite" class="active-filters" id="activeFilters"></div>
+<div aria-label="Loading recipes" class="skeleton-grid" id="loading">
+<div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line mid"></div></div></div>
+<div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line mid"></div></div></div>
+<div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line mid"></div></div></div>
+</div>
+<div id="grid"></div>
+<div class="status-panel" id="empty" role="status">
+<div class="status-mark"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></div>
+<h3>No matching recipes</h3>
+<p>Try another search keyword or reset active filters.</p>
+</div>
+<div class="status-panel" id="loadError" role="alert">
+<div class="status-mark"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 8v5"></path><path d="M12 16.5v.5"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
+<h3>Failed to load recipe data</h3>
+<p>Check that assets/recipes.js is present and contains valid syntax.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="about" id="about">
+<div class="wrap about-inner">
+<div class="sec-label reveal">About</div>
+<h2 class="sec-title reveal">Built for both weeknight cooking and culinary rabbit holes.</h2>
+<p class="reveal">
+      Every recipe lives as a clean, standalone HTML document with exact weights, timing protocols, and offline PWA support. Tap the translation icon in the top bar anytime to switch seamlessly between English and Persian.
+    </p>
+</div>
+</section>
+<footer class="site">
+<div class="wrap">
+    © <span id="year"></span> My Kitchen — Personal Culinary Handbook.
+  </div>
+</footer>
+<script src="../assets/recipes.js"></script>
+<script src="../assets/app.js"></script>
+</body>
+</html>
