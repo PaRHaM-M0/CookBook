@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>PaRHaM's CookBook!</title>
+<meta content="مجموعه‌ی شخصی دستور پخت‌ها — قابل جستجو، دسته‌بندی‌شده و تمیز." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&amp;family=Vazirmatn:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="assets/theme.css" rel="stylesheet"/>
+<link href="assets/home.css" rel="stylesheet"/>
+<link href="manifest.json" rel="manifest"/>
+<meta content="#0f5867" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="CookBook" name="apple-mobile-web-app-title"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<link href="icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="icons/favicon-64.png" rel="icon" sizes="64x64" type="image/png"/>
+</head>
+<body>
+<!-- ░░░ نوار بالا ░░░ -->
+<nav id="nav">
+<div class="nav-in">
+<a class="logo" href="index.html"><span class="logo-mark">MK</span><span>آشپزخانه‌ی من</span><small>My Kitchen</small></a>
+<div class="nav-links">
+<a class="always" href="#gallery">دستور پخت‌ها</a>
+<a href="#about">درباره</a>
+<button class="btn btn-primary install-btn" hidden="" id="installApp" type="button">نصب CookBook</button>
+<a aria-label="English" class="toggle lang-toggle" href="en/index.html" id="langToggle" title="English"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg></a>
+<button aria-label="تغییر تم" class="toggle" id="themeToggle" title="روشن / تاریک">◐</button>
+</div>
+</div>
+</nav>
+<!-- ░░░ هیرو ░░░ -->
+<header class="hero">
+<div class="wrap hero-grid">
+<div class="hero-copy">
+<div class="eyebrow reveal">Personal Recipe Library</div>
+<h1 class="reveal">دستورهایی که <em>خودم</em> می‌پزم.</h1>
+<p class="sub reveal">آرشیو شخصی و قابل جست‌وجوی دستورهای من؛ با نام انگلیسی، جست‌وجوی فارسی و فیلترهای دقیق برای پیدا کردن سریع هر غذا.</p>
+<div class="search-wrap reveal">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+<input aria-label="جست‌وجوی دستور پخت" autocomplete="off" id="search" placeholder="جست‌وجو: پیتزا، Alfredo، gochujang…" type="search"/>
+</div>
+<p class="search-hint reveal">نام فارسی یا انگلیسی غذا را بنویس؛ نام‌های فارسی پنهان هم جست‌وجو می‌شوند.</p>
+</div>
+<div aria-label="آمار کتابخانه" class="hero-stats reveal">
+<div class="hero-stat"><strong data-stat="recipes">—</strong><span>دستور پخت</span></div>
+<div class="hero-stat"><strong data-stat="featured">—</strong><span>منتخب</span></div>
+<div class="hero-stat"><strong data-stat="categories">—</strong><span>دسته‌ی اصلی</span></div>
+</div>
+</div>
+</header>
+<!-- ░░░ دسته‌بندی سریع ░░░ -->
+<section aria-label="دسته‌بندی سریع" class="quick-section">
+<div class="wrap">
+<div class="quick-head"><h2>بر اساس نوع غذا</h2><span>مستقیم برو سراغ همان چیزی که می‌خواهی</span></div>
+<div class="quick-rail" id="quickCats"></div>
+</div>
+</section>
+<!-- ░░░ گالری غذاها ░░░ -->
+<section class="gallery" id="gallery">
+<div class="wrap">
+<div class="filters-head reveal">
+<div>
+<h2>کتابخانه دستورها</h2>
+<p>اول نوع غذا را انتخاب کن؛ بعد با سبک، ماده‌ی اصلی یا زمان نتیجه را دقیق‌تر کن.</p>
+</div>
+</div>
+<div class="library-layout">
+<aside class="filters-panel reveal">
+<div class="filters-panel-head"><strong>فیلترها</strong><div class="filters-panel-actions"><button id="clearFilters" type="button">پاک‌کردن همه</button><button aria-controls="filters" aria-expanded="false" class="filters-toggle" id="filtersToggle" type="button"><span id="filtersToggleText">باز کردن</span><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg></button></div></div>
+<!-- فیلترها (خودکار از روی recipes.js ساخته می‌شوند) -->
+<div aria-label="فیلترهای دستور پخت" class="filters" id="filters"></div>
+</aside>
+<div class="results-main">
+<div class="results-toolbar">
+<div class="results-title"><strong id="resultsTitle">همه‌ی دستورها</strong><span aria-live="polite" class="count" id="count"></span></div>
+<label class="sort-wrap"><span>مرتب‌سازی</span><select aria-label="مرتب‌سازی نتایج" id="sortSelect">
+<option value="default">پیش‌فرض دسته‌بندی</option>
+<option value="featured">منتخب‌ها اول</option>
+<option value="name">نام A تا Z</option>
+<option value="quickest">سریع‌ترین</option>
+<option value="easiest">آسان‌ترین</option>
+</select></label>
+</div>
+<div aria-live="polite" class="active-filters" id="activeFilters"></div>
+<!-- وضعیت بارگذاری -->
+<div aria-label="در حال بارگذاری" class="skeleton-grid" id="loading">
+<div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line mid"></div></div></div>
+<div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line mid"></div></div></div>
+<div class="skeleton"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line mid"></div></div></div>
+</div>
+<!-- شبکه‌ی کارت‌ها (خودکار) -->
+<div id="grid"></div>
+<!-- حالت خالی -->
+<div class="status-panel" id="empty" role="status">
+<div class="status-mark"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg></div>
+<h3>نتیجه‌ای پیدا نشد</h3>
+<p>عبارت دیگری را امتحان کن یا فیلترها را پاک کن.</p>
+</div>
+<!-- حالت خطا -->
+<div class="status-panel" id="loadError" role="alert">
+<div class="status-mark"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24"><path d="M12 8v5"></path><path d="M12 16.5v.5"></path><circle cx="12" cy="12" r="9"></circle></svg></div>
+<h3>داده‌های دستورها بارگذاری نشد</h3>
+<p>فایل assets/recipes.js در دسترس نیست یا خطای نحوی دارد.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ░░░ درباره ░░░ -->
+<section class="about" id="about">
+<div class="wrap about-inner">
+<div class="sec-label reveal">درباره</div>
+<h2 class="sec-title reveal">یک مرجع تمیز برای آشپزی روزمره و پروژه‌ای.</h2>
+<p class="reveal">
+      هر دستور صفحه مستقل خودش را دارد؛ صفحه اصلی فقط آن‌ها را فهرست، جست‌وجو و دسته‌بندی می‌کند.
+      افزودن غذای جدید با یک فایل در پوشه recipes و یک رکورد در <span class="en">assets/recipes.js</span> انجام می‌شود.
+    </p>
+</div>
+</section>
+<footer class="site">
+<div class="wrap">
+    © <span id="year"></span> آشپزخانه‌ی من — آرشیو شخصی دستور پخت‌ها.
+    
+</div>
+</footer>
+<script src="assets/recipes.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
