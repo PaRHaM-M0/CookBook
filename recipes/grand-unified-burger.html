@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>The Grand Unified Burger — PaRHaM's CookBook!</title>
+<meta content="دستور جامع و علمی برگر سرآشپز با دو مسیر انتخابی در یک صفحه: نسخه ۱ دبل اسمش‌برگر توری (۷۵/۲۵) و نسخه ۲ استیک‌برگر ضخیم فوق‌آبدار ۲۰۰ گرمی (تکنیک Heston Blumenthal + Reverse-Sear) با نان هوکایدو تنگژونگ آنزیمی و امولسیون سیر سیاه." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&amp;family=Vazirmatn:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/theme.css" rel="stylesheet"/>
+<link href="../assets/recipe.css" rel="stylesheet"/>
+<link href="../manifest.json" rel="manifest"/>
+<meta content="#c0c8c4" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="CookBook" name="apple-mobile-web-app-title"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="../icons/favicon-64.png" rel="icon" sizes="64x64" type="image/png"/>
+<style>
+  .mode-box{border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface);padding:20px;margin:24px 0 18px;box-shadow:var(--shadow)}
+  .mode-box-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .mode-box-head h3{font-size:17px;font-weight:750;color:var(--ink)}
+  .mode-box-head span{font-size:12px;color:var(--accent);font-weight:650}
+  .mode-compare{font-size:14px;color:var(--ink-soft);line-height:1.9;margin-bottom:16px}
+  .mode-compare b{color:var(--ink);font-weight:650}
+  .mode-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .mode-tab{border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink-soft);padding:12px 14px;text-align:right;cursor:pointer;transition:.2s;display:flex;flex-direction:column;gap:4px;font-family:inherit}
+  .mode-tab:hover{border-color:var(--line-strong);color:var(--ink);background:var(--bg-soft)}
+  .mode-tab.active{background:var(--ink);border-color:var(--ink);color:var(--bg);box-shadow:var(--shadow)}
+  .mode-tab strong{font-size:13.5px;font-weight:750;display:block}
+  .mode-tab small{font-size:11.5px;opacity:.82;line-height:1.5;display:block}
+  .mode-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-bottom:8px}
+  body[data-burger-mode="smash"] .only-juicy{display:none!important}
+  body[data-burger-mode="juicy"] .only-smash{display:none!important}
+  body[data-burger-mode="both"] .only-smash,
+  body[data-burger-mode="both"] .only-juicy{display:block}
+  body[data-burger-mode="both"] table.only-smash,
+  body[data-burger-mode="both"] table.only-juicy{display:table}
+  @media(max-width:720px){.mode-tabs{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-burger-mode="smash">
+<nav id="nav">
+<div class="nav-in">
+<a class="logo" href="../index.html"><span class="logo-mark">MK</span><span>آشپزخانه‌ی من</span><small>My Kitchen</small></a>
+<div class="nav-links">
+<a class="always" href="../index.html">← همه‌ی دستورها</a>
+<a aria-label="English" class="toggle lang-toggle" href="../en/recipes/grand-unified-burger.html" id="langToggle" title="English"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg></a>
+<button aria-label="تغییر تم" class="toggle" id="themeToggle">◐</button>
+</div>
+</div>
+</nav>
+<div class="wrap">
+<div class="crumb">
+<a href="../index.html">آشپزخانه‌ی من</a><span>/</span>
+<a href="../index.html#gallery">دستور پخت‌ها</a><span>/</span>
+    The Grand Unified Burger
+  </div>
+<header class="r-hero">
+<div class="r-eyebrow">
+<span>مهندسی برگر</span> · <span>نان <span class="en">Hokkaido-Tangzhong</span></span> · <span>سس اومامی سیر سیاه</span> · <span>دو مسیر انتخابی</span> · <span>حرفه‌ای</span>
+</div>
+<h1 class="en">The Grand Unified Burger</h1>
+<p class="fa-sub"><b>مهندسی جامع برگر سرآشپز با دو مسیر انتخابی (<span class="en">Double Smash</span> یا <span class="en">Juicy Steakhouse</span>)</b> — بهینه‌سازی علمی بر اساس استانداردهای <span class="en">America's Test Kitchen</span> و <span class="en">Serious Eats</span> با حذف کامل نقاط ضعف مرسوم (خمیر شدن نان، سنگینی چربی بدون اسیدیته و شلوغی نامتوازن مخلفات). پایه طلایی هر دو نسخه — یعنی نان خانگی <span class="en">Hokkaido</span> با پیش‌خمیر <span class="en">Tangzhong</span> و آنزیم مالت دیاستاتیک، امولسیون سیر سیاه و فلفل حلب، خیارشور فوری ادویه‌دار، قارچ <span class="en">Shiitake</span> برشته و <span class="en">Bacon</span> دودی — صددرصد مشترک است و فقط بر اساس سلیقه‌ات بین **پوسته توری و کاراملی <span class="en">Double Smash</span>** یا **پتی ضخیم استیک‌هاوسی با مغز صورتی و فوران عصاره** انتخاب می‌کنی.</p>
+<div class="r-stats">
+<div class="r-stat"><span class="ic"> </span><div><div class="k">تعداد سرو</div><div class="v" id="statYield">۶ عدد دبل‌برگر کامل</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">زمان کل اجرا</div><div class="v">۴ ساعت و ۱۵ دقیقه (۱:۴۵ کار مفید)</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">ترکیب گوشت فعال</div><div class="v" id="statMeat">۹۰۰ گرم سه‌گانه (۷۵/۲۵ · ۱۲ پتی ۷۲g)</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">تکنیک پخت فعال</div><div class="v" id="statTech">اسمش ۳mm روی چدن ۲۶۰°C</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">سختی</div><div class="v">حرفه‌ای</div></div></div>
+</div>
+</header>
+<div class="r-cover">
+<img alt="The Grand Unified Burger — برگر جامع سرآشپز" id="burgerCoverImg" src="../images/grand-unified-burger.webp"/>
+</div>
+<!-- انتخابگر هوشمند مسیر پخت در بالای صفحه -->
+<div aria-label="انتخاب سبک پخت گوشت برگر" class="mode-box">
+<div class="mode-box-head">
+<h3>انتخاب مسیر ساخت برگر: کدام تعریف از «لذیذ و آبدار» را می‌خواهی؟</h3>
+<span>با تغییر گزینه، جدول مواد اولیه و فازهای ۴ تا ۶ خودکار تنظیم می‌شوند</span>
+</div>
+<p class="mode-compare">
+<b>تفاوت علمی دو مسیر:</b> اگر منظورت از آبداری، <b>«نرم و چرب بودن با حداکثر پوسته ترد کاراملی»</b> است، مسیر اول (<span class="en">Double Smash</span>) به خاطر ۲۵٪ چربی ذوب‌شده دنده و سردست و دو لایه پنیر کرمی کاملاً نرم و لذیذ می‌ماند؛ امّا چون در ضخامت ۳ میلی‌متری دمای گوشت ظرف ۹۰ ثانیه از ۷۰°C عبور می‌کند، آب میان‌بافتی بخار می‌شود و مغز صورتی استیکی ندارد. اگر عاشق <b>«آبداری واقعی استیکی با مغز صورتی گرم از لبه تا لبه و فوران عصاره گوشت با اولین گاز»</b> هستی، مسیر دوم (<span class="en">Juicy Steakhouse</span>) را با تکنیک رشته‌های عمودی <span class="en">Heston Blumenthal</span> و پخت معکوس (<span class="en">Reverse-Sear</span>) از <span class="en">J. Kenji López-Alt</span> انتخاب کن!
+    </p>
+<div class="mode-tabs" role="tablist">
+<button class="mode-tab active" data-set-mode="smash" type="button">
+<strong>مسیر ۱: <span class="en">Double Smash Burger</span></strong>
+<small>دو پتی ۷۲ گرمی پهن‌شده (۳mm) با لبه‌های توری ترد، پیاز کاراملی در چربی گوشت و نسبت ۷۵/۲۵</small>
+</button>
+<button class="mode-tab" data-set-mode="juicy" type="button">
+<strong>مسیر ۲: <span class="en">Juicy Steakhouse Burger</span></strong>
+<small>پتی ضخیم ۲۰۰ گرمی (۲.۵cm)، رشته‌های عمودی <span class="en">Blumenthal</span>، پخت معکوس ۵۷°C و کره سیر</small>
+</button>
+<button class="mode-tab" data-set-mode="both" type="button">
+<strong>نمایش کامل هر دو نسخه کنار هم</strong>
+<small>مشاهده هم‌زمان هر دو جدول گوشت و هر دو پروتکل فازهای ۴، ۵ و ۶ برای مقایسه کامل</small>
+</button>
+</div>
+</div>
+<div class="toc">
+<a href="#equipment">تجهیزات لازم</a>
+<a href="#phase1">فاز ۱: خمیر نان <span class="en">Hokkaido</span></a>
+<a href="#phase2">فاز ۲: خیارشور و سس سیر سیاه</a>
+<a href="#phase3">فاز ۳: شکل‌دهی و پخت نان</a>
+<a href="#fork">انتخاب مسیر گوشت (فاز ۴ تا ۶)</a>
+<a href="#science">علم آشپزی و نکات کلیدی سرآشپز</a>
+</div>
+<div class="r-body">
+<aside class="r-aside">
+<div class="ing-card">
+<h3>مواد اولیه به تفکیک بخش</h3>
+<p class="note">برای <b>۶ عدد برگر کامل</b> — بخش‌های ۱، ۲، ۳ و ۵ بین هر دو نسخه مشترک‌اند و بخش ۴ طبق انتخاب تو نمایش داده می‌شود.</p>
+<table class="ing"><caption>۱-الف) پیش‌خمیر <span class="en">Tangzhong</span></caption><tbody>
+<tr><th>آرد نان سفید (<span class="en">Unbleached Bread Flour</span> — پروتئین ۱۲٫۷٪ مثل <span class="en">King Arthur</span>)</th><td class="amt">۲۰ گرم (۲٫۵ ق.غ)</td></tr>
+<tr><th>آب تصفیه‌شده (۲ ق.غ منهای نصف ق.چ)</th><td class="amt">۲۷ گرم / میلی‌لیتر</td></tr>
+<tr><th>شیر کامل (<span class="en">Whole Milk</span>)</th><td class="amt">۶۰ گرم (¼ پیمانه)</td></tr>
+</tbody></table><table class="ing"><caption>۱-ب) خمیر اصلی نان <span class="en">Hokkaido</span> (۶ چانه ۱۱۲ گرمی)</caption><tbody>
+<tr><th>آرد نان سفید (<span class="en">Unbleached Bread Flour</span>)</th><td class="amt">۳۲۰ گرم (۲٫۵ پیمانه)</td></tr>
+<tr><th>شیر کامل گرم‌شده تا دقیقاً ۳۵°C (<span class="en">95°F</span>)</th><td class="amt">۱۲۰ گرم (½ پیمانه)</td></tr>
+<tr><th>مخمر مخصوص نان‌پز (<span class="en">Bread Machine Yeast</span> مثل <span class="en">Fleischmann's</span>)</th><td class="amt">۹ گرم (۱ ق.غ / ۲٫۷۵ ق.چ)</td></tr>
+<tr><th>شکر سفید دانه‌ریز</th><td class="amt">۲۴ گرم (۲ ق.غ)</td></tr>
+<tr><th>نمک دریای دانه‌ریز (<span class="en">Fine Sea Salt</span>)</th><td class="amt">۷ گرم (۱٫۲۵ ق.چ)</td></tr>
+<tr><th>پودر مالت دیاستاتیک (<span class="en">Diastatic Malt Powder</span>) <i>(جایگزین: ۱٫۵g <span class="en">Bakery-Grade Fungal Amylase</span>)</i></th><td class="amt">۲ گرم (½ ق.چ)</td></tr>
+<tr><th>تخم‌مرغ کامل بزرگ (هم‌دمای محیط)</th><td class="amt">۱ عدد (۵۰ گرم)</td></tr>
+<tr><th>زرده تخم‌مرغ بزرگ (هم‌دمای محیط)</th><td class="amt">۱ عدد (۱۸ گرم)</td></tr>
+<tr><th>کره بدون نمک نرم‌شده در دمای محیط (۲۰°C / 68°F، نه ذوب‌شده)</th><td class="amt">۴۲ گرم (۳ ق.غ)</td></tr>
+</tbody></table><table class="ing"><caption>۱-ج) رومال و پرداخت نهایی نان</caption><tbody>
+<tr><th>تخم‌مرغ کامل هم‌زده با ۱۵ میلی‌لیتر (۱ ق.غ) آب و صاف‌شده</th><td class="amt">۱ عدد</td></tr>
+<tr><th>کنجد سفید خام</th><td class="amt">۱۵ گرم (۱٫۵ ق.غ)</td></tr>
+<tr><th>کره ذوب‌شده (بلافاصله پس از فر)</th><td class="amt">۲۰ گرم (۱٫۵ ق.غ)</td></tr>
+<tr><th>کره نرم (برای تُست سطح داخلی نان‌ها)</th><td class="amt">۳۰ گرم (۲ ق.غ)</td></tr>
+</tbody></table><table class="ing"><caption>۲) خیارشور فوری ادویه‌دار (<span class="en">Spiced Quick Pickles</span>)</caption><tbody>
+<tr><th>خیار گلخانه‌ای بی‌دانه (<span class="en">Seedless English Cucumber</span>)، ورقه‌های طولی ۳–۴mm</th><td class="amt">۱ عدد بزرگ (≈ ۳۵۰ گرم)</td></tr>
+<tr><th>آب تصفیه‌شده</th><td class="amt">۳۶۰ گرم (۱٫۵ پیمانه)</td></tr>
+<tr><th>سرکه سفید مقطر ۵٪</th><td class="amt">۲۴۰ گرم (۱ پیمانه)</td></tr>
+<tr><th>نمک <span class="en">Kosher</span> (<span class="en">Diamond Crystal</span>؛ یا ۱۲g / ۲ ق.چ نمک معمولی / <span class="en">Morton</span>)</th><td class="amt">۱۸ گرم (۱ ق.غ)</td></tr>
+<tr><th>شکر سفید</th><td class="amt">۱۲ گرم (۱ ق.غ)</td></tr>
+<tr><th>سیر تازه درشت، کمی له‌شده با پهنای کارد</th><td class="amt">۳ حبه</td></tr>
+<tr><th>شوید تازه</th><td class="amt">۱ دسته کوچک (۱۵ گرم)</td></tr>
+<tr><th>کیسه ادویه درسته در تنظیف: تخم گشنیز ۵g (۲ ق.چ) · خردل زرد ۵g (۱٫۵ ق.چ) · بذر شوید ۳g (۱ ق.چ) · فلفل سیاه درسته ۴g (۱ ق.چ)</th><td class="amt">۱ بسته</td></tr>
+</tbody></table><table class="ing"><caption>۳) امولسیون اومامی سیر سیاه و فلفل حلب</caption><tbody>
+<tr><th>پایه مایونز: ۱ زرده بزرگ (۱۸g) + <span class="en">Dijon Mustard</span> صاف ۱۵g (۱ ق.غ) + آب لیموترش تازه ۱۵g (۱ ق.غ) + شکر ۴g (۱ ق.چ) + نمک <span class="en">Kosher</span> ۲g (½ ق.چ)</th><td class="amt">هم‌دمای محیط</td></tr>
+<tr><th>روغن گیاهی خنثی (کلزا، هسته انگور یا آفتابگردان)</th><td class="amt">۱۸۰ میلی‌لیتر / ۱۶۵ گرم (¾ پیمانه)</td></tr>
+<tr><th>سیر سیاه پوست‌کنده (<span class="en">Black Garlic</span>)، کاملاً خمیرشده</th><td class="amt">۲۵ گرم (۵–۶ حبه درشت)</td></tr>
+<tr><th>کچاپ باکیفیت</th><td class="amt">۳۰ گرم (۲ ق.غ)</td></tr>
+<tr><th>سرکه سیاه چینی (<span class="en">Chinkiang Black Vinegar</span>)</th><td class="amt">۸ میلی‌لیتر (۱٫۵ ق.چ)</td></tr>
+<tr><th>آبِ سردشده خیارشور خانگی (از بخش دوم)</th><td class="amt">۱۰ میلی‌لیتر (۲ ق.چ)</td></tr>
+<tr><th>سس <span class="en">Worcestershire</span></th><td class="amt">۵ میلی‌لیتر (۱ ق.چ)</td></tr>
+<tr><th>پرک فلفل حلب (<span class="en">Aleppo Pepper Flakes</span>)</th><td class="amt">۴ گرم (۱٫۵ ق.چ)</td></tr>
+<tr><th>پیازچه تازه (<span class="en">Fresh Chives</span>)، بسیار ریز خردشده</th><td class="amt">۱۰ گرم (۲ ق.غ)</td></tr>
+<tr><th>فلفل سیاه تازه آسیاب‌شده</th><td class="amt">۱ گرم (¼ ق.چ)</td></tr>
+</tbody></table><table class="ing only-smash"><caption>۴-الف) گوشت سه‌گانه ۷۵/۲۵ — مسیر ۱ (<span class="en">Double Smash</span>: ۱۲ گلوله ۷۲–۷۵g)</caption><tbody>
+<tr><th>دنده گوساله بی‌استخوان (<span class="en">Boneless Beef Short Rib</span> ~۳۳٪ چربی)، مکعب ۲٫۵cm</th><td class="amt">۳۸۵ گرم (۱۳٫۵ اونس)</td></tr>
+<tr><th>سردست گوساله مرمری (<span class="en">Boneless Beef Chuck Roast</span> ~۲۳٪ چربی)، مکعب ۲٫۵cm</th><td class="amt">۳۴۰ گرم (۱۲ اونس)</td></tr>
+<tr><th>راسته مغز ران (<span class="en">Top Sirloin Steak</span> ~۱۱٪ چربی)، مکعب ۲٫۵cm</th><td class="amt">۱۷۵ گرم (۶٫۵ اونس)</td></tr>
+<tr><th>پنیر آمریکایی زرد دِلی (<span class="en">Boar's Head Yellow American</span>)</th><td class="amt">۶ ورق مربعی (هر ورق ≈ ۲۱g)</td></tr>
+<tr><th>پنیر <span class="en">Aged Sharp Cheddar</span> یا <span class="en">Smoked Provolone</span></th><td class="amt">۶ ورق مربعی (هر ورق ≈ ۲۱g)</td></tr>
+<tr><th>نمک <span class="en">Kosher</span> درشت و فلفل سیاه تازه آسیاب‌شده</th><td class="amt">زمان پخت</td></tr>
+</tbody></table><table class="ing only-juicy"><caption>۴-ب) گوشت استیک‌هاوسی ۷۸/۲۲ — مسیر ۲ (<span class="en">Juicy Steakhouse</span>: ۶ پتی ۲۰۰g)</caption><tbody>
+<tr><th>سردست گوساله مرمری (<span class="en">Boneless Beef Chuck Roast</span> ~۲۲٪ چربی)، مکعب ۲٫۵cm</th><td class="amt">۴۸۰ گرم (۱۷ اونس)</td></tr>
+<tr><th>دنده گوساله بی‌استخوان (<span class="en">Boneless Beef Short Rib</span> ~۳۲٪ چربی)، مکعب ۲٫۵cm</th><td class="amt">۴۲۰ گرم (۱۴٫۸ اونس)</td></tr>
+<tr><th>راسته مغز ران (<span class="en">Top Sirloin Steak</span> ~۱۰٪ چربی)، مکعب ۲٫۵cm</th><td class="amt">۳۰۰ گرم (۱۰٫۶ اونس)</td></tr>
+<tr><th>کره معطر <span class="en">Arrosé Basting</span>: روغن آووکادو/کلزا ۳۰ml (۲ ق.غ) + کره ۴۲g (۳ ق.غ) + ۳ حبه سیر با پوست له‌شده + ۴ شاخه آویشن تازه</th><td class="amt">برای قاشق‌ریزی نهایی</td></tr>
+<tr><th>پنیر آمریکایی زرد دِلی (<span class="en">Boar's Head Yellow American</span>)</th><td class="amt">۶ ورق مربعی</td></tr>
+<tr><th>پنیر <span class="en">Aged Sharp Cheddar</span> یا <span class="en">Smoked Provolone</span></th><td class="amt">۶ ورق مربعی</td></tr>
+<tr><th>کاهوی ترد <span class="en">Iceberg Lettuce</span> (سپر ضدآب کف نان)</th><td class="amt">۶ برگ درسته و خشک</td></tr>
+</tbody></table><table class="ing"><caption>۵) مخلفات گرم و سرد (<span class="en">Precision Toppings</span>)</caption><tbody>
+<tr><th>بیکن دودی برش ضخیم (<span class="en">Thick-Cut Applewood Smoked Bacon</span> — ۲ ورق هر برگر)</th><td class="amt">۱۲ ورق (≈ ۴۵۰ گرم / ۱ پوند)</td></tr>
+<tr><th>قارچ تازه <span class="en">Shiitake</span> (ساقه جدا، کلاهک برش ۱٫۲cm / ½ اینچ)</th><td class="amt">۲۸۰ گرم (۱۰ اونس)</td></tr>
+<tr><th>کره بدون نمک (پایان پخت قارچ)</th><td class="amt">۱۴ گرم (۱ ق.غ)</td></tr>
+<tr><th>پیاز سفید بزرگ، ورقه‌شده با <span class="en">Mandoline</span> به ضخامت ۱ میلی‌متر</th><td class="amt">۱ عدد (≈ ۲۵۰ گرم / ۹ اونس)</td></tr>
+<tr><th>گوجه‌فرنگی گوشتی <span class="en">Heirloom</span>، برش از مرکز به ۶ دیسک ضخیم ۸mm</th><td class="amt">۲ عدد بزرگ</td></tr>
+</tbody></table>
+</div>
+</aside>
+<main class="r-main">
+<!-- تجهیزات مورد نیاز -->
+<div class="callout tip"><span class="lbl">نسخه ۳۰ دقیقه‌ای و تک‌تابه‌ای همین برگر!</span>
+        اگر آخرهفته است، فرصت ۴ ساعته نداری و می‌خواهی بدون فر و چرخ‌گوشت، فقط در <b>۳۰ دقیقه و با ۱ تابه چدنی</b> به ۹۰٪ کیفیت همین طعم و آبداری برسی، برو سراغ صفحه <a href="30-minute-pub-burger.html"><span class="en">The 30-Minute One-Skillet Juicy Pub Burger</span></a>!
+      </div>
+<section class="phase" id="equipment">
+<div class="phase-head"><span class="phase-no">تجهیزات</span><h2>تجهیزات مهندسی مورد نیاز</h2></div>
+<ol class="steps">
+<li><h4>ترازوی دیجیتال با دقت ۱ گرم (<span class="en">Digital Kitchen Scale</span>)</h4><p>ضروری برای اندازه‌گیری دقیق آرد، هیدراتاسیون خمیر، دوز دقیق آنزیم و تقسیم یکنواخت گوشت و چانه‌ها.</p></li>
+<li><h4>همزن ایستاده با قلاب خمیر (<span class="en">Stand Mixer with Dough Hook</span>)</h4><p>برای توسعه شبکه گلوتن قوی و جذب تدریجی کره در خمیر غنی‌شده بدون گرم شدن خمیر با دست.</p></li>
+<li><h4>چرخ‌گوشت خانگی با شبکه درشت ۶ میلی‌متری (<span class="en">Meat Grinder with 1/4-inch Coarse Plate</span>)</h4><p>برای چرخ کردن گوشت نیمه‌منجمد بدون له شدن و مالیده شدن چربی.</p></li>
+<li><h4>تابه چدنی سنگین ۱۲ اینچی یا گریل تخت فولاد کربنی (<span class="en">Cast-Iron Skillet / Carbon-Steel Griddle</span>)</h4><p>برای حفظ دمای بالا هنگام برخورد گوشت و ایجاد حداکثر واکنش مایارد (<span class="en">Maillard Reaction</span>).</p></li>
+<li><h4>کاردک فلزی صلب بدون شیار با لبه تیز (<span class="en">Stiff Solid Metal Spatula / Bench Scraper</span>) + درپوش گنبدی (<span class="en">Cheese Melting Dome</span>)</h4><p>کاردک صلب برای کوبیدن یکنواخت پتی‌ها و تراشیدن ۱۰۰٪ پوسته کاراملی در نسخه <span class="en">Smash</span>؛ و درپوش گنبدی (یا درِ قابلمه گود) برای حبس بخار لحظه‌ای و ذوب کامل پنیر <span class="en">Cheddar</span> بدون پخت بیش‌ازحد گوشت.</p></li>
+<li><h4>۶ رینگ فلزی ۱۰ سانتی‌متری (<span class="en">4-Inch English Muffin / Crumpet Rings</span>)</h4><p>برای هدایت رشد عمودی نان‌ها در فر و فرم استاندارد رستورانی. اگر نداری، با نوارهای دولایه فویل آلومینیومی ضخیم به ارتفاع ۴ سانتی‌متر و قطر ۱۰ سانتی‌متر بساز.</p></li>
+<li><h4>ابزارهای دقیق تکمیلی</h4><p>رنده <span class="en">Mandoline</span> (برش کاغذی ۱ میلی‌متری پیاز)، گوشت‌کوب برقی و لیوان بلند (<span class="en">Immersion Blender &amp; Tall Cup</span> برای امولسیون ۶۰ ثانیه‌ای مایونز)، دماسنج دیجیتال نفوذی (<span class="en">Instant-Read Thermometer</span>)، توری سیمی خنک‌کننده (<span class="en">Wire Cooling Rack</span>)، کاغذ روغنی بدون موم، پارچه تنظیف (<span class="en">Cheesecloth</span>) و بطری اسپری ریزپاش.</p></li>
+</ol>
+</section>
+<!-- فاز ۱ مشترک -->
+<section class="phase" id="phase1">
+<div class="phase-head"><span class="phase-no">فاز ۱ (مشترک)</span><h2>آماده‌سازی خمیر نان <span class="en">Hokkaido</span> و تخمیر سرد</h2></div>
+<div class="phase-when"><span class="ic"> </span> شروع: ۴ ساعت قبل از سرو — ۴۵ دقیقه استراحت محیط + ۹۰ دقیقه خواب سرد در یخچال</div>
+<ol class="steps">
+<li>
+<h4>پخت پیش‌خمیر <span class="en">Tangzhong</span></h4>
+<p>در یک شیرجوش کوچک، ۲۰ گرم آرد نان، ۲۷ گرم آب و ۶۰ گرم شیر را روی حرارت سرد با همزن دستی مخلوط کن تا هیچ گلوله‌ای نماند. روی حرارت متوسط بگذار و مداوم کف و دیواره‌ها را هم بزن (حدود ۲ تا ۳ دقیقه) تا دمای مخلوط به <b>۶۵ درجه سانتی‌گراد (<span class="en">149°F</span>)</b> برسد و مایع به خمیر نشاسته‌ای غلیظ و براق تبدیل شود که رد همزن در آن بماند. فوراً به کاسه کوچکی منتقل کن، سلفون را مستقیم روی سطحش بچسبان تا پوسته نبندد و بگذار به دمای محیط (<b>۲۱ تا ۲۴ درجه سانتی‌گراد / <span class="en">70–75°F</span></b>) برسد.</p>
+</li>
+<li>
+<h4>فعال‌سازی مخمر</h4>
+<p>۱۲۰ گرم شیر با دمای دقیق <b>۳۵ درجه سانتی‌گراد (<span class="en">95°F</span>)</b> را با ۹ گرم مخمر هم بزن و ۵ تا ۸ دقیقه استراحت بده تا سطح آن کاملاً کف‌آلود شود.</p>
+</li>
+<li>
+<h4>ترکیب مواد خشک و تر</h4>
+<p>در کاسه همزن ایستاده، ۳۲۰ گرم آرد نان، ۲۴ گرم شکر، ۷ گرم نمک و ۲ گرم پودر مالت دیاستاتیک را با همزن دستی مخلوط کن. قلاب خمیر را نصب کن و همزن را روی دور کند بگذار. مخلوط شیر و مخمر، ۱ تخم‌مرغ کامل + ۱ زرده هم‌زده، و تمام <span class="en">Tangzhong</span> خنک‌شده را اضافه کن و <b>۴ دقیقه</b> ورز بده تا خمیر منسجم شود.</p>
+</li>
+<li>
+<h4>تزریق تدریجی کره و تست پنجره (<span class="en">Windowpane Test</span>)</h4>
+<p>دور همزن را روی متوسط-کم بگذار. ۴۲ گرم کره نرم‌شده را به ۳ تکه مساوی تقسیم کن و <b>هر بار فقط یک تکه</b> بینداز؛ صبر کن کاملاً جذب بافت خمیر شود و اثر چربی از دیواره کاسه پاک شود، سپس تکه بعدی را اضافه کن. پس از جذب کامل کره، <b>۶ تا ۸ دقیقه دیگر</b> ورز بده تا خمیر کاملاً صاف، براق و کشسان شود و از دیواره کاسه جدا گردد (اگر تکه‌ای از خمیر را بین انگشتان بکشی، بدون پاره شدن تا حد عبور نور نازک شود).</p>
+</li>
+<li>
+<h4>تخمیر اول و خواب سرد (<span class="en">Cold Retardation</span>)</h4>
+<p>خمیر را روی سطح بدون آرد به شکل یک گوی سفت گرد کن، داخل کاسه کمی چرب‌شده بگذار و روی آن را کیپ بپوشان. <b>۴۵ دقیقه در دمای محیط (۲۴°C / <span class="en">75°F</span>)</b> استراحت بده تا پف اولیه شکل بگیرد؛ سپس کاسه را دقیقاً <b>۹۰ دقیقه داخل یخچال (۴°C / <span class="en">39°F</span>)</b> بگذار تا خمیر سرد، خوش‌فرم و طعم‌دار شود.</p>
+</li>
+</ol>
+</section>
+<!-- فاز ۲ مشترک -->
+<section class="phase" id="phase2">
+<div class="phase-head"><span class="phase-no">فاز ۲ (مشترک)</span><h2>خیارشور فوری ادویه‌دار و امولسیون سیر سیاه</h2></div>
+<div class="phase-when"><span class="ic"> </span> در حین استراحت ۹۰ دقیقه‌ای خمیر در یخچال</div>
+<ol class="steps">
+<li>
+<h4>آماده‌سازی خیارشور فوری</h4>
+<p>ورقه‌های طولی خیار را همراه با سیر له‌شده و شوید تازه داخل یک شیشه تمیز ۱ لیتری بچین. آب، سرکه سفید، نمک و شکر را همراه با کیسه پارچه‌ای ادویه‌ها در قابلمه کوچکی بریز و روی حرارت بالا به جوش بیاور. به محض قل زدن، حرارت را خاموش کن، ۱ دقیقه صبر کن تا عطر ادویه‌ها آزاد شود، سپس مایع داغ و کیسه ادویه را روی خیارها بریز. پس از خنک شدن نسبی در دمای محیط (حدود ۲۰ دقیقه)، شیشه را داخل یخچال بگذار تا کاملاً سرد و ترد شود.</p>
+</li>
+<li>
+<h4>ساخت امولسیون پایه مایونز در ۶۰ ثانیه</h4>
+<p>زرده تخم‌مرغ، <span class="en">Dijon Mustard</span>، آب لیموترش، شکر، نمک و ۱۸۰ میلی‌لیتر روغن خنثی را داخل لیوان بلند گوشت‌کوب برقی بریز. تیغه گوشت‌کوب را کاملاً کف لیوان تکیه بده، روشن کن و <b>۱۵ ثانیه بدون حرکت</b> نگه دار تا کف لیوان سفید و غلیظ شود؛ سپس به آرامی تیغه را بالا بیاور تا مایونز ظرف ۴۵ ثانیه کاملاً سفت و یکدست شود.</p>
+</li>
+<li>
+<h4>تکمیل امولسیون سیر سیاه و فلفل حلب</h4>
+<p>خمیر سیر سیاه له‌شده، کچاپ، سرکه سیاه چینی (<span class="en">Chinkiang</span>)، ۱۰ میلی‌لیتر از آبِ خنک‌شده خیارشور خانگی، سس <span class="en">Worcestershire</span>، پرک فلفل حلب (<span class="en">Aleppo Pepper</span>)، پیازچه ریز خردشده و فلفل سیاه را به مایونز اضافه کن و کاملاً هم بزن. روی سس را بپوشان و حداقل <b>۱ ساعت</b> در یخچال استراحت بده.</p>
+</li>
+</ol>
+</section>
+<!-- فاز ۳ مشترک -->
+<section class="phase" id="phase3">
+<div class="phase-head"><span class="phase-no">فاز ۳ (مشترک)</span><h2>چانه‌گیری، استراحت در رینگ و پخت نان‌ها</h2></div>
+<div class="phase-when"><span class="ic"> </span> شروع: ۲ ساعت قبل از سرو — پخت در فر ۱۹۰°C به مدت ۱۵ تا ۱۷ دقیقه</div>
+<ol class="steps">
+<li>
+<h4>چانه‌گیری دقیق با ترازو</h4>
+<p>خمیر سرد را از یخچال خارج کن و با فشار دست گاز اضافی‌اش را بگیر. کل خمیر (حدود ۶۸۵ گرم) را به <b>۶ قسمت کاملاً مساوی (هر چانه ۱۱۲ تا ۱۱۴ گرم / ۴ اونس)</b> تقسیم کن. لبه‌های هر تکه را به سمت مرکز جمع کن، درز زیرین را ببند و روی سطح بدون آرد زیر گودی کف دست به شکل دایره‌ای بچرخان تا ۶ گوی کاملاً صاف و پرکشش بسازی.</p>
+</li>
+<li>
+<h4>استراحت دوم داخل رینگ</h4>
+<p>سینی فر را با کاغذ روغنی بپوشان و ۶ رینگ ۱۰ سانتی‌متری چرب‌شده را با فاصله بچین. هر چانه را مرکز رینگ بگذار و با کف دست به آرامی کمی پهن کن. روی سینی را با سینی گود وارونه یا سلفون چرب‌شده بپوشان و <b>۴۵ تا ۶۰ دقیقه در دمای محیط</b> استراحت بده تا حجم چانه‌ها دو برابر شود و دیواره‌های رینگ را پر کنند.</p>
+</li>
+<li>
+<h4>پخت تا دمای مغز ۸۸–۹۰°C و براق‌سازی کره‌ای</h4>
+<p>فر را از قبل روی <b>۱۹۰ درجه سانتی‌گراد (<span class="en">375°F</span>)</b> گرم کن. مخلوط تخم‌مرغ و آبِ صاف‌شده را با بطری اسپری یک لایه بسیار نازک روی گنبد خمیرها اسپری کن (یا با قلم‌موی سیلیکونی بسیار نرم بمال) و بلافاصله کنجد سفید بپاش. در طبقه وسط فر <b>۱۵ تا ۱۷ دقیقه</b> بپز تا رویه قهوه‌ای-طلایی عمیق شود و دمای مرکز نان به <b>۸۸ تا ۹۰ درجه سانتی‌گراد (<span class="en">190–195°F</span>)</b> برسد. به محض خروج از فر، ۲۰ گرم کره ذوب‌شده روی سطح نان‌های داغ بکش، رینگ‌ها را جدا کن و نان‌ها را روی توری سیمی خنک کن تا کفشان عرق نکند.</p>
+</li>
+</ol>
+</section>
+<!-- ایستگاه دوراهی بین فاز ۳ و فاز ۴ -->
+<div class="mode-box" id="fork">
+<div class="mode-box-head">
+<h3>ایستگاه انتخاب مسیر پخت گوشت (ادامه از فاز ۴ تا سرو نهایی)</h3>
+<span>یکی از دو پروتکل زیر را انتخاب کن تا ادامه مراحل بر اساس آن نمایش داده شود</span>
+</div>
+<div class="mode-tabs" role="tablist">
+<button class="mode-tab active" data-set-mode="smash" type="button">
+<strong>مسیر ۱: <span class="en">Double Smash</span> (پوسته توری ترد)</strong>
+<small>۱۲ گلوله ۷۲g · چدن ۲۶۰°C · اسمش ۳mm با پیاز کاراملی</small>
+</button>
+<button class="mode-tab" data-set-mode="juicy" type="button">
+<strong>مسیر ۲: <span class="en">Juicy Steakhouse</span> (فوق‌آبدار استیکی)</strong>
+<small>۶ پتی ۲۰۰g · رشته‌های عمودی <span class="en">Blumenthal</span> · فر ۹۵°C + کره سیر</small>
+</button>
+<button class="mode-tab" data-set-mode="both" type="button">
+<strong>نمایش هم‌زمان هر دو مسیر</strong>
+<small>مشاهده کامل هر دو پروتکل زیر هم</small>
+</button>
+</div>
+</div>
+<!-- ==================== مسیر ۱: DOUBLE SMASH ==================== -->
+<div class="only-smash">
+<section class="phase" id="smash-phase4">
+<div class="mode-badge">مسیر ۱ · <span class="en">The Grand Unified Double Smash Burger</span></div>
+<div class="phase-head"><span class="phase-no">فاز ۴ (اسمش)</span><h2>چرخ سرد گوشت سه‌گانه ۷۵/۲۵ و آماده‌سازی مخلفات</h2></div>
+<div class="phase-when"><span class="ic"> </span> شروع: ۱ ساعت قبل از سرو — انجماد سطحی ۲۵ تا ۳۰ دقیقه‌ای در ۰°C</div>
+<ol class="steps">
+<li>
+<h4>انجماد سطحی گوشت و چرخ‌گوشت</h4>
+<p>مکعب‌های ۲٫۵ سانتی‌متری دنده (۳۸۵g)، سردست (۳۴۰g) و راسته (۱۷۵g) را در یک سینی پهن کن و همراه با کلگی، تیغه و شبکه ۶ میلی‌متری چرخ‌گوشت، دقیقاً <b>۲۵ تا ۳۰ دقیقه در فریزر</b> بگذار تا لبه‌های بیرونی سفت و نیمه‌منجمد شوند (<b>۰°C / <span class="en">32°F</span></b>)، اما مغزشان سنگ نشود.</p>
+</li>
+<li>
+<h4>چرخ تک‌مرحله‌ای و وزن‌کشی آزاد (بدون نمک و بدون ورز!)</h4>
+<p>قطعات نیمه‌منجمد را مخلوط کن و <b>فقط یک بار</b> از چرخ‌گوشت رد کن. رشته‌های خارج‌شده را به‌هیچ‌وجه ورز نده و بدون نمک زدن، با ملایمت به <b>۱۲ گلوله ۷۲ تا ۷۵ گرمی (<span class="en">2.5 oz</span>)</b> تقسیم کن (فقط در حدی گرد کن که فرم کروی بگیرد و هوای بین رشته‌ها بماند). گلوله‌ها را تا لحظه پخت در یخچال نگه دار.</p>
+</li>
+<li>
+<h4>برشته کردن <span class="en">Bacon</span> صاف در فر</h4>
+<p>فر را روی <b>۲۰۰ درجه سانتی‌گراد (<span class="en">400°F</span>)</b> بگذار. ۱۲ ورق <span class="en">Bacon</span> را روی توری سیمی سوار بر سینی فر بچین و <b>۱۸ تا ۲۲ دقیقه</b> بپز تا چربی سفید کاملاً ذوب و شفاف شود و ورقه‌ها کاملاً ترد و صاف شوند؛ سپس روی دستمال کاغذی بگذار.</p>
+</li>
+<li>
+<h4>سرخ کردن استیکی قارچ <span class="en">Shiitake</span></h4>
+<p>تابه چدنی را روی حرارت متوسط-بالا کاملاً داغ کن و ۱ قاشق غذاخوری روغن گیاهی بریز. نوارهای <span class="en">Shiitake</span> را در یک لایه باز کف تابه بچین و <b>تا ۳ دقیقه اول مطلقاً نمک نزن و هم نزن</b> تا یک طرف قارچ‌ها قهوه‌ای تیره و برشته شود. برگردان، ۲ دقیقه دیگر سرخ کن، حرارت را کم کن، نمک <span class="en">Kosher</span>، فلفل سیاه و ۱۴ گرم کره اضافه کن، ۳۰ ثانیه تفت بده و کنار بگذار.</p>
+</li>
+<li>
+<h4>پیاز حمام یخ و گوجه‌فرنگی آب‌گیری‌شده</h4>
+<p>رشته‌های ۱ میلی‌متری پیاز سفید را دقیقاً <b>۲ دقیقه</b> در کاسه آب و یخ بریز، آبکش کن و لای چند لایه حوله کاغذی فشار بده تا <b>صددرصد خشک</b> شوند؛ به ۶ کپه کوچک تقسیم کن. ۶ دیسک ۸ میلی‌متری گوجه‌فرنگی را روی توری سیمی بچین، دو طرفشان نمک <span class="en">Kosher</span> بپاش و <b>۱۵ دقیقه</b> صبر کن تا آب اضافی‌شان خارج شود؛ پیش از مونتاژ با دستمال کاغذی خشک کن.</p>
+</li>
+<li>
+<h4>تُست کره‌ای نان‌ها (سد عایق رطوبت)</h4>
+<p>نان‌های خنک‌شده را افقی از وسط ببر، سطح داخلی هر دو نیمه را از لبه تا لبه با کره نرم بپوشان و روی تابه با حرارت متوسط <b>۶۰ تا ۹۰ ثانیه</b> برشته کن تا حلقه طلایی-قهوه‌ای ترد و یکدستی بسازد.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="smash-phase5">
+<div class="phase-head"><span class="phase-no">فاز ۵ (اسمش)</span><h2>پخت پتی‌های <span class="en">Smash</span> و ذوب بخاری پنیر دوگانه</h2></div>
+<div class="phase-when"><span class="ic"> </span> هر دور ۱ یا ۲ برگر — چدن خشک در نقطه دود ۲۴۵ تا ۲۶۰ درجه سانتی‌گراد</div>
+<ol class="steps">
+<li>
+<h4>رساندن چدن به نقطه دود</h4>
+<p>هود آشپزخانه را روی قوی‌ترین دور روشن کن. تابه چدنی خشک (بدون هیچ روغن اضافه) را روی حرارت بالا بگذار تا به دمای <b>۲۴۵ تا ۲۶۰ درجه سانتی‌گراد (<span class="en">475–500°F</span>)</b> برسد و دود ملایمی بلند شود.</p>
+</li>
+<li>
+<h4>اسمش پتی‌ها (پتی پیازی + پتی خالص)</h4>
+<p>دو گلوله ۷۲ گرمی سرد را با فاصله ۱۰ سانتی‌متر روی چدن خشک بگذار. بلافاصله یک کپه از رشته‌های خشک پیاز را روی <b>گلوله اول</b> بریز و گلوله دوم را ساده نگه دار. یک مربع کاغذ روغنی روی گلوله اول بگذار و با کف کاردک فلزی صلب، با فشار عمودی قاطع گوشت و پیاز را به ضخامت <b>۳ میلی‌متر (<span class="en">1/8-inch</span>)</b> پهن کن و فشار را <b>۵ ثانیه کامل</b> نگه دار تا پروتئین گوشت به منافذ چدن بچسبد؛ کاغذ را جدا کن و فوراً همین کار را برای گلوله دوم انجام بده. سطح بالایی هر دو پتی را سخاوتمندانه نمک <span class="en">Kosher</span> و فلفل سیاه بپاش.</p>
+</li>
+<li>
+<h4>پوسته توری (<span class="en">Lacy Edges</span>) و برگرداندن (۶۰ تا ۷۵ ثانیه)</h4>
+<p>بدون دست زدن صبر کن تا چربی لبه‌ها قل بزند، لبه‌ها کاملاً قهوه‌ای تیره و توری شوند و رنگ پخت از زیر بالا بیاید. لبه تیز کاردک را با زاویه تند چسبیده به کف تابه قاطعانه بتراش تا ۱۰۰٪ پوسته طلایی همراه گوشت جدا شود و فوراً برگردان تا پیازهای پتی اول مستقیم روی چدن داغ در چربی گوشت کاراملی شوند.</p>
+</li>
+<li>
+<h4>ذوب بخاری پنیر دوگانه (۳۰ تا ۴۵ ثانیه)</h4>
+<p>بلافاصله روی پتی اول (پیازی) <b>۱ ورق پنیر آمریکایی زرد</b> و روی پتی دوم <b>۱ ورق <span class="en">Aged Sharp Cheddar</span> (یا <span class="en">Smoked Provolone</span>)</b> بگذار. ۵ میلی‌لیتر (۱ ق.چ) آب کنار تابه بریز و درپوش گنبدی را فوراً <b>۲۰ تا ۳۰ ثانیه</b> بگذار تا بخار داغ پنیرها را ذوب کند. پتی دوم (چداردار) را دقیقاً روی پتی اول سوار کن و فوراً خارج کن.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="smash-phase6">
+<div class="phase-head"><span class="phase-no">فاز ۶ (اسمش)</span><h2>معماری لایه‌چینی نهایی <span class="en">Double Smash</span> (از پایین به بالا)</h2></div>
+<ol class="steps">
+<li><p><b>۱. کف نان (<span class="en">Bottom Bun</span>):</b> تُست‌شده با کره، رو به بالا.</p></li>
+<li><p><b>۲. عایق سس زیرین:</b> ۱ قاشق غذاخوری پر (۱۵ گرم) از امولسیون سیر سیاه و فلفل حلب، یکنواخت از لبه تا لبه.</p></li>
+<li><p><b>۳. لایه اسیدی و ترد زیرین:</b> ۳ تا ۴ نوار طولی از خیارشور فوری ادویه‌دار (آب‌گیری‌شده با دستمال)، چیده‌شده به صورت موازی.</p></li>
+<li><p><b>۴. برج دوگانه گوشت و پنیر:</b> پشته داغ پتی اول (پیاز کاراملی + پنیر آمریکایی) و روی آن پتی دوم (پوسته برشته خالص + پنیر چدار/پروولون ذوب‌شده).</p></li>
+<li><p><b>۵. تیرک‌های ترد دودی:</b> ۲ ورق <span class="en">Bacon</span> دودی صاف و ترد به صورت ضربدری (<span class="en">X</span>) روی پنیر ذوب‌شده تا درون پنیر قفل شوند و سر نخورند.</p></li>
+<li><p><b>۶. تاج اومامی گرم:</b> ۱٫۵ قاشق غذاخوری از نوارهای قارچ <span class="en">Shiitake</span> برشته‌شده بین شیارهای بیکن.</p></li>
+<li><p><b>۷. طراوت سرد نمک‌خورده:</b> ۱ اسلایس ضخیم گوجه‌فرنگی <span class="en">Heirloom</span> آب‌گیری‌شده + اندکی فلفل سیاه تازه.</p></li>
+<li><p><b>۸. سقف نان (<span class="en">Crown Bun</span>):</b> آغشته به ۱ قاشق غذاخوری دیگر (۱۵ گرم) امولسیون سیر سیاه؛ روی گوجه بگذار، ۱ ثانیه فشار ملایم با کف دست بده تا لایه‌ها قفل شوند و فوراً داغ سرو کن.</p></li>
+</ol>
+</section>
+</div>
+<!-- ==================== مسیر ۲: JUICY STEAKHOUSE ==================== -->
+<div class="only-juicy">
+<section class="phase" id="juicy-phase4">
+<div class="mode-badge">مسیر ۲ · <span class="en">Juicy Steakhouse Burger (Blumenthal + Reverse-Sear)</span></div>
+<div class="phase-head"><span class="phase-no">فاز ۴ (استیکی)</span><h2>استریل سطحی، چرخ سرد و تکنیک رشته‌های عمودی <span class="en">Heston Blumenthal</span></h2></div>
+<div class="phase-when"><span class="ic"> </span> بلانچ ۱۰ ثانیه‌ای + ۳۰ دقیقه فریزر + رول استوانه‌ای ۲۵ دقیقه‌ای برای ۶ دیسک ۲۰۰ گرمی</div>
+<figure class="topping-photo">
+<img alt="Juicy Steakhouse Reverse-Seared Burger Cross-Section" loading="lazy" src="../images/juicy-steakhouse-burger.webp"/>
+<figcaption><span class="en">Juicy Steakhouse Edition — Heston Blumenthal Vertical-Grain + Kenji Reverse-Sear (57°C / 135°F)</span></figcaption>
+</figure>
+<ol class="steps">
+<li>
+<h4>بلانچ ۱۰ ثانیه‌ای برای ایمنی کامل پخت <span class="en">Medium-Rare / Medium</span></h4>
+<p>پیش از خرد کردن تکه‌های درسته گوشت، یک قابلمه آب را به جوش بیاور. تکه‌های سالم سردست (۴۸۰g)، دنده (۴۲۰g) و راسته (۳۰۰g) را با انبر فقط به مدت <b>۱۰ ثانیه</b> داخل آب جوش بزن، فوراً خارج کن و با حوله کاغذی خشک کن؛ این کار بدون پختن گوشت، باکتری‌های سطحی را از بین می‌برد تا پخت مرکز برگر در دمای ۵۶–۵۷°C کاملاً ایمن باشد (<a href="https://blog.thermoworks.com/how-to-grind-your-own-hamburgers/" rel="noopener" target="_blank"><span class="en">ThermoWorks</span></a>). سپس گوشت‌ها را به مکعب‌های ۲٫۵ سانتی‌متری خرد کن و همراه تیغه و شبکه درشت (۶ میلی‌متری) چرخ‌گوشت، <b>۳۰ دقیقه در فریزر (۰°C / <span class="en">32°F</span>)</b> بگذار.</p>
+</li>
+<li>
+<h4>چرخ رشته‌ای و رول کردن در راستای موازی (تکنیک <span class="en">Heston Blumenthal</span>)</h4>
+<p>یک لایه بلند سلفون جلوی دهانه چرخ‌گوشت پهن کن. مکعب‌های نیمه‌منجمد را مخلوط و چرخ کن؛ هم‌زمان که رشته‌های بلند گوشت شبیه اسپاگتی بیرون می‌آیند، آن‌ها را <b>هم‌راستا و موازی کنار هم</b> روی سلفون بخوابان تا استوانه‌ای بلند به قطر <b>۱۰٫۵ سانتی‌متر (<span class="en">4.25 inches</span>)</b> شکل بگیرد (به هیچ عنوان گوشت را با دست مچاله نکن و نمک نزن!). سلفون را دور رشته‌های موازی بپیچ و دو سر آن را مثل شکلات بپیچان تا استوانه‌ای منسجم ولی متخلخل بسازی. استوانه را <b>۲۵ دقیقه در فریزر</b> بگذار تا خودش را بگیرد.</p>
+</li>
+<li>
+<h4>برش استیکی ۲۰۰ گرمی عمود بر الیاف</h4>
+<p>سلفون را باز کن و استوانه گوشت را با کارد تیز سرآشپز، عمود بر جهت رشته‌ها، به <b>۶ دیسک ضخیم ۲٫۵ سانتی‌متری (<span class="en">1-inch thick</span> — هر کدام دقیقاً ۲۰۰ گرم / ۷ اونس)</b> ببر تا رشته‌های گوشت دقیقاً مثل فیله استیک عمود بر سطح برگر بایستند! مرکز هر پتی را با شست حدود <b>۵ میلی‌متر گود کن</b> تا هنگام پخت باد نکند.</p>
+</li>
+<li>
+<h4>آماده‌سازی مخلفات</h4>
+<p><span class="en">Bacon</span> ترد در فر ۲۰۰°C (۱۸–۲۲ دقیقه)، قارچ <span class="en">Shiitake</span> برشته با ۱۴g کره، گوجه نمک‌خورده آب‌گیری‌شده و تُست کره‌ای نان‌ها را دقیقاً طبق مراحل استاندارد آماده کن. رشته‌های ۱ میلی‌متری پیاز سفید را پس از ۲ دقیقه حمام آب و یخ و خشک کردن کامل، یا <b>به‌صورت خام و ترد</b> کنار بگذار، یا در <b>۱ قاشق چربی باقی‌مانده از بیکن</b> روی حرارت ملایم ۱۰ دقیقه تفت بده تا طلایی و شیرین (<span class="en">Caramelized</span>) شوند.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="juicy-phase5">
+<div class="phase-head"><span class="phase-no">فاز ۵ (استیکی)</span><h2>پخت معکوس در فر ملایم + برشته‌سازی کره‌ای (<span class="en">Reverse-Sear</span>)</h2></div>
+<div class="phase-when"><span class="ic"> </span> فر ۹۵°C (۱۸–۲۵ دقیقه) ← شوک چدن ۲۵۰°C (۴۵ ثانیه) ← قاشق‌ریزی کره سیر ← ۴ دقیقه استراحت</div>
+<ol class="steps">
+<li>
+<h4>پخت ملایم یکنواخت در فر (حذف کامل نوار خاکستری خشک)</h4>
+<p>فر را روی دمای بسیار ملایم <b>۹۵ درجه سانتی‌گراد (<span class="en">200°F</span>)</b> تنظیم کن (<a href="https://www.seriouseats.com/thick-and-juicy-burgers-recipe" rel="noopener" target="_blank"><span class="en">Serious Eats</span></a>). هر دو طرف و لبه‌های کناری هر ۶ پتی ۲۰۰ گرمی را درست پیش از ورود به فر سخاوتمندانه نمک <span class="en">Kosher</span> درشت و فلفل سیاه بزن و روی توری سیمی سوار بر سینی فر بچین. طبقه وسط فر <b>۱۸ تا ۲۵ دقیقه</b> حرارت بده تا دماسنج دیجیتال در مرکز دقیق پتی دمای زیر را نشان دهد:</p>
+<ul class="sub">
+<li><b>برای <span class="en">Medium-Rare</span> (قرمز-صورتی بسیار آبدار):</b> خروج از فر در دمای <b>۴۹°C (<span class="en">120°F</span>)</b> — دمای نهایی پس از سرخ شدن: ۵۴°C (<span class="en">130°F</span>).</li>
+<li><b>برای <span class="en">Medium</span> طلایی سرآشپز (صورتی گرم — پیشنهادی‌ترین حالت برای این ترکیب گوشت):</b> خروج از فر در دمای <b>۵۲ تا ۵۳°C (<span class="en">126–128°F</span>)</b> — دمای نهایی پس از سرخ شدن: <b>۵۷°C (<span class="en">135°F</span>)</b>، نقطه‌ای که ۱۰۰٪ چربی دنده ذوب شده ولی آب گوشت بیرون نزده است.</li>
+</ul>
+</li>
+<li>
+<h4>شوک حرارتی در چدن ۲۵۰°C و قاشق‌ریزی کره سیر (<span class="en">Arrosé Basting</span>)</h4>
+<p>تابه چدنی سنگین را روی حرارت بسیار بالا تا <b>۲۵۰ درجه سانتی‌گراد (<span class="en">485°F</span>)</b> داغ کن و ۳۰ میلی‌لیتر روغن آووکادو/کلزا بریز تا به نقطه دود برسد. پتی‌های گرم را با احتیاط بگذار (هر بار ۲ یا ۳ عدد) و <b>۴۵ تا ۶۰ ثانیه بدون حرکت</b> سرخ کن تا پوسته قهوه‌ای تیره استیکی شکل بگیرد (<b>هرگز روی پتی فشار نیاور!</b>). برگردان؛ بلافاصله ۴۲ گرم کره، ۳ حبه سیر با پوست له‌شده و ۴ شاخه آویشن تازه را کنار تابه بینداز، تابه را کمی کج کن و <b>۲۰ ثانیه</b> کره کف‌آلود داغ را پیاپی با قاشق روی پتی‌ها بریز (<span class="en">Basting</span>). بلافاصله روی هر پتی <b>۱ ورق پنیر آمریکایی زرد + ۱ ورق <span class="en">Aged Sharp Cheddar</span></b> بگذار، ۱ ق.چ آب کنار تابه بریز و درپوش گنبدی را <b>۲۰ تا ۲۵ ثانیه</b> بگذار تا پنیرها کاملاً ذوب شوند.</p>
+</li>
+<li>
+<h4>استراحت حیاتی ۴ دقیقه‌ای (قفل کردن عصاره داخل گوشت)</h4>
+<p>پتی‌های آماده را <b>دقیقاً ۴ دقیقه روی توری سیمی</b> استراحت بده و مطلقاً بلافاصله لای نان نگذار (<a href="https://www.mentalfloss.com/food/15-tips-chefs-creating-perfect-burgers" rel="noopener" target="_blank"><span class="en">Mental Floss Chef Guide</span></a>). در این ۴ دقیقه فشار بخار مرکز گوشت فروکش می‌کند و تمام عصاره داغ دوباره جذب فضای بین رشته‌های عمودی می‌شود تا به جای ریختن در بشقاب، هنگام گاز زدن در دهان آزاد شود.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="juicy-phase6">
+<div class="phase-head"><span class="phase-no">فاز ۶ (استیکی)</span><h2>معماری لایه‌چینی ضدآب (مخصوص پتی ضخیم پرآب)</h2></div>
+<ol class="steps">
+<li><p><b>۱. کف نان تُست‌شده با کره</b></p></li>
+<li><p><b>۲. عایق سس زیرین:</b> ۱ قاشق غذاخوری پر امولسیون سیر سیاه و فلفل حلب (پوشش کامل از لبه تا لبه).</p></li>
+<li><p><b>۳. سپر ضدآب:</b> ۱ برگ تاخورده کاهوی ترد <span class="en">Iceberg</span> (مانع نفوذ عصاره داغ فراوان گوشت به بافت نان می‌شود).</p></li>
+<li><p><b>۴. لایه اسیدی ترد:</b> ۳ تا ۴ نوار طولی خیارشور فوری ادویه‌دار.</p></li>
+<li><p><b>۵. قلب استیکی:</b> پتی ضخیم ۲۰۰ گرمی آبدار با لایه دوگانه پنیر آمریکایی و چدار ذوب‌شده.</p></li>
+<li><p><b>۶. تاج دود و اومامی:</b> ۲ ورق <span class="en">Bacon</span> دودی ترد (ضربدری) + نوارهای قارچ <span class="en">Shiitake</span> برشته + پیاز (خام ترد آب‌یخ یا کاراملی در چربی بیکن).</p></li>
+<li><p><b>۷. طراوت نمک‌خورده:</b> ۱ اسلایس گوجه‌فرنگی <span class="en">Heirloom</span> نمک‌خورده و خشک‌شده.</p></li>
+<li><p><b>۸. سقف نان:</b> آغشته به ۱ قاشق غذاخوری امولسیون سیر سیاه.</p></li>
+</ol>
+</section>
+</div>
+<!-- بخش ۵: نکات کلیدی سرآشپز و علم آشپزی -->
+<section class="phase" id="science">
+<div class="phase-head"><span class="phase-no">علم آشپزی</span><h2>نکات کلیدی سرآشپز و مبانی علمی هر دو نسخه</h2></div>
+<div class="callout warn"><span class="lbl">هشدار حیاتی درباره نوع آنزیم آمیلاز (تفاوت قارچی و باکتریایی)</span>
+          اگر به جای پودر مالت دیاستاتیک، آنزیم خالص می‌خری، حتماً نوع <b>قارچی مخصوص نانوایی (<span class="en">Fungal Alpha-Amylase</span>)</b> تهیه کن و هرگز از آمیلاز مخصوص آبجوسازی (<span class="en">Bacterial Alpha-Amylase</span>) استفاده نکن! آمیلاز قارچی در دمای <b>۶۰ تا ۶۵°C</b> اوایل پخت در فر غیرفعال می‌شود و بافتی پنبه‌ای می‌دهد؛ اما آمیلاز باکتریایی تا <b>۹۰ تا ۹۵°C</b> فعال می‌ماند و نشاسته ژلاتینه‌شده داخل نان را ذوب کرده و مغز نان را خمیری و چسبناک (<span class="en">Gummy Crumb</span>) می‌کند (<a href="https://domson.co.uk/gb/academy/bread-technology/bread-improvers-enzyme-technology" rel="noopener" target="_blank"><span class="en">Domson Bread Technology</span></a>). همچنین هرگز از دوز ۰٫۵٪ وزن آرد (۲ گرم) فراتر نرو (<a href="https://jayarrbread.com/blog/diastatic-malt-bread" rel="noopener" target="_blank"><span class="en">JayArr Bread</span></a>).
+        </div>
+<ol class="steps">
+<li>
+<h4>هم‌افزایی دوگانه <span class="en">Tangzhong</span> + آنزیم مالت</h4>
+<p>پیش‌خمیر <span class="en">Tangzhong</span> با ژلاتینه‌کردن نشاسته پیش از پخت، آب آزاد خمیر را به صورت ژل محبوس می‌کند تا نان خشک نشود؛ هم‌زمان مالت دیاستاتیک نشاسته‌های بلند را به مالتوز و دکسترین‌های کوتاه می‌شکند که غذای مخمر را تأمین می‌کنند، رنگ پوسته را در ۱۹۰°C کهربایی می‌کنند و بیات شدن نشاسته (<span class="en">Starch Retrogradation</span>) را به تعویق می‌اندازند.</p>
+</li>
+<li>
+<h4>چرخش علمی گوشت سه‌گانه و دمای انجماد سطحی (۰°C / <span class="en">32°F</span>)</h4>
+<p>دنده (<span class="en">Short Rib</span>) طعمی آجیلی، کره‌ای و سرشار از اومامی دارد اما به‌تنهایی سنگین است؛ سردست (<span class="en">Chuck</span>) پیوند کلاژنی کلاسیک برگر را می‌سازد و راسته (<span class="en">Sirloin</span>) طعم خالص و معدنی گوشت گاو را تثبیت می‌کند (<a href="https://www.seriouseats.com/the-burger-lab-best-burger-blend-profiles-of-eight-cuts-of-beef" rel="noopener" target="_blank"><span class="en">Serious Eats Burger Lab</span></a>). اگر گوشت یا تیغه چرخ‌گوشت گرم باشد، چربی گاو به جای بریده شدن، ذوب و دور ذرات پروتئین مالیده می‌شود (<span class="en">Fat Smearing</span>) و برگر بافتی لاستیکی شبیه سوسیس پیدا می‌کند.</p>
+</li>
+<li>
+<h4>چرا نمک زدن داخل مایه گوشت خام ممنوع است؟</h4>
+<p>پاشیدن نمک داخل گوشت چرخ‌کرده خام باعث حل شدن پروتئین میوزین (<span class="en">Myosin</span>) می‌شود که رشته‌های گوشت را به شبکه‌ای چسبناک و متراکم شبیه سوسیس پیوند می‌دهد (<a href="https://www.seriouseats.com/classic-smashed-burgers-recipe" rel="noopener" target="_blank"><span class="en">Serious Eats Smashed Burgers</span></a>). نمک زدن صرفاً روی سطح بیرونی پتی، داخل برگر را ترد، متخلخل و آبدار نگه می‌دارد.</p>
+</li>
+<li>
+<h4>شیمی ذوب پنیر دوگانه و اثر ضربی ۸ برابری اومامی</h4>
+<p>پنیر چدار کهنه در حرارت مستقیم دوفاز می‌شود و روغن پس می‌دهد، اما پنیر آمریکایی حاوی امولسیون‌کننده <b>سیترات سدیم (<span class="en">Sodium Citrate</span>)</b> است؛ ترکیب این دو زیر بخار آب، پروتئین کازئین را به امولسیونی کرمی و پایدار تبدیل می‌کند. هم‌زمان، اینوزینات (<span class="en">IMP</span>) گوشت گاو و بیکن با گوانیلات (<span class="en">GMP</span>) و گلوتامات آزاد قارچ <span class="en">Shiitake</span>، سیر سیاه تخمیرشده و گوجه نمک‌خورده هم‌افزایی نمایی ایجاد کرده و شدت اومامی را چندین برابر می‌کند.</p>
+</li>
+<li>
+<h4>چرا نسخه دوم رکورد آبداری را در علم آشپزی می‌شکند؟ (کانال‌های عمودی + ۵۷°C)</h4>
+<p>وقتی در روش <span class="en">Heston Blumenthal</span> رشته‌های گوشت عمودی برش می‌خورند، دندان هنگام گاز زدن در امتداد الیاف حرکت می‌کند (بافتی به نرمی کره بدون جویدن کشسان) و شیارهای میکروسکوپی بین رشته‌ها مثل اسفنج عصاره گوشت را نگه می‌دارند. در پخت معکوس ۹۵°C نیز برخلاف تابه معمولی، کل حجم ۲۰۰ گرمی پتی یکنواخت به دمای <b>۵۷°C (<span class="en">135°F</span>)</b> — نقطه ذوب کامل چربی دنده بدون خروج آب — می‌رسد و سطح خشک‌شده‌اش در ۴۵ ثانیه روی چدن داغ برشته می‌شود (<a href="https://www.seriouseats.com/thick-and-juicy-burgers-recipe" rel="noopener" target="_blank"><span class="en">Serious Eats Thick Burgers</span></a>).</p>
+</li>
+</ol>
+</section>
+<div class="r-foot">
+<a class="back" href="../index.html">← بازگشت به همه‌ی دستورها</a>
+</div>
+</main>
+</div>
+</div>
+<footer class="site"><div class="wrap">© <span id="year"></span> آشپزخانه‌ی من</div></footer>
+<button aria-label="بالا" class="to-top" id="toTop">↑</button>
+<script src="../assets/app.js"></script>
+<script>
+  var tt=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){ tt.classList.toggle('show', window.scrollY>500); },{passive:true});
+  tt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  (function burgerModeSwitcher(){
+    var buttons = document.querySelectorAll('[data-set-mode]');
+    var cover = document.getElementById('burgerCoverImg');
+    var statYield = document.getElementById('statYield');
+    var statMeat = document.getElementById('statMeat');
+    var statTech = document.getElementById('statTech');
+    var meta = {
+      smash: {
+        img: '../images/grand-unified-burger.webp',
+        yield: '۶ عدد دبل‌برگر کامل',
+        meat: '۹۰۰g سه‌گانه (۷۵/۲۵ · ۱۲ پتی ۷۲g)',
+        tech: 'اسمش ۳mm روی چدن ۲۶۰°C'
+      },
+      juicy: {
+        img: '../images/juicy-steakhouse-burger.webp',
+        yield: '۶ استیک‌برگر ضخیم ۲۰۰ گرمی',
+        meat: '۱۲۰۰g سه‌گانه (۷۸/۲۲ · ۶ پتی ۲۰۰g)',
+        tech: 'رشته عمودی + Reverse-Sear ۵۷°C'
+      },
+      both: {
+        img: '../images/juicy-steakhouse-burger.webp',
+        yield: '۶ برگر (مقایسه هر دو مسیر)',
+        meat: '۹۰۰g اسمش / ۱۲۰۰g استیک‌هاوسی',
+        tech: 'Double Smash + Reverse-Sear'
+      }
+    };
+    function setMode(m, syncUrl){
+      if(!meta[m]) m = 'smash';
+      document.body.setAttribute('data-burger-mode', m);
+      buttons.forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-set-mode') === m);
+      });
+      if(cover) cover.src = meta[m].img;
+      if(statYield) statYield.textContent = meta[m].yield;
+      if(statMeat) statMeat.textContent = meta[m].meat;
+      if(statTech) statTech.textContent = meta[m].tech;
+      if(syncUrl && window.CookBookURL){
+        window.CookBookURL.set({ mode: m === 'smash' ? null : m });
+      }
+    }
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){ setMode(b.getAttribute('data-set-mode'), true); });
+    });
+    var initMode = window.CookBookURL && window.CookBookURL.get('mode');
+    if(initMode && meta[initMode]) setMode(initMode, false);
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+/* =====================================================================
+   Design system — adapted for PaRHaM's CookBook!
+   Visual reference: Minimal Gallery (quiet whitespace, directory rhythm)
+   Component reference: shadcn/ui (neutral tokens, Button/Badge/Input,
+   8px radius, visible focus ring, restrained borders and shadows)
+   Type: Barlow for Latin/English, Vazirmatn for Persian
+   ===================================================================== */
+:root{
+  /* Palette source: "یک منظره، هزاران رنگ" — 3 regions × (light / MEAN / dark).
+     Sky   #D3D9DC · #CBD2D5 · #C2CBCE
+     Moss  #62774F · #4B603F · #364A2F
+     Ground#2D3837 · #242E2D · #1D2726
+     The three MEAN colours carry the page: mean sky = canvas family, mean moss = accent,
+     mean ground = ink. Light/dark siblings are the supporting surfaces, borders, hovers. */
+  /* Canvas: sky MEAN with a breath of moss MEAN mixed in — the photograph's own
+     grey-green haze, not a neutral UI grey. */
+  --bg:#c0c8c4;
+  --bg-soft:#b2bcb8;       /* sky dark + moss: bands, insets, chips */
+  --surface:#e6e9e7;       /* card paper — lifted well clear of the canvas */
+  --surface-2:#eef1ef;     /* popovers, sheet, sticky heads, search field */
+  --card:#e6e9e7;
+  --footer-bg:#242e2d;     /* ground MEAN anchors the end of the page */
+  --footer-ink:#aeb9b7;
+  --ink:#242e2d;           /* ground MEAN */
+  --ink-soft:#33403d;
+  --muted:#414f4b;
+  --line:#a9b4b0;
+  --line-strong:#93a09c;
+  --accent:#4b603f;        /* moss MEAN */
+  --accent-hover:#3e5134;
+  --accent-strong:#364a2f; /* moss dark — link text */
+  --accent-soft:#c0cbb8;
+  --accent-2:#62774f;      /* moss light */
+  --accent-2-soft:#c4cfb8; /* highlight wash under the headline */
+  --badge-bg:#364a2f;      /* editorial badge fill */
+  --badge-ink:#d3d9dc;
+  --on-accent:#d3d9dc;
+  --scrim:rgba(29,39,38,.55);
+  --on-photo:#e2e7e8;   /* text over photography — the palette's lightest, never #fff */
+  --warning:#6f5a29;
+  --warning-bg:#cdd0bd;
+  --success:#4b603f;
+  --radius:10px;
+  --radius-lg:16px;
+  --radius-xl:22px;
+  --shadow:0 1px 2px rgba(29,39,38,.14),0 1px 1px rgba(29,39,38,.06);
+  --shadow-md:0 6px 18px rgba(29,39,38,.14);
+  --shadow-hover:0 14px 34px rgba(29,39,38,.22);
+  --latin:'Barlow', 'Vazirmatn', system-ui, sans-serif;
+  --sans:'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+  --maxw:1180px;
+  --ease:cubic-bezier(.16,1,.3,1);        /* strong ease-out: enter/exit, reveals */
+  --ease-inout:cubic-bezier(.77,0,.175,1); /* on-screen movement, morphs */
+  --dur-press:120ms;                       /* button/chip press feedback */
+  --dur-hover:180ms;                       /* hover, color, border */
+  --dur-enter:420ms;                       /* first-paint reveal */
+}
+html[data-theme="dark"]{
+  /* Not an exaggerated black: the ground MEAN is the surface, ground dark is the page. */
+  --bg:#1a2322;            /* between ground dark and its shadow — never #000 */
+  --bg-soft:#212b2a;
+  --surface:#28322f;       /* ground MEAN, one step up from the page */
+  --surface-2:#313c3a;     /* ground light — sheet, headers */
+  --card:#28322f;
+  --footer-bg:#182120;
+  --footer-ink:#93a09e;
+  --ink:#d3d9dc;           /* sky light — never pure white */
+  --ink-soft:#aeb9ba;
+  --muted:#8a9799;
+  --line:#36423f;
+  --line-strong:#48544f;
+  --accent:#a8bc90;        /* moss lifted toward the sky family for legibility */
+  --accent-hover:#b9cba3;
+  --accent-strong:#b9cba3;
+  --accent-soft:#28352b;
+  --accent-2:#62774f;
+  --accent-2-soft:#2a3629;
+  --badge-bg:#a8bc90;
+  --badge-ink:#1d2726;
+  --on-accent:#1d2726;
+  --scrim:rgba(10,15,15,.62);
+  --on-photo:#e2e7e8;
+  --warning:#c8bd93;
+  --warning-bg:#31392c;
+  --shadow:0 1px 2px rgba(6,10,10,.5);
+  --shadow-md:0 6px 18px rgba(6,10,10,.5);
+  --shadow-hover:0 16px 38px rgba(6,10,10,.6);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.8;font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+::selection{background:var(--badge-bg);color:var(--badge-ink)}
+a{color:inherit;text-decoration:none}
+a,button,select,label{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button,input,select{font:inherit}
+button{cursor:pointer}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:32px}
+.muted{color:var(--ink-soft)}
+.en,[lang="en"]{font-family:var(--latin);direction:ltr;unicode-bidi:isolate;letter-spacing:.01em}
+.numbers{direction:ltr;unicode-bidi:isolate;font-family:var(--latin)}
+
+/* Header — flat product navigation, no emoji mark */
+nav{position:fixed;inset:0 0 auto;z-index:50;background:var(--surface);background:color-mix(in srgb,var(--surface) 90%,transparent);backdrop-filter:saturate(150%) blur(12px);border-bottom:1px solid transparent;transition:border-color .25s,background .25s}
+nav.scrolled{border-bottom-color:var(--line)}
+.nav-in{max-width:var(--maxw);height:68px;margin:0 auto;padding-inline:32px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;white-space:nowrap;min-width:0}
+.logo-mark{width:34px;height:34px;border:1px solid var(--ink);border-radius:10px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--latin);font-size:11px;font-weight:800;letter-spacing:.08em;flex:0 0 auto}
+.logo small{font-family:var(--latin);font-weight:600;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.logo .ic{display:none}
+.nav-links{display:flex;gap:6px;align-items:center;font-size:13.5px;font-weight:500;flex:0 0 auto}
+.nav-links a:not(.toggle){color:var(--ink-soft);padding:8px 11px;border-radius:7px;transition:background var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease);white-space:nowrap}
+.nav-links a:not(.toggle):hover{color:var(--ink);background:var(--bg-soft)}
+.toggle,a.toggle{width:36px;height:36px;padding:0!important;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);display:grid;place-items:center;transition:border-color var(--dur-hover) var(--ease),background var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease),transform var(--dur-press) var(--ease);flex:0 0 auto}
+.toggle:active,a.toggle:active{transform:scale(.94)}
+.toggle:hover,a.toggle:hover{border-color:var(--line-strong);background:var(--bg-soft)}
+.toggle.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.toggle svg{width:17px;height:17px}
+.cta{border:1px solid var(--accent)!important;background:var(--accent);padding:7px 13px!important;border-radius:8px;color:var(--on-accent)!important;font-size:13px;white-space:nowrap}
+.cta:hover{background:var(--accent-hover);border-color:var(--accent-hover)!important;color:var(--on-accent)!important}
+
+/* Subtle bottom kitchen toast (Wake Lock / status feedback) */
+.cb-toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:var(--bg);padding:8px 15px;border-radius:999px;font-size:12.5px;font-weight:600;box-shadow:var(--shadow-hover);opacity:0;pointer-events:none;transition:opacity var(--dur-hover) var(--ease),transform var(--dur-hover) var(--ease);z-index:80;white-space:nowrap}
+.cb-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* shadcn-like buttons, badges, labels */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:9px 16px;border-radius:8px;font-size:14px;font-weight:600;transition:background var(--dur-hover) var(--ease),border-color var(--dur-hover) var(--ease),color var(--dur-hover) var(--ease),transform var(--dur-press) var(--ease);cursor:pointer;border:1px solid transparent;font-family:inherit}
+.btn:active{transform:scale(.96)}
+.btn-primary{background:var(--accent);color:var(--on-accent)}
+.btn-primary:hover{background:var(--accent-hover);color:var(--on-accent)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:var(--surface)}
+.btn-ghost:hover{border-color:var(--line-strong);background:var(--bg-soft)}
+.badge{display:inline-flex;align-items:center;min-height:24px;padding:2px 8px;border:1px solid var(--line);border-radius:999px;background:var(--bg-soft);color:var(--ink-soft);font-size:11.5px;font-weight:500;line-height:1.5;white-space:nowrap}
+.sec-label{font-size:12px;letter-spacing:.12em;color:var(--accent);font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;text-transform:uppercase}
+.sec-label::before{content:"";width:24px;height:1px;background:var(--accent)}
+h2.sec-title{font-family:var(--sans);font-weight:800;font-size:clamp(30px,3.8vw,46px);line-height:1.22;margin-bottom:16px;letter-spacing:-.03em;text-wrap:balance}
+
+/* Motion: discreet reveal only */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity var(--dur-enter) var(--ease),transform var(--dur-enter) var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{transition-duration:.01ms!important}}
+
+/* Image placeholder */
+.ph{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:var(--bg-soft);border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph .ph-mark{display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted)}
+.ph .ph-mark svg{width:38px;height:38px}
+.ph .ph-mark span{font-size:11px;letter-spacing:.12em}
+
+footer.site{text-align:center;font-size:13px}
+@media(max-width:700px){
+  .wrap{padding-inline:16px}
+  .nav-in{padding-inline:14px;height:58px;gap:8px}
+  .logo{gap:8px;font-size:14px}
+  .logo-mark{width:30px;height:30px;font-size:10.5px}
+  .logo small{display:none}
+  .nav-links{gap:5px;font-size:12.5px}
+  .nav-links a:not(.cta):not(.always):not(.toggle){display:none}
+  .nav-links a:not(.toggle){padding-inline:7px}
+  .toggle,a.toggle{width:34px;height:34px}
+}
+body.is-mobile .reveal{transition-duration:.45s}
+
+/* Coarse pointers: hover styles must not stick after a tap */
+@media (hover:none),(pointer:coarse){
+  .nav-links a:not(.toggle):hover{color:var(--ink-soft);background:transparent}
+  .toggle:hover,a.toggle:hover{border-color:var(--line);background:var(--surface)}
+  .lang-toggle:hover{color:var(--ink);border-color:var(--line)}
+  .btn-primary:hover{background:var(--ink);color:var(--bg);border-color:transparent}
+  .btn-ghost:hover{border-color:var(--line);background:var(--surface)}
+  .cta:hover{background:var(--ink);border-color:var(--ink)!important;color:var(--bg)!important}
+}
+
+/* Digits that change must not shift layout */
+.hero-stat strong,.count,.chip-count,.quick-btn small,.result-group-head span,.numbers,.hero-stats strong{font-variant-numeric:tabular-nums}
+
+/* ---------- Bilingual LTR English mode ---------- */
+html[lang="en"]{direction:ltr}
+html[lang="en"] body{font-family:var(--latin);line-height:1.68;font-size:15.5px;letter-spacing:-.005em}
+html[lang="en"] h2.sec-title{font-family:var(--latin);letter-spacing:-.025em;line-height:1.15}
+.lang-toggle:hover{color:var(--accent);border-color:var(--accent)}
+
+/* =====================================================================
+   v3 visual layer — warm paper, terracotta accent, film grain
+   ===================================================================== */
+body{
+  /* tiled noise, no extra DOM layer, no network request */
+  background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"] body{background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.075'/%3E%3C/svg%3E")}
+.sec-label{color:var(--accent-strong);letter-spacing:.14em}
+.sec-label::before{background:var(--accent)}
+.badge{border-radius:999px;background:var(--bg-soft)}
+::selection{background:var(--badge-bg);color:var(--badge-ink)}
+@media(max-width:700px){.nav-in{height:60px}}
