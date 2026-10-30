@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+
+<html dir="ltr" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>The Grand Unified Burger — PaRHaM's CookBook!</title>
+<meta content="Definitive Chef's Dual-Path Burger Engineering Manual: choose Path 1 Lacy Double Smash (75/25 tri-blend on 260°C dry cast iron) OR Path 2 Juicy Steakhouse (78/22 vertical-grain Heston Blumenthal + 95°C Reverse-Sear + garlic-thyme butter Arrosé) inside enzyme Hokkaido-Tangzhong buns with Black Garlic &amp; Aleppo emulsion." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&amp;family=Vazirmatn:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/theme.css" rel="stylesheet"/>
+<link href="../../assets/recipe.css" rel="stylesheet"/>
+<link href="../../manifest.json" rel="manifest"/>
+<meta content="#c0c8c4" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="CookBook" name="apple-mobile-web-app-title"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<link href="../../icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="../../icons/favicon-64.png" rel="icon" sizes="64x64" type="image/png"/>
+<style>
+  .mode-box{border:1px solid var(--line-strong);border-radius:var(--radius-lg);background:var(--surface);padding:20px;margin:24px 0 18px;box-shadow:var(--shadow)}
+  .mode-box-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+  .mode-box-head h3{font-size:17px;font-weight:750;color:var(--ink)}
+  .mode-box-head span{font-size:12px;color:var(--accent);font-weight:650}
+  .mode-compare{font-size:14px;color:var(--ink-soft);line-height:1.9;margin-bottom:16px}
+  .mode-compare b{color:var(--ink);font-weight:650}
+  .mode-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .mode-tab{border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink-soft);padding:12px 14px;text-align:left;cursor:pointer;transition:.2s;display:flex;flex-direction:column;gap:4px;font-family:inherit}
+  .mode-tab:hover{border-color:var(--line-strong);color:var(--ink);background:var(--bg-soft)}
+  .mode-tab.active{background:var(--ink);border-color:var(--ink);color:var(--bg);box-shadow:var(--shadow)}
+  .mode-tab strong{font-size:13.5px;font-weight:750;display:block}
+  .mode-tab small{font-size:11.5px;opacity:.82;line-height:1.5;display:block}
+  .mode-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-bottom:8px}
+  body[data-burger-mode="smash"] .only-juicy{display:none!important}
+  body[data-burger-mode="juicy"] .only-smash{display:none!important}
+  body[data-burger-mode="both"] .only-smash,
+  body[data-burger-mode="both"] .only-juicy{display:block}
+  body[data-burger-mode="both"] table.only-smash,
+  body[data-burger-mode="both"] table.only-juicy{display:table}
+  @media(max-width:720px){.mode-tabs{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-burger-mode="smash">
+<nav id="nav">
+<div class="nav-in">
+<a class="logo" href="../index.html"><span class="logo-mark">MK</span><span>My Kitchen</span><small>CookBook</small></a>
+<div class="nav-links">
+<a class="always" href="../index.html">← All Recipes</a>
+<a aria-label="فارسی" class="toggle lang-toggle" href="../../recipes/grand-unified-burger.html" id="langToggle" title="فارسی"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg></a>
+<button aria-label="Toggle theme" class="toggle" id="themeToggle" title="Light / Dark">◐</button>
+</div>
+</div>
+</nav>
+<div class="wrap">
+<div class="crumb"><a href="../index.html">My Kitchen</a><span>/</span>
+<a href="../index.html#gallery">Recipes</a><span>/</span>
+    The Grand Unified Burger</div>
+<header class="r-hero">
+<div class="r-eyebrow"><span>Burger Engineering</span> · <span>Enzyme Hokkaido-Tangzhong Bun</span> · <span>Black-Garlic Umami Spread</span> · <span>2 Interactive Paths</span> · <span>Advanced</span></div>
+<h1 class="en">The Grand Unified Burger</h1>
+<p class="fa-sub"><b>Definitive Dual-Path Burger Engineering (Double Smash OR Juicy Steakhouse)</b> — scientifically optimized across every layer per America's Test Kitchen and Serious Eats standards to eliminate every classic burger failure (soggy bottom buns, heavy fat without bright acid, rubbery overworked beef, and sliding toppings). Phases 1–3 build the exact same golden chassis — <b>enzyme-enhanced Hokkaido milk buns with Tangzhong water-roux and diastatic malt, 60-second black-garlic Chinkiang Aleppo emulsion, spiced quick cucumber ribbons, seared Shiitake caps, and oven-flat smoked bacon</b> — letting you toggle live between <b>shatter-lacy caramelized Double Smash</b> OR <b>edge-to-edge rosy 200 g Juicy Steakhouse</b>.</p>
+<div class="r-stats">
+<div class="r-stat"><span class="ic"> </span><div><div class="k">Yield</div><div class="v" id="statYield">6 full double smash burgers</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">Total Run Time</div><div class="v">4 hrs 15 mins (1h 45m active)</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">Active Beef Blend</div><div class="v" id="statMeat">900 g Tri-Blend (75/25 · 12 × 72 g balls)</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">Active Cook Physics</div><div class="v" id="statTech">3 mm Smash on 260°C dry cast iron</div></div></div>
+<div class="r-stat"><span class="ic"> </span><div><div class="k">Skill Level</div><div class="v">Advanced</div></div></div>
+</div>
+</header>
+<div class="r-cover">
+<img alt="The Grand Unified Burger — Master Dual-Path Double Smash &amp; Juicy Steakhouse Burger" id="burgerCoverImg" src="../../images/grand-unified-burger.webp"/>
+</div>
+<div aria-label="Select Burger Beef Engineering Path" class="mode-box">
+<div class="mode-box-head">
+<h3>Choose Your Burger Path: Which Definition of “Juicy Perfection” Are You Craving?</h3>
+<span>Toggling updates both the Ingredient Table and Phases 4–6 automatically</span>
+</div>
+<p class="mode-compare"><b>Scientific Distinction Between Both Paths:</b> If your ideal burger means <b>“lusciously rich, melty, and packed with maximum lacy caramelized Maillard crust,”</b> choose <b>Path 1 (Double Smash)</b> — 25% rendered short-rib/chuck fat plus double steam-melted cheese keeps thin patties rich and succulent, though hitting &gt;70°C inside 90 seconds at 3 mm thickness evaporates free muscle juice with zero rosy center. If you crave <b>“true steakhouse juiciness with an edge-to-edge warm pink core and a gusher of savory beef jus on first bite,”</b> lock <b>Path 2 (Juicy Steakhouse)</b> combining <b>Heston Blumenthal's vertical parallel muscle strands</b> with <b>J. Kenji López-Alt's 95°C Reverse-Sear</b>!</p>
+<div class="mode-tabs" role="tablist">
+<button class="mode-tab active" data-set-mode="smash" type="button"><strong>Path 1: Double Smash Burger</strong>
+<small>Two 72 g smashed (3 mm) lacy-edged patties, beef-fat caramelized onion ribbons &amp; 75/25 tri-blend</small></button>
+<button class="mode-tab" data-set-mode="juicy" type="button"><strong>Path 2: Juicy Steakhouse Burger</strong>
+<small>Thick 200 g (2.5 cm / 1-in) vertical-grain Blumenthal patty, 95°C Reverse-Sear to 57°C &amp; garlic-thyme butter baste</small></button>
+<button class="mode-tab" data-set-mode="both" type="button"><strong>Show Both Full Paths Side-by-Side</strong>
+<small>View both meat tables and complete Phases 4, 5 &amp; 6 for both paths together</small></button>
+</div>
+</div>
+<div class="toc"><a href="#equipment">Engineering Gear</a>
+<a href="#phase1">Phase 1: Hokkaido Bun Dough</a>
+<a href="#phase2">Phase 2: Quick Pickles &amp; Black-Garlic Sauce</a>
+<a href="#phase3">Phase 3: Ring Proof &amp; Bake</a>
+<a href="#fork">Beef Path Fork (Phases 4–6)</a>
+<a href="#science">Food Science &amp; Enzyme Notes</a></div>
+<div class="r-body">
+<aside class="r-aside">
+<div class="ing-card">
+<h3>Master Ingredients by Module</h3>
+<p class="note">Makes <b>6 complete burgers</b> — Sections 1, 2, 3, and 5 are 100% shared across both paths while Section 4 dynamically matches your active selection.</p>
+<table class="ing"><caption>1A) Tangzhong Starch Water-Roux</caption><tbody>
+<tr><th>Unbleached Bread Flour (~12.7% protein, e.g., King Arthur)</th><td class="amt">20 g (2.5 tbsp)</td></tr>
+<tr><th>Filtered water (2 tbsp minus ½ tsp)</th><td class="amt">27 g / ml</td></tr>
+<tr><th>Whole milk</th><td class="amt">60 g (¼ cup)</td></tr>
+</tbody></table><table class="ing"><caption>1B) Main Hokkaido Bun Dough (6 × 112 g Balls)</caption><tbody>
+<tr><th>Unbleached Bread Flour</th><td class="amt">320 g (2.5 cups)</td></tr>
+<tr><th>Whole milk warmed strictly to 35°C (95°F)</th><td class="amt">120 g (½ cup)</td></tr>
+<tr><th>Bread Machine / Instant Yeast (e.g., Fleischmann's)</th><td class="amt">9 g (1 tbsp / 2.75 tsp)</td></tr>
+<tr><th>Fine white granulated sugar</th><td class="amt">24 g (2 tbsp)</td></tr>
+<tr><th>Fine sea salt</th><td class="amt">7 g (1.25 tsp)</td></tr>
+<tr><th>Diastatic Malt Powder <i>(or 1.5 g Bakery-Grade Fungal Alpha-Amylase)</i></th><td class="amt">2 g (½ tsp)</td></tr>
+<tr><th>Large whole egg (room temperature)</th><td class="amt">1 whole (50 g)</td></tr>
+<tr><th>Large egg yolk (room temperature)</th><td class="amt">1 yolk (18 g)</td></tr>
+<tr><th>Unsalted butter softened to room temp (20°C / 68°F — NEVER melted!)</th><td class="amt">42 g (3 tbsp)</td></tr>
+</tbody></table><table class="ing"><caption>1C) Bun Glaze, Seeds &amp; Interior Toast</caption><tbody>
+<tr><th>Whole egg beaten smooth with 15 ml (1 tbsp) water &amp; strained</th><td class="amt">1 egg wash</td></tr>
+<tr><th>Raw white sesame seeds</th><td class="amt">15 g (1.5 tbsp)</td></tr>
+<tr><th>Melted unsalted butter (brushed immediately out of oven)</th><td class="amt">20 g (1.5 tbsp)</td></tr>
+<tr><th>Softened butter (for edge-to-edge interior bun toast)</th><td class="amt">30 g (2 tbsp)</td></tr>
+</tbody></table><table class="ing"><caption>2) Spiced Quick Cucumber Ribbons</caption><tbody>
+<tr><th>Seedless English cucumber, shaved lengthwise into 3–4 mm ribbons</th><td class="amt">1 large (~350 g)</td></tr>
+<tr><th>Filtered water</th><td class="amt">360 g (1.5 cups)</td></tr>
+<tr><th>5% distilled white vinegar</th><td class="amt">240 g (1 cup)</td></tr>
+<tr><th>Kosher salt (Diamond Crystal; OR 12 g / 2 tsp fine / Morton salt)</th><td class="amt">18 g (1 tbsp)</td></tr>
+<tr><th>White granulated sugar</th><td class="amt">12 g (1 tbsp)</td></tr>
+<tr><th>Large fresh garlic cloves, lightly smashed under flat knife blade</th><td class="amt">3 cloves</td></tr>
+<tr><th>Fresh dill sprigs</th><td class="amt">1 small bunch (15 g)</td></tr>
+<tr><th>Cheesecloth whole-spice sachet: 5 g (2 tsp) coriander seed · 5 g (1.5 tsp) yellow mustard seed · 3 g (1 tsp) dill seed · 4 g (1 tsp) whole black peppercorns</th><td class="amt">1 tied sachet</td></tr>
+</tbody></table><table class="ing"><caption>3) Black Garlic &amp; Aleppo Umami Emulsion</caption><tbody>
+<tr><th>60-Second Mayo Base: 1 large room-temp egg yolk (18 g) + smooth Dijon mustard 15 g (1 tbsp) + fresh lemon juice 15 g (1 tbsp) + sugar 4 g (1 tsp) + kosher salt 2 g (½ tsp)</th><td class="amt">Room temp</td></tr>
+<tr><th>Neutral vegetable oil (canola, grapeseed, or sunflower)</th><td class="amt">180 ml / 165 g (¾ cup)</td></tr>
+<tr><th>Peeled fermented Black Garlic cloves, mashed completely smooth into paste</th><td class="amt">25 g (5–6 large cloves)</td></tr>
+<tr><th>High-quality ketchup</th><td class="amt">30 g (2 tbsp)</td></tr>
+<tr><th>Chinese Chinkiang black rice vinegar</th><td class="amt">8 ml (1.5 tsp)</td></tr>
+<tr><th>Chilled homemade spiced pickle brine (from Section 2)</th><td class="amt">10 ml (2 tsp)</td></tr>
+<tr><th>Worcestershire sauce</th><td class="amt">5 ml (1 tsp)</td></tr>
+<tr><th>Aleppo pepper flakes</th><td class="amt">4 g (1.5 tsp)</td></tr>
+<tr><th>Fresh chives, razor-finely minced</th><td class="amt">10 g (2 tbsp)</td></tr>
+<tr><th>Freshly cracked black pepper</th><td class="amt">1 g (¼ tsp)</td></tr>
+</tbody></table><table class="ing only-smash"><caption>4A) 75/25 Tri-Blend Beef — Path 1 (Double Smash: 12 × 72–75 g Balls)</caption><tbody>
+<tr><th>Boneless Beef Short Rib (~33% fat), cut into 2.5 cm (1-in) cubes</th><td class="amt">385 g (13.5 oz)</td></tr>
+<tr><th>Well-marbled Boneless Beef Chuck Roast (~23% fat), 2.5 cm cubes</th><td class="amt">340 g (12 oz)</td></tr>
+<tr><th>Top Sirloin Steak (~11% fat), 2.5 cm cubes</th><td class="amt">175 g (6.5 oz)</td></tr>
+<tr><th>Deli-sliced Boar's Head Yellow American Cheese</th><td class="amt">6 slices (~21 g each)</td></tr>
+<tr><th>Sliced Aged Sharp Cheddar OR Smoked Provolone</th><td class="amt">6 slices (~21 g each)</td></tr>
+<tr><th>Coarse kosher salt &amp; freshly cracked black pepper</th><td class="amt">Strictly at sear</td></tr>
+</tbody></table><table class="ing only-juicy"><caption>4B) 78/22 Steakhouse Tri-Blend — Path 2 (Juicy Steakhouse: 6 × 200 g Discs)</caption><tbody>
+<tr><th>Well-marbled Boneless Beef Chuck Roast (~22% fat), 2.5 cm cubes</th><td class="amt">480 g (17 oz)</td></tr>
+<tr><th>Boneless Beef Short Rib (~32% fat), 2.5 cm cubes</th><td class="amt">420 g (14.8 oz)</td></tr>
+<tr><th>Top Sirloin Steak (~10% fat), 2.5 cm cubes</th><td class="amt">300 g (10.6 oz)</td></tr>
+<tr><th>Arrosé Basting Pan Aromatics: 30 ml (2 tbsp) avocado/canola oil + 42 g (3 tbsp) unsalted butter + 3 skin-on smashed garlic cloves + 4 fresh thyme sprigs</th><td class="amt">For final pan baste</td></tr>
+<tr><th>Deli-sliced Boar's Head Yellow American Cheese</th><td class="amt">6 slices</td></tr>
+<tr><th>Sliced Aged Sharp Cheddar OR Smoked Provolone</th><td class="amt">6 slices</td></tr>
+<tr><th>Crisp whole Iceberg Lettuce leaves (waterproof lower moisture shield)</th><td class="amt">6 whole dry leaves</td></tr>
+</tbody></table><table class="ing"><caption>5) Precision Hot &amp; Cold Toppings (Both Paths)</caption><tbody>
+<tr><th>Thick-cut Applewood Smoked Bacon (2 strips per burger)</th><td class="amt">12 strips (~450 g / 1 lb)</td></tr>
+<tr><th>Fresh Shiitake mushrooms (stemmed, caps sliced 1.2 cm / ½-in thick)</th><td class="amt">280 g (10 oz)</td></tr>
+<tr><th>Unsalted butter (finishing mushroom sear)</th><td class="amt">14 g (1 tbsp)</td></tr>
+<tr><th>Large white onion, shaved on a Mandoline strictly to 1 mm paper-thin ribbons</th><td class="amt">1 large (~250 g / 9 oz)</td></tr>
+<tr><th>Ripe beefy Heirloom tomatoes, center-cut into 6 thick 8 mm slabs</th><td class="amt">2 large</td></tr>
+</tbody></table>
+</div>
+</aside>
+<main class="r-main">
+<div class="callout tip"><span class="lbl">Need Dinner Ready in 30 Minutes Flat Tonight?</span>
+        Short on a 4-hour project window? Jump straight to our companion <a href="30-minute-pub-burger.html">The 30-Minute One-Skillet Juicy Pub Burger</a> — engineered to hit 90% of this exact black-garlic steakhouse magic using one cast-iron skillet and Harold McGee's 30-second flip physics!</div>
+<section class="phase" id="equipment">
+<div class="phase-head"><span class="phase-no">Hardware</span><h2>Required Culinary Engineering Gear</h2></div>
+<ol class="steps">
+<li><h4>1-Gram Precision Digital Kitchen Scale</h4><p>Mandatory for exact flour hydration, micro-gram diastatic enzyme dosing, equal 112 g bun balls, and calibrated beef portions.</p></li>
+<li><h4>Stand Mixer with Dough Hook</h4><p>Develops an elastic gluten network and emulsifies softened butter gradually without warming enriched dough by hand.</p></li>
+<li><h4>Home Meat Grinder with Coarse 6 mm (¼-Inch) Plate</h4><p>Cleanly shears crust-frozen beef cubes into airy loose strands with zero fat smearing.</p></li>
+<li><h4>Heavy 12-Inch Cast-Iron Skillet OR Carbon-Steel Griddle</h4><p>Delivers massive thermal mass so surface temperature never crashes when cold beef hits iron.</p></li>
+<li><h4>Rigid Unslotted Metal Spatula / Bench Scraper + Cheese Melting Dome</h4><p>Rigid sharp bevel compresses Smash balls flat to 3 mm and scrapes 100% of caramelized crust intact, while a tight dome lid steam-melts sharp cheddar in 20–25 seconds.</p></li>
+<li><h4>Six 10 cm (4-Inch) Stainless English Muffin / Crumpet Rings</h4><p>Guides upward bakery loft rather than flat sideways sprawl — easily improvised in 2 minutes from folded strips of heavy-duty aluminum foil stapled/taped to 4 cm height × 10 cm diameter!</p></li>
+<li><h4>Supporting Precision Tools</h4><p>Mandoline slicer (1 mm onion ribbons), immersion stick blender + narrow tall cup (60-second foolproof mayonnaise), instant-read digital probe thermometer, wire cooling rack, parchment squares, cheesecloth, and fine-mist spray bottle.</p></li>
+</ol>
+</section>
+<section class="phase" id="phase1">
+<div class="phase-head"><span class="phase-no">Phase 1 (Shared)</span><h2>Mixing Enzyme Hokkaido-Tangzhong Dough &amp; Cold Retard</h2></div>
+<div class="phase-when"><span class="ic"> </span> Start 4 hours before service — 45m ambient rise + 90m 4°C cold retard</div>
+<ol class="steps">
+<li>
+<h4>Cooking the 65°C Tangzhong Water-Roux</h4>
+<p>Whisk <b>20 g bread flour, 27 g water, and 60 g whole milk</b> smooth off-heat inside a small saucepan until zero lumps remain. Cook over medium heat while whisking floor and corners nonstop (~2 to 3 minutes) until thickened to a glossy pudding paste reading <b>65°C (149°F)</b> where whisk tracks hold visible lines. Scrape immediately into a small bowl, press plastic wrap flush against the surface so no skin forms, and cool to room temperature (<b>21–24°C / 70–75°F</b>).</p>
+</li>
+<li>
+<h4>Blooming the Yeast</h4>
+<p>Stir <b>9 g yeast into 120 g whole milk warmed strictly to 35°C (95°F)</b> and let stand 5 to 8 minutes until foamy and domed.</p>
+</li>
+<li>
+<h4>Combining Dry Matrix &amp; Wet Enrichments</h4>
+<p>Whisk <b>320 g bread flour, 24 g sugar, 7 g fine sea salt, and 2 g diastatic malt powder</b> thoroughly inside your stand mixer bowl. Attach the dough hook on low speed, add the foamy milk-yeast mixture, <b>1 whole beaten egg + 1 egg yolk</b>, and all cooled <b>Tangzhong paste</b>, mixing <b>4 minutes</b> into a cohesive mass.</p>
+</li>
+<li>
+<h4>3-Stage Softened Butter Emulsion &amp; Windowpane Test</h4>
+<p>Step speed to medium-low. Divide <b>42 g room-temp softened butter</b> into 3 equal pats and add <b>strictly one pat at a time</b>, waiting until each piece disappears completely from bowl walls before dropping the next. Knead <b>6 to 8 minutes longer</b> until satin-smooth, glossy, and slapping clean off the bowl — passing a full translucent <b>Windowpane Test</b> between your fingers without tearing.</p>
+</li>
+<li>
+<h4>Primary Ambient Rise + 90-Minute Cold Retard</h4>
+<p>Shape into a taut ball on an unfloured counter, set in a lightly oiled bowl sealed tight, rest <b>45 minutes at room temperature (24°C / 75°F)</b> for initial lift, then refrigerate <b>strictly 90 minutes at 4°C (39°F)</b> to firm butterfat for razor-precise shaping while deepening flavor.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="phase2">
+<div class="phase-head"><span class="phase-no">Phase 2 (Shared)</span><h2>Spiced Quick Pickles &amp; 60-Second Black-Garlic Umami Emulsion</h2></div>
+<div class="phase-when"><span class="ic"> </span> Complete effortlessly while dough chills 90 minutes in the fridge</div>
+<ol class="steps">
+<li>
+<h4>Infusing Crisp Spiced Cucumber Ribbons</h4>
+<p>Pack 3–4 mm lengthwise cucumber ribbons tightly into a clean 1-liter jar alongside 3 smashed garlic cloves and fresh dill sprigs. Bring <b>360 g water, 240 g white vinegar, 18 g Diamond Crystal kosher salt, and 12 g sugar</b> with your tied cheesecloth spice sachet to a rolling boil, kill heat immediately, steep covered 1 minute to bloom whole spices, and pour hot brine + sachet over cucumbers. Cool 20 minutes on counter then refrigerate ice-cold.</p>
+</li>
+<li>
+<h4>60-Second Immersion-Blender Mayonnaise Base</h4>
+<p>Layer <b>1 egg yolk, 15 g Dijon mustard, 15 g fresh lemon juice, 4 g sugar, 2 g kosher salt, and 180 ml neutral oil</b> inside a narrow tall immersion cup. Plant blender head flat against bottom floor, switch high, hold <b>15 full seconds completely stationary</b> as white thick emulsion blooms underneath, then tilt and draw slowly upward over 45 seconds until thick and velvety.</p>
+</li>
+<li>
+<h4>Folding Black Garlic, Chinkiang &amp; Aleppo Umami</h4>
+<p>Fold in smooth mashed <b>black garlic paste (25 g), ketchup (30 g), Chinese Chinkiang black vinegar (8 ml), chilled homemade pickle brine (10 ml), Worcestershire (5 ml), Aleppo pepper flakes (4 g), minced fresh chives (10 g), and cracked black pepper (1 g)</b> until uniform. Cover and chill at least <b>1 hour</b> so Aleppo oils and black garlic meld.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="phase3">
+<div class="phase-head"><span class="phase-no">Phase 3 (Shared)</span><h2>Scaling 112 g Balls, Ring Proofing &amp; Baking to 88–90°C</h2></div>
+<div class="phase-when"><span class="ic"> </span> Start 2 hours pre-service — Bake 15 to 17 minutes at 190°C (375°F)</div>
+<ol class="steps">
+<li>
+<h4>Gram-Exact 6-Ball Scaling</h4>
+<p>Press cold dough gently to degas and divide the ~685 g batch on your scale into <b>6 dead-even balls (112 to 114 g / 4 oz each)</b>. Tuck edges underneath, pinch seam shut, and cup-roll against an unfloured counter under your arched palm into tight, satin-smooth spheres.</p>
+</li>
+<li>
+<h4>Final Proof Inside 10 cm (4-Inch) greased Rings</h4>
+<p>Space six oiled 10 cm crumpet/foil rings across a parchment-lined sheet pan, center one ball inside each ring, press lightly with flat palm, cover under an inverted deep sheet pan or oiled plastic wrap, and proof <b>45 to 60 minutes ambient</b> until doubled and hugging ring walls.</p>
+</li>
+<li>
+<h4>Baking to 88–90°C Internal &amp; Melted Butter Gloss</h4>
+<p>Preheat oven to <b>190°C (375°F)</b>. Fine-mist or feather-brush domes lightly with strained egg wash, scatter raw white sesame seeds over top, and bake middle rack <b>15 to 17 minutes</b> until rich golden-amber and reading <b>88–90°C (190–195°F)</b> dead center. Brush tops immediately with <b>20 g melted butter</b>, slip rings off, and cool completely on a <b>wire rack</b> so steam never softens bottoms.</p>
+</li>
+</ol>
+</section>
+<div class="mode-box" id="fork">
+<div class="mode-box-head">
+<h3>Beef Engineering Fork (Phases 4 Through Final Stack)</h3>
+<span>Pick either protocol below (or view both side-by-side)</span>
+</div>
+<div class="mode-tabs" role="tablist">
+<button class="mode-tab active" data-set-mode="smash" type="button"><strong>Path 1: Double Smash (Lacy Maillard Crust)</strong>
+<small>12 × 72 g loose balls · 260°C dry iron · 3 mm onion-smash stack</small></button>
+<button class="mode-tab" data-set-mode="juicy" type="button"><strong>Path 2: Juicy Steakhouse (Vertical-Grain Reverse-Sear)</strong>
+<small>6 × 200 g discs · Blumenthal cylinder · 95°C oven + garlic-thyme baste</small></button>
+<button class="mode-tab" data-set-mode="both" type="button"><strong>View Both Paths Side-by-Side</strong>
+<small>Display complete Phases 4, 5 &amp; 6 for both paths consecutively</small></button>
+</div>
+</div>
+<div class="only-smash">
+<section class="phase" id="smash-phase4">
+<div class="mode-badge">Path 1 · The Grand Unified Double Smash Burger</div>
+<div class="phase-head"><span class="phase-no">Phase 4 (Smash)</span><h2>Crust-Frozen 75/25 Grind &amp; Topping Prep</h2></div>
+<div class="phase-when"><span class="ic"> </span> Start 1 hour pre-service — 25–30 min 0°C crust-freeze before grinding</div>
+<ol class="steps">
+<li>
+<h4>Crust-Freezing Tri-Blend Cubes &amp; Grinder Hardware</h4>
+<p>Spread 2.5 cm cubes of <b>short rib (385 g), chuck (340 g), and top sirloin (175 g)</b> in a single layer on a tray alongside your grinder housing, blade, and <b>6 mm coarse plate</b> inside the freezer for <b>strictly 25 to 30 minutes</b> until exteriors stiffen crusty-firm at <b>0°C (32°F)</b> without freezing solid.</p>
+</li>
+<li>
+<h4>Single-Pass Coarse Grind &amp; Zero-Compression 72 g Balls (ZERO Salt Inside!)</h4>
+<p>Toss crust-frozen cubes together and pass <b>strictly ONCE</b> through the coarse plate. Never knead or salt raw strands! Feather-lightly gather loose strands into <b>12 airy balls weighing 72 to 75 g (2.5 oz) each</b> preserving internal air gaps, and refrigerate immediately until searing.</p>
+</li>
+<li>
+<h4>Sheet-Pan Flat Crispy Smoked Bacon</h4>
+<p>Lay 12 thick applewood bacon strips across a wire rack set inside a rimmed sheet pan at <b>200°C (400°F) for 18 to 22 minutes</b> until white fat renders translucent and strips crisp flat edge-to-edge; blot on paper towels.</p>
+</li>
+<li>
+<h4>Steakhouse Hard-Seared Shiitake Mushrooms</h4>
+<p>Heat 1 tbsp oil in hot cast iron over medium-high, arrange sliced Shiitake caps in one open layer, and leave <b>100% untouched AND unsalted for 3 full minutes</b> for deep mahogany browning; flip 2 minutes, lower heat, toss 30 seconds with kosher salt, cracked black pepper, and <b>14 g butter</b>, and set aside.</p>
+</li>
+<li>
+<h4>Ice-Bath Bone-Dry Onion Ribbons &amp; Drained Salted Heirloom Slabs</h4>
+<p>Submerge 1 mm white onion ribbons in ice water for <b>strictly 2 minutes</b> to strip harsh sulfur bite, drain, and press between double paper towels until <b>100% bone-dry</b> in 6 neat piles. Salt both sides of six 8 mm heirloom tomato slabs over a wire rack for <b>15 minutes</b> to purge watery juice, blotting dry before stacking.</p>
+</li>
+<li>
+<h4>Edge-to-Edge Butter Bun Armor</h4>
+<p>Slice cooled Hokkaido buns horizontally, butter cut faces edge-to-edge with softened butter, and griddle over medium heat <b>60 to 90 seconds</b> into crisp golden moisture shields.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="smash-phase5">
+<div class="phase-head"><span class="phase-no">Phase 5 (Smash)</span><h2>260°C Dry Smash, Lacy Edges &amp; Double-Cheese Steam Fusion</h2></div>
+<div class="phase-when"><span class="ic"> </span> Cook 1–2 burgers per round — Dry cast iron smoking at 245–260°C (475–500°F)</div>
+<ol class="steps">
+<li>
+<h4>Bringing Dry Cast Iron to Wisps of Smoke</h4>
+<p>Crank exhaust hood high and preheat dry un-oiled cast iron until smoking faintly at <b>245–260°C (475–500°F)</b>.</p>
+</li>
+<li>
+<h4>5-Second Vertical Smash (Onion Ball #1 + Plain Ball #2)</h4>
+<p>Set two cold 72 g beef balls 10 cm apart on dry iron, pile one dry onion mound atop <b>Ball #1</b> leaving <b>Ball #2</b> bare, place parchment over Ball #1, and press straight down hard with your rigid spatula to <b>3 mm (⅛-in)</b> — holding full vertical force <b>5 full seconds</b> to weld proteins onto iron pores! Peel paper, immediately smash Ball #2 identically, and season both tops generously with coarse kosher salt and black pepper.</p>
+</li>
+<li>
+<h4>Scraping 100% of Lacy Crust &amp; Flipping (60–75 Seconds)</h4>
+<p>Leave untouched 60–75 seconds until edges bubble lacy mahogany brown and grey-pink cook rises from below; drive your sharp beveled spatula flat at an acute angle flush against iron to pry 100% of caramelized crust intact and flip immediately so onions on Patty #1 caramelize sweet directly in beef fat.</p>
+</li>
+<li>
+<h4>20–30 Second Steam Double-Cheese Melt</h4>
+<p>Crown Patty #1 (onion) immediately with <b>Yellow American</b> and Patty #2 with <b>Aged Sharp Cheddar / Smoked Provolone</b>, splash <b>5 ml (1 tsp) water</b> onto bare iron, clamp melting dome shut <b>20 to 30 seconds</b>, stack Cheddar Patty #2 squarely atop Onion-American Patty #1, and lift straight onto your bun!</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="smash-phase6">
+<div class="phase-head"><span class="phase-no">Phase 6 (Smash)</span><h2>Bottom-to-Top Double Smash Architecture</h2></div>
+<ol class="steps">
+<li><p><b>1. Bottom Hokkaido Bun Heel:</b> crisp golden-buttered face UP.</p></li>
+<li><p><b>2. Lower Umami Seal:</b> 1 generous tbsp (15 g) Black-Garlic Aleppo Emulsion spread edge-to-edge.</p></li>
+<li><p><b>3. Bright Acidic Crunch:</b> 3 to 4 blotted spiced quick cucumber ribbons laid parallel.</p></li>
+<li><p><b>4. Double-Patty Cheese Tower:</b> hot Onion + American Patty #1 crowned with Lacy Crust + Sharp Cheddar Patty #2.</p></li>
+<li><p><b>5. Interlocking X-Beams of Smoke:</b> 2 flat crisp bacon strips crossed in an X locking into molten cheddar so nothing slides.</p></li>
+<li><p><b>6. Warm Umami Crown:</b> 1.5 tbsp seared buttered Shiitake slices nestled across bacon channels.</p></li>
+<li><p><b>7. Drained Salted Tomato Slab:</b> 1 thick blotted Heirloom tomato disc + crack of fresh black pepper.</p></li>
+<li><p><b>8. Top Sesame Hokkaido Crown:</b> slathered with 1 tbsp (15 g) Black-Garlic Emulsion, pressed gently for 1 second to lock layers, served piping hot!</p></li>
+</ol>
+</section>
+</div>
+<div class="only-juicy">
+<section class="phase" id="juicy-phase4">
+<div class="mode-badge">Path 2 · Juicy Steakhouse Burger (Blumenthal Vertical Grain + Reverse-Sear)</div>
+<div class="phase-head"><span class="phase-no">Phase 4 (Steakhouse)</span><h2>10-Second Pasteurization Blanch, Cold Grind &amp; Heston Blumenthal Vertical-Strand Cylinder</h2></div>
+<div class="phase-when"><span class="ic"> </span> 10s boiling blanch + 30m crust-freeze + 25m cylinder chill → 6 × 200 g vertical-grain discs</div>
+<figure class="topping-photo">
+<img alt="Juicy Steakhouse Reverse-Seared Burger Cross-Section" loading="lazy" src="../../images/juicy-steakhouse-burger.webp"/>
+<figcaption>Juicy Steakhouse Edition — Heston Blumenthal Vertical-Grain + Kenji Reverse-Sear (57°C / 135°F)</figcaption>
+</figure>
+<ol class="steps">
+<li>
+<h4>10-Second Surface Boiling Blanch for Safe Medium-Rare / Medium Cores</h4>
+<p>Before cubing whole muscles, plunge whole intact cuts of <b>chuck (480 g), short rib (420 g), and top sirloin (300 g)</b> with tongs into rapidly boiling water for <b>strictly 10 seconds</b>, pull immediately, and blot dry — eradicating surface bacteria cleanly without cooking meat fibers so a 56–57°C rosy core is 100% food-safe (<a href="https://blog.thermoworks.com/how-to-grind-your-own-hamburgers/" rel="noopener" target="_blank">ThermoWorks</a>). Cube into 2.5 cm pieces and crust-freeze <b>30 minutes at 0°C (32°F)</b> alongside your 6 mm grinder plate and blade.</p>
+</li>
+<li>
+<h4>Parallel Strand Alignment &amp; Plastic-Wrap Cylinder (Heston Blumenthal Technique)</h4>
+<p>Lay a wide sheet of plastic wrap directly in front of your grinder exit spout. Feed crust-frozen tri-blend cubes through and catch emerging meat strands laying them <b>strictly parallel side-by-side in one single direction</b> across the film until forming a log <b>10.5 cm (4.25 in) in diameter</b> — <b>NEVER squeeze, knead, or salt!</b> Roll film snugly around parallel strands twisting ends candy-wrapper tight into an airy porous cylinder, and firm in the freezer <b>25 minutes</b>.</p>
+</li>
+<li>
+<h4>Cross-Grain Slicing into Six 200 g (1-Inch) Filet-Mignon Discs</h4>
+<p>Unwrap the chilled log and slice cleanly perpendicular across the strands with a razor-sharp chef's knife into <b>6 thick 2.5 cm (1-inch) steaks weighing 200 g (7 oz) each</b> — standing every single muscle fiber vertically upright just like prime tenderloin! Press a gentle <b>5 mm center thumb dimple</b> into each face.</p>
+</li>
+<li>
+<h4>Shared Toppings &amp; Dual Onion Choice</h4>
+<p>Prepare 200°C flat oven bacon, browned buttered Shiitakes, drained salted heirloom slabs, and butter-griddled buns identically; serve ice-bathed 1 mm white onion ribbons either <b>crisp raw</b> OR slowly caramelized sweet over low heat for 10 minutes in 1 tbsp rendered bacon fat.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="juicy-phase5">
+<div class="phase-head"><span class="phase-no">Phase 5 (Steakhouse)</span><h2>Low 95°C Oven Reverse-Sear + 250°C Cast-Iron Garlic-Thyme Butter Arrosé</h2></div>
+<div class="phase-when"><span class="ic"> </span> 95°C oven (18–25m) → 250°C iron sear (45s) → 20s foaming garlic-thyme butter baste → 4m wire-rack rest</div>
+<ol class="steps">
+<li>
+<h4>Edge-to-Edge Zero-Gray-Band 95°C Oven Warmup</h4>
+<p>Preheat oven gently to <b>95°C (200°F)</b> (<a href="https://www.seriouseats.com/thick-and-juicy-burgers-recipe" rel="noopener" target="_blank">Serious Eats</a>). Season both faces AND vertical side walls of all six 200 g patties generously with coarse kosher salt and cracked black pepper immediately before loading onto a wire rack set over a sheet pan. Warm middle rack <b>18 to 25 minutes</b> until dead-center digital probe reads:</p>
+<ul class="sub">
+<li><b>For Ultra-Juicy Medium-Rare:</b> Pull from oven at <b>49°C (120°F)</b> → finishes post-sear at <b>54°C (130°F)</b>.</li>
+<li><b>Chef's Signature Warm Rosy Medium (Recommended Sweet Spot):</b> Pull from oven at <b>52–53°C (126–128°F)</b> → finishes post-sear at <b>57°C (135°F)</b> where 100% of short-rib fat liquefies silky without squeezing muscle juice out!</li>
+</ul>
+</li>
+<li>
+<h4>250°C Cast-Iron Sear + 20-Second Garlic-Thyme Butter Arrosé</h4>
+<p>Heat heavy cast iron blazing hot to <b>250°C (485°F)</b> with 30 ml avocado/canola oil smoking faintly. Lay warm patties gently in (2–3 per batch), sear untouched <b>45 to 60 seconds</b> for deep steak crust (<b>NEVER press!</b>), flip, immediately toss in <b>42 g butter + 3 smashed garlic cloves + 4 fresh thyme sprigs</b>, tilt pan slightly, and spoon foaming herb-garlic butter continuously over tops for <b>20 seconds</b>! Crown with <b>Yellow American + Aged Sharp Cheddar</b>, splash 1 tsp water in pan, steam under dome <b>20–25 seconds</b>.</p>
+</li>
+<li>
+<h4>Mandatory 4-Minute Wire-Rack Rest</h4>
+<p>Rest seared cheeseburgers <b>strictly 4 full minutes on a wire cooling rack</b> before stacking (<a href="https://www.mentalfloss.com/food/15-tips-chefs-creating-perfect-burgers" rel="noopener" target="_blank">Mental Floss Chef Guide</a>) — allowing internal vapor pressure to subside so juices reabsorb inside vertical channels instead of flooding onto the plate.</p>
+</li>
+</ol>
+</section>
+<section class="phase" id="juicy-phase6">
+<div class="phase-head"><span class="phase-no">Phase 6 (Steakhouse)</span><h2>Waterproof Architecture Engineered for Juicy 200 g Patties</h2></div>
+<ol class="steps">
+<li><p><b>1. Butter-Crisped Bottom Hokkaido Heel</b></p></li>
+<li><p><b>2. Lower Sauce Seal:</b> 1 heaping tbsp Black-Garlic Aleppo Emulsion edge-to-edge.</p></li>
+<li><p><b>3. Hydrophobic Thermal Shield:</b> 1 folded crisp whole <b>Iceberg Lettuce leaf</b> blocking hot beef jus from softening crumb.</p></li>
+<li><p><b>4. Crisp Acidic Layer:</b> 3 to 4 spiced quick cucumber ribbons.</p></li>
+<li><p><b>5. Vertical-Grain Steakhouse Heart:</b> rested 200 g rosy patty + molten Yellow American &amp; Sharp Cheddar.</p></li>
+<li><p><b>6. Smoke &amp; Umami Crown:</b> 2 crossed strips crisp smoked bacon + browned buttered Shiitake caps + crisp ice-bath OR bacon-caramelized onions.</p></li>
+<li><p><b>7. Salted Heirloom Slab:</b> 1 drained 8 mm slice.</p></li>
+<li><p><b>8. Sesame Hokkaido Crown:</b> spread with 1 tbsp Black-Garlic Emulsion.</p></li>
+</ol>
+</section>
+</div>
+<section class="phase" id="science">
+<div class="phase-head"><span class="phase-no">Food Science</span><h2>Chef's Technical Notes &amp; Biochemical Principles</h2></div>
+<div class="callout warn"><span class="lbl">CRITICAL ENZYME WARNING: FUNGAL VS. BACTERIAL ALPHA-AMYLASE</span> Substituting pure enzyme powder for diastatic malt? Buy <b>strictly Bakery-Grade Fungal Alpha-Amylase</b> — <b>NEVER brewing Bacterial Alpha-Amylase!</b> Fungal amylase denatures safely right at <b>60–65°C</b> early inside the oven yielding cloud-soft crumb, whereas heat-stable bacterial amylase survives past <b>90–95°C</b> digesting gelatinized starch into sticky liquid gum (<a href="https://domson.co.uk/gb/academy/bread-technology/bread-improvers-enzyme-technology" rel="noopener" target="_blank">Domson Bread Technology</a>). Strictly cap dose at <b>0.5% flour weight (2 g max)</b> (<a href="https://jayarrbread.com/blog/diastatic-malt-bread" rel="noopener" target="_blank">JayArr Bread</a>).</div>
+<ol class="steps">
+<li>
+<h4>Dual Synergy of 65°C Tangzhong + Diastatic Malt</h4>
+<p>Pre-gelatinized Tangzhong locks free water inside starch networks for pillow softness while diastatic malt cleaves long starch chains into yeast-feeding maltose and short dextrins — browning crust amber at 190°C and delaying starch retrogradation (staling) for days.</p>
+</li>
+<li>
+<h4>0°C Crust-Freezing &amp; Why Short Rib + Chuck + Sirloin Wins</h4>
+<p>Short rib supplies rich buttery umami, chuck provides classic burger collagen chew, and lean top sirloin anchors clean mineral beefiness (<a href="https://www.seriouseats.com/the-burger-lab-best-burger-blend-profiles-of-eight-cuts-of-beef" rel="noopener" target="_blank">Serious Eats Burger Lab</a>). Warm grinders smear soft beef tallow around protein particles (<i>fat smearing</i>), turning burgers dense and rubbery instead of loose and juicy.</p>
+</li>
+<li>
+<h4>Why Salting Inside Raw Ground Beef Is Strictly Forbidden</h4>
+<p>Mixing salt into raw ground beef dissolves contractile <b>myosin</b> protein, cross-linking strands into springy sausage bounce (<a href="https://www.seriouseats.com/classic-smashed-burgers-recipe" rel="noopener" target="_blank">Serious Eats Smashed Burgers</a>). Salting strictly exterior faces milliseconds pre-cook keeps interiors tender and crumbly.</p>
+</li>
+<li>
+<h4>Sodium Citrate Cheese Emulsion &amp; 8× Umami Synergy</h4>
+<p>Aged sharp cheddar splits oily alone under high heat, whereas American cheese brings <b>sodium citrate</b> emulsifying salts that fuse both cheeses silky smooth under steam. Meanwhile, beef &amp; bacon 5'-inosinate (<b>IMP</b>) multiplies exponentially alongside Shiitake 5'-guanylate (<b>GMP</b>) plus free glutamates in fermented black garlic, Worcestershire, and salted heirloom tomatoes!</p>
+</li>
+<li>
+<h4>Why Vertical Strands + 57°C Reverse-Sear Breaks Every Juiciness Record</h4>
+<p>Aligning strands vertically per Heston Blumenthal lets teeth shear effortlessly down parallel muscle channels while microscopic capillary gaps hold hot beef juice like a sponge; pairing a gentle 95°C warmup to <b>57°C (135°F)</b> with a 45-second 250°C crust locks edge-to-edge pink perfection (<a href="https://www.seriouseats.com/thick-and-juicy-burgers-recipe" rel="noopener" target="_blank">Serious Eats Thick Burgers</a>).</p>
+</li>
+</ol>
+</section>
+<div class="r-foot">
+<a class="back" href="../index.html">← Back to All Recipes</a>
+</div>
+</main>
+</div>
+</div>
+<footer class="site"><div class="wrap">© <span id="year"></span> My Kitchen</div></footer>
+<button aria-label="Back to top" class="to-top" id="toTop">↑</button>
+<script src="../../assets/app.js"></script>
+<script>
+  var tt=document.getElementById('toTop');
+  window.addEventListener('scroll',function(){ tt.classList.toggle('show', window.scrollY>500); },{passive:true});
+  tt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  (function burgerModeSwitcher(){
+    var buttons = document.querySelectorAll('[data-set-mode]');
+    var cover = document.getElementById('burgerCoverImg');
+    var statYield = document.getElementById('statYield');
+    var statMeat = document.getElementById('statMeat');
+    var statTech = document.getElementById('statTech');
+    var meta = {
+      smash: {
+        img: '../../images/grand-unified-burger.webp',
+        yield: '6 Double Smash Burgers',
+        meat: '900g Tri-Blend (75/25 · 12 × 72g)',
+        tech: '3mm Smash on 260°C Cast Iron'
+      },
+      juicy: {
+        img: '../../images/juicy-steakhouse-burger.webp',
+        yield: '6 Thick 200g Steakhouse Burgers',
+        meat: '1200g Tri-Blend (78/22 · 6 × 200g)',
+        tech: 'Vertical Grain + 57°C Reverse-Sear'
+      },
+      both: {
+        img: '../../images/juicy-steakhouse-burger.webp',
+        yield: '6 Burgers (Both Paths Side-by-Side)',
+        meat: '900g Smash / 1200g Steakhouse',
+        tech: 'Double Smash + Reverse-Sear'
+      }
+    };
+    function setMode(m, syncUrl){
+      if(!meta[m]) m = 'smash';
+      document.body.setAttribute('data-burger-mode', m);
+      buttons.forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-set-mode') === m);
+      });
+      if(cover) cover.src = meta[m].img;
+      if(statYield) statYield.textContent = meta[m].yield;
+      if(statMeat) statMeat.textContent = meta[m].meat;
+      if(statTech) statTech.textContent = meta[m].tech;
+      if(syncUrl && window.CookBookURL){
+        window.CookBookURL.set({ mode: m === 'smash' ? null : m });
+      }
+    }
+    buttons.forEach(function(b){
+      b.addEventListener('click', function(){ setMode(b.getAttribute('data-set-mode'), true); });
+    });
+    var initMode = window.CookBookURL && window.CookBookURL.get('mode');
+    if(initMode && meta[initMode]) setMode(initMode, false);
+  })();
+</script>
+</body>
+</html>
