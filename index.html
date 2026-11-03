@@ -65,13 +65,13 @@
 <div class="stats-head"><div><span class="label">کتابخانه</span><h2>برای هر ذائقه، یک ایده.</h2><p>یک مجموعه برای کشف، پختن و لذت بردن.</p></div><span class="stats-mark" aria-hidden="true"></span></div>
 <ul class="stats" aria-label="آمار کتابخانه">
 <li><strong data-stat="recipes">—</strong><span>دستور پخت</span></li>
-<li><strong data-stat="featured">—</strong><span>منتخب</span></li>
+<li><strong data-stat="featured">—</strong><span title="برچسب دستی؛ معیار انتخاب جداگانه‌ای تعریف نشده است" aria-label="منتخب؛ برچسب دستی">منتخب</span></li>
 <li><strong data-stat="categories">—</strong><span>دسته</span></li>
 </ul>
 </div>
 
 <div class="bento-fast">
-<div class="tile-head"><span class="label">زیر ۳۰ دقیقه</span></div>
+<div class="tile-head"><span class="label">دستورهای سریع</span></div>
 <ol class="fast-list" id="quickFast"><li><span class="fast-empty">در حال بارگذاری…</span></li></ol>
 </div>
 
@@ -101,7 +101,7 @@
 <div class="library-head">
 <h2 class="library-title"><span id="resultsTitle">همه‌ی دستورها</span><span aria-live="polite" class="count" id="count"></span></h2>
 <div class="library-tools">
-<button aria-controls="filters" aria-expanded="false" class="btn" id="filtersToggle" type="button">
+<button aria-controls="filtersPanel" aria-expanded="false" class="btn" id="filtersToggle" type="button">
 <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg>
 <span id="filtersToggleText">فیلترها</span>
 </button>
@@ -109,16 +109,16 @@
 <option value="default">پیش‌فرض دسته‌بندی</option>
 <option value="featured">منتخب‌ها اول</option>
 <option value="name">نام A تا Z</option>
-<option value="quickest">سریع‌ترین</option>
+<option value="quickest">بر اساس دستهٔ زمانی</option>
 <option value="easiest">آسان‌ترین</option>
 </select></label>
 </div>
 </div>
 
-<aside class="filters-panel" id="filtersPanel">
+<aside class="filters-panel" id="filtersPanel" tabindex="-1">
 <div class="sheet-grip" id="sheetGrip" aria-hidden="true"><span></span></div>
 <div class="filters-panel-head">
-<strong>فیلترها</strong>
+<strong id="filtersPanelTitle">فیلترها</strong>
 <div class="filters-panel-actions">
 <button id="clearFilters" type="button">پاک‌کردن همه</button>
 <button aria-label="بستن فیلترها" class="sheet-close" id="sheetClose" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
@@ -166,11 +166,12 @@
 <div aria-label="دسترسی سریع" class="mobile-bar" id="mobileBar" role="navigation">
 <button class="mbar-btn" id="mbarSearch" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>جست‌وجو</span></button>
 <button class="mbar-btn" id="mbarCats" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>دسته‌ها</span></button>
-<button class="mbar-btn" id="mbarFilters" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg><span>فیلترها</span></button>
+<button class="mbar-btn" id="mbarFilters" type="button" aria-controls="filtersPanel" aria-expanded="false"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg><span>فیلترها</span></button>
 </div>
 
 <script src="assets/recipes.js"></script>
 <script src="assets/ingredients.js"></script>
 <script src="assets/app.js"></script>
+<script src="assets/pwa.js"></script>
 </body>
 </html>

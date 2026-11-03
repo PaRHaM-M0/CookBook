@@ -65,13 +65,13 @@
 <div class="stats-head"><div><span class="label">Library</span><h2>A little something for every appetite.</h2><p>Explore the collection, one recipe at a time.</p></div><span class="stats-mark" aria-hidden="true"></span></div>
 <ul class="stats" aria-label="Library statistics">
 <li><strong data-stat="recipes">—</strong><span>Recipes</span></li>
-<li><strong data-stat="featured">—</strong><span>Featured</span></li>
+<li><strong data-stat="featured">—</strong><span title="Manually marked; no separate selection criteria have been defined" aria-label="Featured; manually marked">Featured</span></li>
 <li><strong data-stat="categories">—</strong><span>Categories</span></li>
 </ul>
 </div>
 
 <div class="bento-fast">
-<div class="tile-head"><span class="label">Under 30 minutes</span></div>
+<div class="tile-head"><span class="label">Quick recipes</span></div>
 <ol class="fast-list" id="quickFast"><li><span class="fast-empty">Loading…</span></li></ol>
 </div>
 
@@ -101,7 +101,7 @@
 <div class="library-head">
 <h2 class="library-title"><span id="resultsTitle">All recipes</span><span aria-live="polite" class="count" id="count"></span></h2>
 <div class="library-tools">
-<button aria-controls="filters" aria-expanded="false" class="btn" id="filtersToggle" type="button">
+<button aria-controls="filtersPanel" aria-expanded="false" class="btn" id="filtersToggle" type="button">
 <svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg>
 <span id="filtersToggleText">Filters</span>
 </button>
@@ -109,16 +109,16 @@
 <option value="default">Grouped by category</option>
 <option value="featured">Featured first</option>
 <option value="name">Name (A to Z)</option>
-<option value="quickest">Quickest first</option>
+<option value="quickest">By time category</option>
 <option value="easiest">Easiest first</option>
 </select></label>
 </div>
 </div>
 
-<aside class="filters-panel" id="filtersPanel">
+<aside class="filters-panel" id="filtersPanel" tabindex="-1">
 <div class="sheet-grip" id="sheetGrip" aria-hidden="true"><span></span></div>
 <div class="filters-panel-head">
-<strong>Filters</strong>
+<strong id="filtersPanelTitle">Filters</strong>
 <div class="filters-panel-actions">
 <button id="clearFilters" type="button">Clear all</button>
 <button aria-label="Close filters" class="sheet-close" id="sheetClose" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
@@ -166,11 +166,12 @@
 <div aria-label="Quick access" class="mobile-bar" id="mobileBar" role="navigation">
 <button class="mbar-btn" id="mbarSearch" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><span>Search</span></button>
 <button class="mbar-btn" id="mbarCats" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span>Categories</span></button>
-<button class="mbar-btn" id="mbarFilters" type="button"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg><span>Filters</span></button>
+<button class="mbar-btn" id="mbarFilters" type="button" aria-controls="filtersPanel" aria-expanded="false"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.9" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.4"/><circle cx="10" cy="17" r="2.4"/></svg><span>Filters</span></button>
 </div>
 
 <script src="../assets/recipes.js"></script>
 <script src="../assets/ingredients.js"></script>
 <script src="../assets/app.js"></script>
+<script src="../assets/pwa.js"></script>
 </body>
 </html>
