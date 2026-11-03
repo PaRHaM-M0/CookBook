@@ -99,6 +99,11 @@ function norm(str){
   const saved=localStorage.getItem(key);
   const prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
   root.setAttribute('data-theme', saved||(prefersDark?'dark':'light'));
+  const themeMeta=document.querySelector('meta[name="theme-color"]');
+  function syncThemeColor(){
+    if(themeMeta) themeMeta.content=root.getAttribute('data-theme')==='dark'?'#293B31':'#E5EDE1';
+  }
+  syncThemeColor();
   const btn=$('#themeToggle');
   const sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
   const moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 13.2A8.5 8.5 0 1 1 10.8 4a7 7 0 0 0 9.2 9.2Z"/></svg>';
@@ -113,7 +118,7 @@ function norm(str){
   icon();
   if(btn) btn.addEventListener('click',()=>{
     const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
-    root.setAttribute('data-theme',next);localStorage.setItem(key,next);icon();
+    root.setAttribute('data-theme',next);localStorage.setItem(key,next);icon();syncThemeColor();
   });
 })();
 
@@ -362,6 +367,32 @@ function norm(str){
   on(); window.addEventListener('scroll',on,{passive:true});
 })();
 
+/* Quiet reading progress on every page, following the document scroll position. */
+(function readingProgress(){
+  const nav = document.getElementById('nav');
+  if (!nav) return;
+  const bar = document.createElement('span');
+  bar.className = 'reading-progress';
+  bar.setAttribute('aria-hidden', 'true');
+  nav.appendChild(bar);
+  let queued = false;
+  function update(){
+    queued = false;
+    const root = document.scrollingElement || document.documentElement;
+    const max = root.scrollHeight - root.clientHeight;
+    const progress = max > 0 ? Math.min(1, Math.max(0, root.scrollTop / max)) : 0;
+    bar.style.transform = `scaleX(${progress})`;
+  }
+  function requestUpdate(){
+    if (!queued) { queued = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', requestUpdate, {passive:true});
+  window.addEventListener('resize', requestUpdate, {passive:true});
+  window.addEventListener('load', requestUpdate, {once:true});
+  if ('ResizeObserver' in window) new ResizeObserver(requestUpdate).observe(document.body);
+  update();
+})();
+
 /* Footer year */
 (function(){ const y=$('#year'); if(y) y.textContent=new Date().getFullYear(); })();
 
@@ -391,7 +422,7 @@ function norm(str){
   const errorEl=$('#loadError');
   if(typeof RECIPES==="undefined" || typeof FILTERS==="undefined"){
     if(loadingEl) loadingEl.style.display='none';
-    if(errorEl) errorEl.classList.add('show');
+    if(errorEl) { errorEl.hidden = false; errorEl.classList.add('show'); }
     return;
   }
 
@@ -428,9 +459,15 @@ function norm(str){
   };
 
   const assetPrefix = IS_EN ? '../' : '';
+  /* Responsive images: every photo ships a 480w and a 960w WebP next to the
+     original. 64px thumbs take the 480, spreads take the 960, and the original
+     backs up hi-dpi screens. */
+  const sized = (name, w) => name.replace(/\.webp$/i, `-${w}.webp`);
   const searchInput = $('#search');
   const filterBar   = $('#filters');
   const quickBar    = $('#quickCats');
+  const quickAll    = $('#quickAll');
+  const quickFeatured = $('#quickFeatured');
   const countEl     = $('#count');
   const titleEl     = $('#resultsTitle');
   const activeEl    = $('#activeFilters');
@@ -475,6 +512,7 @@ function norm(str){
 
   function haystack(r){
     return norm([r.name, r.fa, r.desc, r.desc_en, (r.tags||[]).join(" "),
+      typeof INGREDIENT_SEARCH !== "undefined" ? INGREDIENT_SEARCH[r.page] : "",
       FILTERS.category?.options?.[r.category]?.label, FILTERS.category?.options?.[r.category]?.label_en,
       FILTERS.meal?.options?.[r.meal]?.label, FILTERS.meal?.options?.[r.meal]?.label_en,
       FILTERS.cuisine?.options?.[r.cuisine]?.label, FILTERS.cuisine?.options?.[r.cuisine]?.label_en,
@@ -501,59 +539,160 @@ function norm(str){
     return RECIPES.filter(r=>r[group]===key && matchesExcept(r,group)).length;
   }
 
-  /* Hero showcase: the most representative featured dish, rendered into the hero */
+  /* Recipe suggestions: shuffle once per visit, then cycle without repeats. */
   (function heroShowcase(){
-    const el = document.getElementById('heroFeatured'); if(!el) return;
-    const pool = RECIPES.filter(r => r.featured && r.image);
-    const pick = pool[0] || RECIPES.find(r => r.image);
-    if(!pick){ el.style.display='none'; return; }
-    el.href = pick.page || '#';
+    const root = document.getElementById('heroShowcase');
+    const el = document.getElementById('heroFeatured');
     const media = document.getElementById('hfMedia');
-    if(media) media.innerHTML = `<img src="${assetPrefix}${pick.image}" alt="${pick.name}" decoding="async"/>`;
     const title = document.getElementById('hfTitle');
-    if(title) title.textContent = pick.name;
     const meta = document.getElementById('hfMeta');
-    if(meta){
-      const bits = [pick.category && label('category', pick.category),
-                    pick.level && label('level', pick.level),
-                    pick.time && label('time', pick.time)].filter(Boolean);
-      meta.innerHTML = bits.map(b => `<span>${b}</span>`).join('');
+    const controls = document.getElementById('showcaseControls');
+    const counter = document.getElementById('showcaseIndex');
+    const status = document.getElementById('showcaseStatus');
+    const pause = document.getElementById('showcasePause');
+    if (!root || !el || !media || !title || !meta || !controls || !counter || !pause) return;
+    const pool = RECIPES.filter(r => r.image && r.page);
+    for (let i = pool.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    const lbl = el.querySelector('.hf-label');
-    if(lbl) lbl.textContent = IS_EN ? 'Featured recipe' : 'دستور منتخب';
+    if (!pool.length) return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0, paused = motion.matches, timer = null, request = 0;
+    const pauseLabel = () => {
+      pause.setAttribute('aria-pressed', String(paused));
+      pause.setAttribute('aria-label', paused
+        ? (IS_EN ? 'Play autoplay' : 'شروع پخش خودکار')
+        : (IS_EN ? 'Pause autoplay' : 'توقف پخش خودکار'));
+      pause.querySelector('.showcase-pause-icon').toggleAttribute('hidden', paused);
+      pause.querySelector('.showcase-play-icon').toggleAttribute('hidden', !paused);
+    };
+    function schedule(){
+      clearTimeout(timer);
+      if (!paused && !document.hidden && pool.length > 1)
+        timer = setTimeout(() => show(index + 1, false), 6000);
+    }
+    function show(next, manual){
+      const wanted = (next + pool.length) % pool.length;
+      const r = pool[wanted];
+      const id = ++request;
+      const img = new Image();
+      img.alt = r.name;
+      img.decoding = 'async';
+      img.onload = () => {
+        if (id !== request) return;
+        index = wanted;
+        el.href = r.page;
+        title.textContent = r.name;
+        // Align the entire recipe caption by the title's own first strong script,
+        // independently of the surrounding page language.
+        const firstStrong = r.name.match(/[A-Za-z\u0590-\u08ff\ufb1d-\ufdff\ufe70-\ufeff]/);
+        el.dataset.titleDir = firstStrong && /[\u0590-\u08ff\ufb1d-\ufdff\ufe70-\ufeff]/.test(firstStrong[0]) ? 'rtl' : 'ltr';
+        meta.replaceChildren();
+        [r.category && label('category', r.category), r.level && label('level', r.level),
+          r.time && label('time', r.time)].filter(Boolean).forEach(text => {
+          const span = document.createElement('span'); span.dir = 'auto'; span.textContent = text; meta.appendChild(span);
+        });
+        media.replaceChildren(img);
+        counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(pool.length).padStart(2, '0')}`;
+        if (status) status.textContent = manual ? r.name : '';
+        schedule();
+      };
+      img.onerror = () => { if (id === request) schedule(); };
+      img.src = assetPrefix + sized(r.image, 960);
+    }
+    controls.hidden = pool.length < 2;
+    pauseLabel();
+    show(0, false);
+    document.getElementById('showcasePrev')?.addEventListener('click', () => show(index - 1, true));
+    document.getElementById('showcaseNext')?.addEventListener('click', () => show(index + 1, true));
+    pause.addEventListener('click', () => {
+      paused = !paused;
+      if (paused) request++; // Ignore an automatic image already loading.
+      pauseLabel(); schedule();
+    });
+    document.addEventListener('visibilitychange', schedule);
+    motion.addEventListener?.('change', e => { if (e.matches) { paused = true; pauseLabel(); } schedule(); });
+    let touchX = null;
+    el.addEventListener('touchstart', e => { touchX = e.changedTouches[0].clientX; }, {passive:true});
+    el.addEventListener('touchend', e => {
+      if (touchX === null) return;
+      const delta = e.changedTouches[0].clientX - touchX; touchX = null;
+      if (Math.abs(delta) > 50) show(index + (delta < 0 ? 1 : -1) * (IS_EN ? 1 : -1), true);
+    }, {passive:true});
   })();
 
   function quickImage(key){
-    const hit = RECIPES.find(r => r.category===key && r.image) || RECIPES.find(r => r.image);
-    return hit && hit.image ? assetPrefix + hit.image : '';
+    const hit = RECIPES.find(r => r.category===key && r.image);
+    return hit?.image || '';
   }
 
   function buildQuick(){
+    const countText=n=>Number(n).toLocaleString(IS_EN?'en-US':'fa-IR');
+    if(quickAll){
+      quickAll.innerHTML=`<span>${STR.all}</span><small>${countText(RECIPES.length)}</small>`;
+      const active=quickMode==='all'&&!state.category.size;
+      quickAll.classList.toggle('is-active',active);
+      quickAll.setAttribute('aria-pressed',active?'true':'false');
+    }
+    if(quickFeatured){
+      const n=RECIPES.filter(r=>r.featured).length;
+      quickFeatured.innerHTML=`<span>${STR.featured}</span><small>${countText(n)}</small>`;
+      quickFeatured.classList.toggle('is-active',quickMode==='featured');
+      quickFeatured.setAttribute('aria-pressed',quickMode==='featured'?'true':'false');
+    }
     if(!quickBar) return;
     quickBar.innerHTML='';
-    const items=[
-      {key:'all',text:STR.all,count:RECIPES.length},
-      {key:'featured',text:STR.featured,count:RECIPES.filter(r=>r.featured).length},
-      ...categoryOrder.map(k=>({key:k,text:label('category',k),count:RECIPES.filter(r=>r.category===k).length}))
-    ];
-    items.forEach(item=>{
+    categoryOrder.forEach(key=>{
+      const text=label('category',key);
+      const count=RECIPES.filter(r=>r.category===key).length;
+      const rawImage=quickImage(key);
+      const image=rawImage ? `<img src="${assetPrefix}${sized(rawImage,480)}" srcset="${assetPrefix}${sized(rawImage,480)} 480w, ${assetPrefix}${sized(rawImage,960)} 960w, ${assetPrefix}${rawImage} 1440w" sizes="(max-width:700px) 39vw, 148px" width="480" height="360" alt="" loading="lazy" decoding="async">` : '';
       const b=document.createElement('button');
       b.type='button';
-      b.className='quick-btn'+(((quickMode===item.key)||(item.key!=='all'&&item.key!=='featured'&&quickMode==='all'&&state.category.size===1&&state.category.has(item.key)))?' on':'');
-      const plain = item.key==='all' || item.key==='featured';
-      b.innerHTML = plain
-        ? `<span class="qt-thumb qt-plain${item.key==='featured'?' qt-hot':''}"><span class="qt-big">${item.count}</span></span><span class="qt-name">${item.text}</span>`
-        : `<span class="qt-thumb"><img alt="" decoding="async" loading="lazy" src="${quickImage(item.key)}"/><span class="qt-count">${item.count}</span></span><span class="qt-name">${item.text}</span>`;
-      b.setAttribute('aria-pressed', b.classList.contains('on')?'true':'false');
+      const active=quickMode==='category'&&state.category.size===1&&state.category.has(key);
+      b.className='category-card'+(rawImage?'':' no-image');
+      b.setAttribute('aria-label',`${text}, ${STR.count(count)}`);
+      b.setAttribute('aria-pressed',active?'true':'false');
+      b.innerHTML=`${image}<span class="cat-count" aria-hidden="true">${countText(count)}</span><span class="cat-title">${text}</span>`;
       b.addEventListener('click',()=>{
-        if(item.key==='all'){ quickMode='all'; state.category.clear(); }
-        else if(item.key==='featured'){ quickMode='featured'; state.category.clear(); }
-        else { quickMode='category'; state.category.clear(); state.category.add(item.key); }
-        revealGallery();
-        render();
+        quickMode='category';state.category.clear();state.category.add(key);
+        revealGallery();render();
       });
       quickBar.appendChild(b);
     });
+  }
+
+  // Touch uses native horizontal scrolling; mouse drag should not activate a category.
+  if (quickBar) {
+    let startX = 0, startScroll = 0, pointerId = null, dragging = false, suppressClick = false;
+    quickBar.addEventListener('dragstart', e => e.preventDefault());
+    quickBar.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      startX = e.clientX; startScroll = quickBar.scrollLeft; pointerId = e.pointerId;
+      dragging = false; suppressClick = false;
+    });
+    quickBar.addEventListener('pointermove', e => {
+      if (pointerId !== e.pointerId) return;
+      const delta = e.clientX - startX;
+      if (!dragging && Math.abs(delta) > 6) {
+        dragging = true; suppressClick = true;
+        quickBar.classList.add('dragging');
+        quickBar.setPointerCapture(e.pointerId);
+      }
+      if (dragging) { e.preventDefault(); quickBar.scrollLeft = startScroll - delta; }
+    });
+    function finishDrag(e) {
+      if (pointerId !== e.pointerId) return;
+      pointerId = null; dragging = false; quickBar.classList.remove('dragging');
+      if (suppressClick) setTimeout(() => { suppressClick = false; }, 0);
+    }
+    quickBar.addEventListener('pointerup', finishDrag);
+    quickBar.addEventListener('pointercancel', finishDrag);
+    quickBar.addEventListener('lostpointercapture', finishDrag);
+    quickBar.addEventListener('click', e => {
+      if (suppressClick && e.detail !== 0) { e.preventDefault(); e.stopImmediatePropagation(); }
+    }, true);
   }
 
   function buildFilters(){
@@ -591,27 +730,30 @@ function norm(str){
         <path d="M21 15l-5-5L5 21"/>
       </svg><span>${STR.photoLater}</span></div>`;
 
-  function card(r){
+  /* Photo card. The image is the tile's face; the body carries the name and
+     the two facts people actually compare (time, difficulty). */
+  function card(r, wide){
     const a=document.createElement('a');
-    a.className='rcard reveal in'; a.href=r.page||'#';
-    const badge = r.featured ? `<span class="rbadge">${STR.featured}</span>` : "";
-    const img = r.image ? `<img src="${assetPrefix}${r.image}" alt="${r.name}" loading="lazy" decoding="async">` : phMark;
+    a.className='rcard'+(wide?' wide':'');
+    a.href=r.page||'#';
+    const img = r.image
+      ? `<img src="${assetPrefix}${sized(r.image,480)}" alt="" width="480" height="360" loading="lazy" decoding="async">`
+      : '';
+    /* 29 of 37 dishes are featured, so a text badge would be noise: a quiet
+       saffron dot marks the state and the pill rail filters by it. */
+    const badge = r.featured ? `<span class="rdot" title="${STR.featured}" aria-label="${STR.featured}"></span>` : '';
+    const cat = r.category ? `<span class="rcard-cat">${label('category',r.category)}</span>` : '';
     const meta=[];
-    if(r.category) meta.push(label('category',r.category));
-    if(r.cuisine) meta.push(label('cuisine',r.cuisine));
-    if(r.main) meta.push(label('main',r.main));
     if(r.time) meta.push(label('time',r.time));
     if(r.level) meta.push(label('level',r.level));
-    const kicker=(r.category ? label('category',r.category) : STR.recipeFallback) + (r.cuisine ? ` · ${label('cuisine',r.cuisine)}` : '');
     const summaryText = IS_EN ? (r.desc_en || r.desc || "") : (r.desc || "");
     a.innerHTML=`
-      <div class="ph${r.image?'':' no-img'}">${img}${badge}<span class="rcard-cat">${kicker}</span></div>
-      <div class="rcard-body">
-        <h3 class="en">${r.name}</h3>
-        <p class="rcard-desc">${summaryText}</p>
-        <div class="rcard-meta">${meta.map(m=>`<span class="badge">${m}</span>`).join("")}</div>
-        <div class="rcard-footer"><span class="rcard-go">${STR.viewRecipe}</span><span class="rcard-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
-      </div>`;
+      <span class="ph">${img}${badge}${cat}</span>
+      <span class="rcard-body">
+        <span class="rcard-title">${r.name}</span>
+        <span class="rcard-desc">${summaryText}</span>
+        <span class="rcard-meta">${meta.map(m=>`<span>${m}</span>`).join("")}</span>
+      </span>`;
     return a;
   }
 
@@ -629,7 +771,9 @@ function norm(str){
     activeEl.innerHTML='';
     const makePill=(text,clear)=>{
       const b=document.createElement('button'); b.type='button'; b.className='active-filter';
-      b.innerHTML=`<b>${text}</b><span aria-hidden="true">×</span>`;
+      const label = document.createElement('b'); label.textContent = text;
+      const close = document.createElement('span'); close.setAttribute('aria-hidden', 'true'); close.textContent = '×';
+      b.append(label, close);
       b.addEventListener('click',clear); activeEl.appendChild(b);
     };
     if(query) makePill(`${STR.searchPrefix}${searchInput?.value || ''}`,()=>{query=''; if(searchInput)searchInput.value=''; render();});
@@ -646,33 +790,51 @@ function norm(str){
     if(sheetApply) sheetApply.textContent = STR.apply(listCount);
   }
 
+  function groupBlock(title, items){
+    const sec=document.createElement('section'); sec.className='card-group';
+    sec.innerHTML=`<div class="card-group-head"><h3>${title}</h3><span>${STR.count(items.length)}</span></div>`;
+    const wrap=document.createElement('div'); wrap.className='card-grid';
+    items.forEach(r=>wrap.appendChild(card(r)));
+    sec.appendChild(wrap);
+    return sec;
+  }
+
+  /* Three quickest recipes, as a text list — the tile that answers
+     "what can I cook tonight" without a scroll. */
+  function buildFast(){
+    const box=document.getElementById('quickFast');
+    if(!box) return;
+    const quick = [...RECIPES]
+      .filter(r => r.time && (timeRank[r.time]||99) === 1)
+      .sort((a,b)=>(timeRank[a.time]||99)-(timeRank[b.time]||99) || a.name.localeCompare(b.name,'en'))
+      .slice(0,3);
+    const pool = quick;
+    box.innerHTML = pool.map(r=>`
+      <li><a class="fast-item" href="${r.page||'#'}">
+        <span class="fi-name">${r.name}</span>
+        <span class="fi-time">${r.time ? label('time', r.time) : (IS_EN?'—':'—')}</span>
+      </a></li>`).join('');
+  }
+
   function render(){
     const list=sorted(RECIPES.filter(match));
     buildQuick(); buildFilters(); buildActive(list.length);
     grid.innerHTML='';
-    if(!list.length){ if(emptyEl)emptyEl.style.display='block'; return; }
-    if(emptyEl)emptyEl.style.display='none';
+    if(!list.length){ if(emptyEl) emptyEl.hidden = false; if(loadingEl) loadingEl.style.display='none'; return; }
+    if(emptyEl) emptyEl.hidden = true;
 
     if(sortMode==='default'){
       categoryOrder.forEach(cat=>{
         const items=list.filter(r=>r.category===cat);
         if(!items.length)return;
-        const sec=document.createElement('section'); sec.className='result-group';
-        sec.innerHTML=`<div class="result-group-head"><h3>${label('category',cat)}</h3><span>${STR.count(items.length)}</span></div>`;
-        const wrap=document.createElement('div'); wrap.className='card-grid';
-        items.forEach(r=>wrap.appendChild(card(r)));
-        sec.appendChild(wrap); grid.appendChild(sec);
+        grid.appendChild(groupBlock(label('category',cat), items));
       });
       const uncategorized=list.filter(r=>!categoryOrder.includes(r.category));
-      if(uncategorized.length){
-        const sec=document.createElement('section'); sec.className='result-group';
-        sec.innerHTML=`<div class="result-group-head"><h3>${STR.uncategorized}</h3><span>${STR.count(uncategorized.length)}</span></div>`;
-        const wrap=document.createElement('div'); wrap.className='card-grid';
-        uncategorized.forEach(r=>wrap.appendChild(card(r))); sec.appendChild(wrap); grid.appendChild(sec);
-      }
+      if(uncategorized.length) grid.appendChild(groupBlock(STR.uncategorized, uncategorized));
     } else {
       const wrap=document.createElement('div'); wrap.className='card-grid';
-      list.forEach(r=>wrap.appendChild(card(r))); grid.appendChild(wrap);
+      list.forEach(r=>wrap.appendChild(card(r)));
+      grid.appendChild(wrap);
     }
     if(loadingEl) loadingEl.style.display='none';
   }
@@ -699,10 +861,11 @@ function norm(str){
 
   function syncFiltersToggle(){
     if(!filtersPanel || !filtersToggle) return;
-    const mobile = window.matchMedia('(max-width: 950px)').matches;
-    const open = !mobile || filtersPanel.classList.contains('open');
+    /* v7: the same control opens a drawer on desktop and a bottom sheet on mobile,
+       so its state is simply "is the panel open", at every width. */
+    const open = filtersPanel.classList.contains('open');
     filtersToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    if(filtersToggleText) filtersToggleText.textContent = open ? STR.close : STR.open;
+    if(filtersToggleText) filtersToggleText.textContent = open ? STR.close : (IS_EN ? 'Filters' : 'فیلترها');
   }
   /* ---- Mobile bottom sheet + bottom access bar ------------------------- */
   const backdrop = document.getElementById('filtersBackdrop');
@@ -712,14 +875,62 @@ function norm(str){
   function setSheet(open){
     if(!filtersPanel) return;
     filtersPanel.classList.toggle('open', open);
+    if (!open) filtersPanel.classList.remove('is-expanded');
     if(backdrop) backdrop.classList.toggle('show', open);
     document.body.classList.toggle('sheet-open', open);
     syncFiltersToggle();
   }
 
+  // Only the grip and unused header area drag the sheet. The filter list keeps
+  // native scrolling, so selecting chips and scrolling never competes with it.
+  const sheetGrip = document.getElementById('sheetGrip');
+  const sheetHead = filtersPanel?.querySelector('.filters-panel-head');
+  let sheetDrag = null;
+  function dragStart(e){
+    if (!window.matchMedia('(max-width: 1049px)').matches || !filtersPanel.classList.contains('open') ||
+        (e.pointerType === 'mouse' && e.button !== 0) || e.target.closest('button')) return;
+    const offset = Math.min(window.innerHeight * .08, 120);
+    const height = Math.min(window.innerHeight * .92, 900);
+    const base = filtersPanel.classList.contains('is-expanded') ? 0 : offset;
+    sheetDrag = {id:e.pointerId, startY:e.clientY, lastY:e.clientY, lastTime:performance.now(), velocity:0, base, offset, height};
+    filtersPanel.classList.add('is-dragging');
+    e.currentTarget.setPointerCapture(e.pointerId);
+  }
+  function dragMove(e){
+    if (!sheetDrag || sheetDrag.id !== e.pointerId) return;
+    e.preventDefault();
+    const now = performance.now();
+    if (now > sheetDrag.lastTime) sheetDrag.velocity = (e.clientY - sheetDrag.lastY) / (now - sheetDrag.lastTime);
+    sheetDrag.lastY = e.clientY; sheetDrag.lastTime = now;
+    const y = Math.max(0, Math.min(sheetDrag.height, sheetDrag.base + e.clientY - sheetDrag.startY));
+    filtersPanel.style.height = `${sheetDrag.height - Math.min(y, sheetDrag.offset)}px`;
+    filtersPanel.style.transform = `translateY(${Math.max(0, y - sheetDrag.offset)}px)`;
+  }
+  function dragEnd(e){
+    if (!sheetDrag || sheetDrag.id !== e.pointerId) return;
+    const drag = sheetDrag; sheetDrag = null;
+    const y = Math.max(0, Math.min(drag.height, drag.base + e.clientY - drag.startY));
+    const distance = e.clientY - drag.startY;
+    const velocity = performance.now() - drag.lastTime < 100 ? drag.velocity : 0;
+    filtersPanel.classList.remove('is-dragging');
+    if (e.type !== 'pointercancel' && (y > drag.offset + drag.height * .25 || (distance > 30 && velocity > .65))) {
+      setSheet(false);
+    } else if (e.type !== 'pointercancel' && Math.abs(distance) > 12) {
+      filtersPanel.classList.toggle('is-expanded', distance < 0 || y < drag.offset / 2);
+    }
+    filtersPanel.style.removeProperty('transform');
+    filtersPanel.style.removeProperty('height');
+  }
+  [sheetGrip, sheetHead].filter(Boolean).forEach(handle => {
+    handle.addEventListener('pointerdown', dragStart);
+    handle.addEventListener('pointermove', dragMove);
+    handle.addEventListener('pointerup', dragEnd);
+    handle.addEventListener('pointercancel', dragEnd);
+  });
+
   if(filtersToggle && filtersPanel){
     filtersToggle.addEventListener('click', () => setSheet(!filtersPanel.classList.contains('open')));
-    window.matchMedia('(max-width: 950px)').addEventListener?.('change', syncFiltersToggle);
+
   }
   backdrop?.addEventListener('click', () => setSheet(false));
   sheetClose?.addEventListener('click', () => setSheet(false));
@@ -731,17 +942,22 @@ function norm(str){
   const mbarSearch = document.getElementById('mbarSearch');
   const mbarCats   = document.getElementById('mbarCats');
   const mbarFilters= document.getElementById('mbarFilters');
-  const mbarInstall= document.getElementById('mbarInstall');
 
   mbarSearch?.addEventListener('click', () => {
-    window.scrollTo({top:0, behavior: reducedMotion() ? 'auto' : 'smooth'});
+    searchInput?.scrollIntoView({behavior: reducedMotion() ? 'auto' : 'smooth', block:'center'});
     searchInput?.focus({preventScroll:true});
   });
   mbarCats?.addEventListener('click', () => {
-    document.querySelector('.quick-section')?.scrollIntoView({behavior: reducedMotion() ? 'auto' : 'smooth', block:'start'});
+    document.querySelector('.category-browse')?.scrollIntoView({behavior: reducedMotion() ? 'auto' : 'smooth', block:'start'});
   });
   mbarFilters?.addEventListener('click', () => setSheet(true));
-  mbarInstall?.addEventListener('click', () => document.getElementById('installApp')?.click());
+  quickAll?.addEventListener('click',()=>{
+    quickMode='all';state.category.clear();revealGallery();render();
+  });
+  quickFeatured?.addEventListener('click',()=>{
+    quickMode='featured';state.category.clear();revealGallery();render();
+  });
+
 
   /* Optional category URL sync on homepage (?cat=pizza, ?q=alfredo) */
   const initCat = window.CookBookURL.get('cat');
@@ -757,10 +973,11 @@ function norm(str){
 
   render();
   syncFiltersToggle();
+  buildFast();
   requestAnimationFrame(()=>{ if(loadingEl && RECIPES.filter(match).length) loadingEl.style.display='none'; });
 })();
 
-/* ---------- CookBook PWA: service worker + install prompt ---------- */
+/* ---------- CookBook PWA: browser-managed install, service worker ---------- */
 (function pwa(){
   if(!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
   const script=document.currentScript;
@@ -779,27 +996,6 @@ function norm(str){
       .catch(()=>{});
   }, { once:true });
 
-  let deferredPrompt=null;
-  const installBtn=document.getElementById('installApp');
-  window.addEventListener('beforeinstallprompt',(event)=>{
-    event.preventDefault();
-    deferredPrompt=event;
-    if(installBtn) installBtn.hidden=false;
-    const mb=document.getElementById('mbarInstall'); if(mb) mb.hidden=false;
-  });
-  if(installBtn){
-    installBtn.addEventListener('click',async()=>{
-      if(!deferredPrompt) return;
-      deferredPrompt.prompt();
-      await deferredPrompt.userChoice;
-      deferredPrompt=null;
-      installBtn.hidden=true;
-    });
-  }
-  window.addEventListener('appinstalled',()=>{
-    deferredPrompt=null;
-    if(installBtn) installBtn.hidden=true;
-  });
 })();
 
 /* Ordered steps, part 2 — the HTML `start` attribute.
@@ -809,6 +1005,6 @@ function norm(str){
 (function stepStarts(){
   document.querySelectorAll('ol.steps[start]').forEach((ol) => {
     const n = parseInt(ol.getAttribute('start'), 10);
-    if (Number.isInteger(n) && n > 1) ol.style.counterReset = 's ' + (n - 1);
+    if (Number.isInteger(n) && n > 1) ol.style.counterReset = 'step ' + (n - 1);
   });
 })();
