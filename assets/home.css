@@ -543,3 +543,25 @@
 }
 .discovery-search h2{color:var(--ink)}
 .discovery-search .search{background:var(--surface-2);border-color:var(--line-strong)}
+
+/* On phones the cover fits between the navigation and the bottom bar. It can
+   grow naturally when text or accessibility zoom needs more room. */
+@media (max-width:760px){
+  .bento-feature{min-height:calc(100vh - 149px - env(safe-area-inset-bottom));min-height:calc(100svh - 149px - env(safe-area-inset-bottom))}
+  .bento-feature .bento-hero{min-height:0}
+  .hero-intro{margin-top:64px}
+  .hero-intro h1{font-size:clamp(30px,8vw,44px);line-height:1.32}
+  .hero-intro p{line-height:1.7}
+  .bh-body{margin-top:16px;margin-bottom:20px}
+  .bh-body h2{font-size:clamp(19px,5.5vw,26px);line-height:1.16}
+}
+
+@media (max-width:760px) and (max-height:650px){
+  .hero-intro{margin-top:62px}
+  .hero-intro-label{margin-bottom:7px}
+  .hero-intro h1{font-size:clamp(25px,7.3vw,32px);line-height:1.22}
+  .hero-intro p{font-size:12px;line-height:1.55;margin-top:6px}
+  .bh-body{gap:6px;margin-top:12px;margin-bottom:14px}
+  .bh-body h2{font-size:clamp(17px,5vw,21px)}
+  .bh-meta span{font-size:10px;padding:3px 8px}
+}

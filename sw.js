@@ -1,7 +1,7 @@
 /* PaRHaM's CookBook! — Two-Tier Resilient Service Worker (FA + EN)
    Tier 1 (CORE_URLS): lightweight shell + all HTML/CSS/JS/icons cached atomically on install.
    Tier 2 (IMAGE_URLS): WebP photos warmed with bounded concurrency; failures do not abort install. */
-const CACHE_VERSION = "cookbook-v2.8.17";
+const CACHE_VERSION = "cookbook-v2.8.18";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
