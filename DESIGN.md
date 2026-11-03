@@ -55,12 +55,12 @@ The existing bilingual recipe pages keep their established hooks and data. `asse
 
 ## 5. Responsive image ladder and offline cache
 
-Recipe covers use existing originals plus `-960.webp` and `-480.webp` derivatives. Home category tiles request the 480 px version and advertise 960/original fallbacks. `sw.js` warms the original photos and available 480/960 pixel variants during installation with bounded concurrency; individual photo failures do not abort installation; the cache list is kept in sync with those files.
+Recipe covers use existing originals plus `-960.webp` and `-480.webp` derivatives. Home category tiles request the 480 px version and advertise 960/original fallbacks. `sw.js` caches the shell and a fallback photo at install; other photos are cached on demand and may be unavailable offline until viewed; the cache list is kept in sync with those files.
 
 ## 6. Accessibility and motion
 
 - Persian content uses `dir="rtl"`; English content uses `dir="ltr"`. Mixed Latin text remains isolated from surrounding RTL text.
-- Search, filters, sorting, and theme/language actions retain their accessible labels and keyboard focus rings.
+- Search, filters, sorting, and theme/language actions retain their accessible labels and keyboard focus rings. The mobile filter sheet is a modal dialog with focus trapping and restoration; the desktop filter drawer remains non-modal.
 - Category cards expose their category and recipe count to assistive technology; their photographs are decorative.
 - The mobile filter sheet follows pointer drags on its centered grip and header, with expanded and resting positions and a drag-to-dismiss gesture; filter content retains native scrolling.
 - Step markers use logical spacing; recipe checklists remain operable on touch screens.

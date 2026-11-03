@@ -697,6 +697,9 @@ function norm(str){
 
   function buildFilters(){
     if(!filterBar) return;
+    const focused = document.activeElement;
+    const focusedGroup = filterBar.contains(focused) ? focused.dataset.filterGroup : null;
+    const focusedKey = focusedGroup ? focused.dataset.filterKey : null;
     filterBar.innerHTML='';
     groupOrder.forEach(groupKey=>{
       const group=FILTERS[groupKey];
@@ -709,6 +712,7 @@ function norm(str){
       opts.forEach(([key])=>{
         const n=countFor(groupKey,key);
         const b=document.createElement('button');
+        b.dataset.filterGroup=groupKey; b.dataset.filterKey=key;
         b.type='button'; b.className='chip'+(state[groupKey].has(key)?' on':''); b.disabled=(n===0&&!state[groupKey].has(key));
         b.innerHTML=`<span>${label(groupKey,key)}</span><span class="chip-count">${n}</span>`;
         b.setAttribute('aria-pressed', state[groupKey].has(key)?'true':'false');
@@ -721,6 +725,10 @@ function norm(str){
       });
       wrap.appendChild(chips); filterBar.appendChild(wrap);
     });
+    if (focusedGroup) {
+      const next = [...filterBar.querySelectorAll('.chip')].find(el => el.dataset.filterGroup === focusedGroup && el.dataset.filterKey === focusedKey && !el.disabled);
+      (next || sheetClose)?.focus({preventScroll:true});
+    }
   }
 
   const phMark = `<div class="ph-mark">
@@ -799,7 +807,7 @@ function norm(str){
     return sec;
   }
 
-  /* Three quickest recipes, as a text list — the tile that answers
+  /* Three recipes tagged quick, alphabetically — the tile that answers
      "what can I cook tonight" without a scroll. */
   function buildFast(){
     const box=document.getElementById('quickFast');
@@ -846,7 +854,8 @@ function norm(str){
   document.addEventListener('keydown', e=>{
     const t=e.target;
     const typing = t && (t.tagName==='INPUT' || t.tagName==='TEXTAREA' || t.tagName==='SELECT' || t.isContentEditable);
-    if(e.key==='/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey){
+    if(e.key==='/' && !typing && !e.metaKey && !e.ctrlKey && !e.altKey &&
+       !(filtersPanel?.classList.contains('open') && window.matchMedia('(max-width: 1049px)').matches)){
       e.preventDefault(); searchInput?.focus(); searchInput?.select?.(); return;
     }
     if(e.key==='Escape' && searchInput && t===searchInput){
@@ -857,6 +866,7 @@ function norm(str){
   if(clearBtn) clearBtn.addEventListener('click',()=>{
     query=''; if(searchInput)searchInput.value=''; quickMode='all'; sortMode='default'; if(sortSelect)sortSelect.value='default';
     Object.values(state).forEach(s=>s.clear()); render();
+    if (window.matchMedia('(max-width: 1049px)').matches && filtersPanel?.classList.contains('open')) sheetClose?.focus({preventScroll:true});
   });
 
   function syncFiltersToggle(){
@@ -866,20 +876,67 @@ function norm(str){
     const open = filtersPanel.classList.contains('open');
     filtersToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     if(filtersToggleText) filtersToggleText.textContent = open ? STR.close : (IS_EN ? 'Filters' : 'فیلترها');
+    document.getElementById('mbarFilters')?.setAttribute('aria-expanded', String(open));
   }
   /* ---- Mobile bottom sheet + bottom access bar ------------------------- */
   const backdrop = document.getElementById('filtersBackdrop');
   const sheetApply = document.getElementById('sheetApply');
   const sheetClose = document.getElementById('sheetClose');
 
-  function setSheet(open){
+  const mobileSheet = window.matchMedia('(max-width: 1049px)');
+  let sheetOpener = null;
+  let modalActive = false;
+  function focusableSheetItems(){
+    return [...filtersPanel.querySelectorAll('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex="-1"])')]
+      .filter(el => el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
+  }
+  function syncSheetMode(focusOnEnter = false){
+    const isOpen = filtersPanel.classList.contains('open');
+    const isModal = isOpen && mobileSheet.matches;
+    const wasModal = modalActive;
+    modalActive = isModal;
+    if (isModal) {
+      filtersPanel.setAttribute('role', 'dialog');
+      filtersPanel.setAttribute('aria-modal', 'true');
+      filtersPanel.setAttribute('aria-labelledby', 'filtersPanelTitle');
+      if (focusOnEnter || !filtersPanel.contains(document.activeElement)) (sheetClose || filtersPanel).focus({preventScroll:true});
+    } else {
+      filtersPanel.removeAttribute('role');
+      filtersPanel.removeAttribute('aria-modal');
+      filtersPanel.removeAttribute('aria-labelledby');
+      if (isOpen && wasModal && (!document.activeElement.getClientRects().length || !filtersPanel.contains(document.activeElement))) {
+        (focusableSheetItems()[0] || filtersToggle)?.focus({preventScroll:true});
+      }
+    }
+  }
+  function setSheet(open, opener){
     if(!filtersPanel) return;
+    const wasOpen = filtersPanel.classList.contains('open');
+    const wasModal = modalActive;
+    if (open && !wasOpen) sheetOpener = opener || document.activeElement;
     filtersPanel.classList.toggle('open', open);
     if (!open) filtersPanel.classList.remove('is-expanded');
     if(backdrop) backdrop.classList.toggle('show', open);
     document.body.classList.toggle('sheet-open', open);
     syncFiltersToggle();
+    syncSheetMode(open && !wasOpen);
+    if (!open && wasOpen && wasModal && sheetOpener?.isConnected && sheetOpener.getClientRects().length) {
+      sheetOpener.focus({preventScroll:true});
+    }
+    if (!open) sheetOpener = null;
   }
+  mobileSheet.addEventListener?.('change', () => syncSheetMode());
+  document.addEventListener('focusin', e => {
+    if (modalActive && !filtersPanel.contains(e.target)) (focusableSheetItems()[0] || filtersPanel).focus({preventScroll:true});
+  });
+  document.addEventListener('keydown', e => {
+    if (!modalActive || e.key !== 'Tab') return;
+    const items = focusableSheetItems();
+    if (!items.length) { e.preventDefault(); filtersPanel.focus({preventScroll:true}); return; }
+    const index = items.indexOf(document.activeElement);
+    if (e.shiftKey && index <= 0) { e.preventDefault(); items[items.length-1].focus(); }
+    else if (!e.shiftKey && (index < 0 || index === items.length-1)) { e.preventDefault(); items[0].focus(); }
+  });
 
   // Only the grip and unused header area drag the sheet. The filter list keeps
   // native scrolling, so selecting chips and scrolling never competes with it.
@@ -929,7 +986,7 @@ function norm(str){
   });
 
   if(filtersToggle && filtersPanel){
-    filtersToggle.addEventListener('click', () => setSheet(!filtersPanel.classList.contains('open')));
+    filtersToggle.addEventListener('click', () => setSheet(!filtersPanel.classList.contains('open'), filtersToggle));
 
   }
   backdrop?.addEventListener('click', () => setSheet(false));
@@ -950,7 +1007,7 @@ function norm(str){
   mbarCats?.addEventListener('click', () => {
     document.querySelector('.category-browse')?.scrollIntoView({behavior: reducedMotion() ? 'auto' : 'smooth', block:'start'});
   });
-  mbarFilters?.addEventListener('click', () => setSheet(true));
+  mbarFilters?.addEventListener('click', () => setSheet(true, mbarFilters));
   quickAll?.addEventListener('click',()=>{
     quickMode='all';state.category.clear();revealGallery();render();
   });
@@ -975,27 +1032,6 @@ function norm(str){
   syncFiltersToggle();
   buildFast();
   requestAnimationFrame(()=>{ if(loadingEl && RECIPES.filter(match).length) loadingEl.style.display='none'; });
-})();
-
-/* ---------- CookBook PWA: browser-managed install, service worker ---------- */
-(function pwa(){
-  if(!('serviceWorker' in navigator) || !/^https?:$/.test(location.protocol)) return;
-  const script=document.currentScript;
-  const swUrl=script ? new URL('../sw.js', script.src).href : 'sw.js';
-
-  let refreshing=false;
-  navigator.serviceWorker.addEventListener('controllerchange',()=>{
-    if(refreshing) return;
-    refreshing=true;
-    location.reload();
-  });
-
-  window.addEventListener('load',()=>{
-    navigator.serviceWorker.register(swUrl)
-      .then((registration)=>registration.update())
-      .catch(()=>{});
-  }, { once:true });
-
 })();
 
 /* Ordered steps, part 2 — the HTML `start` attribute.

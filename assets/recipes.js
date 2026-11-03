@@ -93,7 +93,7 @@ const FILTERS = {
   time: {
     title: "زمان پخت", title_en: "Time",
     options: {
-      quick:  { label: "سریع (زیر ۳۰ دقیقه)", label_en: "Quick (Under 30m)", ic:"⚡" },
+      quick:  { label: "سریع", label_en: "Quick", ic:"⚡" },
       medium: { label: "متوسط (۳۰ تا ۹۰ دقیقه)", label_en: "Medium (30–90m)", ic:"⏱️" },
       long:   { label: "طولانی (چند ساعت)", label_en: "Long (Several hrs)", ic:"🕰️" },
       project:{ label: "پروژه‌ای (چند روزه)", label_en: "Project (Multi-day)", ic:"📅" },
