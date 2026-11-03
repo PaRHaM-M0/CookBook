@@ -1,7 +1,7 @@
 /* PaRHaM's CookBook! — Two-Tier Resilient Service Worker (FA + EN)
    Tier 1 (CORE_URLS): lightweight shell + all HTML/CSS/JS/icons cached atomically on install.
-   Tier 2 (IMAGE_URLS): WebP photos warmed asynchronously via Promise.allSettled without blocking install. */
-const CACHE_VERSION = "cookbook-v2.8.1";
+   Tier 2 (IMAGE_URLS): WebP photos warmed with bounded concurrency; failures do not abort install. */
+const CACHE_VERSION = "cookbook-v2.8.17";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -13,8 +13,10 @@ const CORE_URLS = [
   "./manifest.json",
   "./assets/theme.css",
   "./assets/home.css",
+  "./assets/chef-hat.png",
   "./assets/recipe.css",
   "./assets/recipes.js",
+  "./assets/ingredients.js",
   "./assets/app.js",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
@@ -100,6 +102,83 @@ const CORE_URLS = [
 ];
 
 const IMAGE_URLS = [
+  "./images/30-minute-pub-burger-480.webp",
+  "./images/bellyfull-chicken-alfredo-480.webp",
+  "./images/cheesy-potato-thing-480.webp",
+  "./images/cherry-cheesecakes-480.webp",
+  "./images/chicken-65-480.webp",
+  "./images/chicken-alfredo-garlic-bread-480.webp",
+  "./images/chicken-mushroom-alfredo-480.webp",
+  "./images/classic-caesar-salad-480.webp",
+  "./images/detroit-style-pizza-480.webp",
+  "./images/deviled-egg-dip-480.webp",
+  "./images/easy-chicken-alfredo-penne-480.webp",
+  "./images/fast-food-sauce-copycat-collection-480.webp",
+  "./images/grand-unified-burger-480.webp",
+  "./images/harira-480.webp",
+  "./images/herb-compound-butter-480.webp",
+  "./images/homemade-chicken-broth-480.webp",
+  "./images/homemade-ricotta-480.webp",
+  "./images/italian-seasoning-480.webp",
+  "./images/juicy-steakhouse-burger-480.webp",
+  "./images/lacto-fermented-pizza-sauce-480.webp",
+  "./images/lemon-chicken-orzo-soup-480.webp",
+  "./images/linguine-gamberetti-zafferano-480.webp",
+  "./images/low-calorie-high-protein-double-smash-cheeseburger-480.webp",
+  "./images/modular-burrito-encyclopedia-480.webp",
+  "./images/new-york-egg-cream-480.webp",
+  "./images/perfect-pancakes-480.webp",
+  "./images/pizza-480.webp",
+  "./images/pizza-toppings-480.webp",
+  "./images/poolish-pizza-dough-480.webp",
+  "./images/popeyes-style-fried-chicken-meal-480.webp",
+  "./images/porchetta-bacon-480.webp",
+  "./images/robuchon-pomme-puree-480.webp",
+  "./images/sausage-cheese-pinwheels-480.webp",
+  "./images/scialatielli-gamberi-480.webp",
+  "./images/sourdough-480.webp",
+  "./images/stuffed-crust-pizza-480.webp",
+  "./images/tunakado-480.webp",
+  "./images/yangnyeom-chicken-480.webp",
+  "./images/30-minute-pub-burger-960.webp",
+  "./images/bellyfull-chicken-alfredo-960.webp",
+  "./images/cheesy-potato-thing-960.webp",
+  "./images/cherry-cheesecakes-960.webp",
+  "./images/chicken-65-960.webp",
+  "./images/chicken-alfredo-garlic-bread-960.webp",
+  "./images/chicken-mushroom-alfredo-960.webp",
+  "./images/classic-caesar-salad-960.webp",
+  "./images/detroit-style-pizza-960.webp",
+  "./images/deviled-egg-dip-960.webp",
+  "./images/easy-chicken-alfredo-penne-960.webp",
+  "./images/fast-food-sauce-copycat-collection-960.webp",
+  "./images/grand-unified-burger-960.webp",
+  "./images/harira-960.webp",
+  "./images/herb-compound-butter-960.webp",
+  "./images/homemade-chicken-broth-960.webp",
+  "./images/homemade-ricotta-960.webp",
+  "./images/italian-seasoning-960.webp",
+  "./images/juicy-steakhouse-burger-960.webp",
+  "./images/lacto-fermented-pizza-sauce-960.webp",
+  "./images/lemon-chicken-orzo-soup-960.webp",
+  "./images/linguine-gamberetti-zafferano-960.webp",
+  "./images/low-calorie-high-protein-double-smash-cheeseburger-960.webp",
+  "./images/modular-burrito-encyclopedia-960.webp",
+  "./images/new-york-egg-cream-960.webp",
+  "./images/perfect-pancakes-960.webp",
+  "./images/pizza-960.webp",
+  "./images/pizza-toppings-960.webp",
+  "./images/poolish-pizza-dough-960.webp",
+  "./images/popeyes-style-fried-chicken-meal-960.webp",
+  "./images/porchetta-bacon-960.webp",
+  "./images/robuchon-pomme-puree-960.webp",
+  "./images/sausage-cheese-pinwheels-960.webp",
+  "./images/scialatielli-gamberi-960.webp",
+  "./images/sourdough-960.webp",
+  "./images/stuffed-crust-pizza-960.webp",
+  "./images/tunakado-960.webp",
+  "./images/yangnyeom-chicken-960.webp",
+
   "./images/30-minute-pub-burger.webp",
   "./images/bellyfull-chicken-alfredo.webp",
   "./images/cheesy-potato-thing.webp",
@@ -160,8 +239,15 @@ self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(STATIC_CACHE);
     await cache.addAll(CORE_URLS);
-    /* Warm all WebP images non-atomically in the background so a flaky network never aborts install */
-    Promise.allSettled(IMAGE_URLS.map((url) => cache.add(url))).catch(() => {});
+    // Keep the install event alive until warming finishes. Individual image
+    // failures remain non-fatal and can be cached on a later online visit.
+    let next = 0;
+    await Promise.all(Array.from({length: 6}, async () => {
+      while (next < IMAGE_URLS.length) {
+        const url = IMAGE_URLS[next++];
+        try { await cache.add(url); } catch (_) { /* optional photo */ }
+      }
+    }));
     await self.skipWaiting();
   })());
 });
@@ -169,28 +255,32 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys();
-    await Promise.all(keys.filter((key) => !key.startsWith(CACHE_VERSION)).map((key) => caches.delete(key)));
+    await Promise.all(keys.filter((key) => key.startsWith("cookbook-") && !key.startsWith(CACHE_VERSION)).map((key) => caches.delete(key)));
     await self.clients.claim();
   })());
 });
 
-async function staleWhileRevalidate(request, cacheName) {
+async function staleWhileRevalidate(request, cacheName, event) {
   const cache = await caches.open(cacheName);
   const cached = await cache.match(request, { ignoreSearch: true });
-  const network = fetch(request).then((response) => {
+  const network = fetch(request).then(async (response) => {
     if (response && (response.status === 200 || response.type === "opaque")) {
-      cache.put(request, response.clone());
+      try { await cache.put(request, response.clone()); } catch (_) { /* cache is optional */ }
     }
     return response;
   }).catch(() => null);
-  return cached || (await network) || Response.error();
+  // A cached response returns immediately, but the refresh must outlive fetch.
+  if (cached) { event.waitUntil(network); return cached; }
+  return (await network) || Response.error();
 }
 
 async function networkFirst(request) {
   const cache = await caches.open(STATIC_CACHE);
   try {
     const response = await fetch(request);
-    if (response && response.status === 200) await cache.put(request, response.clone());
+    if (response && response.status === 200) {
+      try { await cache.put(request, response.clone()); } catch (_) { /* keep the network response if storage is full */ }
+    }
     return response;
   } catch (error) {
     const cached = await cache.match(request, { ignoreSearch: true });
@@ -211,10 +301,10 @@ self.addEventListener("fetch", (event) => {
     return;
   }
   if (url.origin === self.location.origin) {
-    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
+    event.respondWith(staleWhileRevalidate(request, STATIC_CACHE, event));
     return;
   }
   if (url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com") {
-    event.respondWith(staleWhileRevalidate(request, RUNTIME_CACHE));
+    event.respondWith(staleWhileRevalidate(request, RUNTIME_CACHE, event));
   }
 });
