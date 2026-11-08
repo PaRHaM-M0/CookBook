@@ -192,6 +192,7 @@ function norm(str){
   }
 
   /* --- 2 & 3. Portion Scaler (0.5x | 1x | 2x) + Tap-to-Check State --- */
+  const fixedBatch = ingCard.hasAttribute("data-no-scale");
   const amtCells = $$("table.ing td.amt", ingCard);
   const ingRows = $$("table.ing tbody tr", ingCard);
   const stepItems = $$(".r-main ol.steps > li");
@@ -209,6 +210,8 @@ function norm(str){
     </div>
     <button type="button" class="reset-checks" hidden>${IS_EN ? "Clear checks" : "پاک‌کردن تیک‌ها"}</button>
   `;
+
+  if (fixedBatch) toolsBar.querySelector(".scale-wrap")?.remove();
 
   const hintEl = document.createElement("p");
   hintEl.className = "check-hint";
@@ -357,7 +360,7 @@ function norm(str){
   });
 
   const urlScale = parseFloat(window.CookBookURL.get("scale") || "1");
-  if (urlScale === 0.5 || urlScale === 2) applyScale(urlScale, false);
+  if (!fixedBatch && (urlScale === 0.5 || urlScale === 2)) applyScale(urlScale, false);
 })();
 
 /* Navbar scroll border */
