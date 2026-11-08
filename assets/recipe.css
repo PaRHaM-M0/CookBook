@@ -288,3 +288,16 @@ html[data-theme="dark"] .r-stat{background:#3b4943;border-color:#52645a}
 .ing-card{background:#e2e8e1;--surface-2:#eef2ec}
 html[data-theme="dark"] .ing-card{background:#34423e;--surface-2:#415149}
 @media print{.r-stat,.r-stat:first-child,html[data-theme="dark"] .r-stat:first-child,.ing-card,html[data-theme="dark"] .ing-card{background:white;color:black}.r-stat:first-child .k,.r-stat:first-child .v{color:black}}
+
+/* Supporting, clearly labelled illustration within a recipe phase. */
+.recipe-illustration{margin:18px 0 24px}
+.recipe-illustration img{display:block;width:100%;height:auto;border-radius:var(--radius);box-shadow:var(--shadow-sm)}
+.recipe-illustration figcaption{font-size:12px;line-height:1.7;color:var(--muted);margin-top:8px}
+.pecorino-recipe .r-hero h1.en{display:block;text-align:left}
+/* Continue the recipe's numbering across separate phase lists. */
+.pecorino-recipe ol.steps[start="4"]{counter-reset:step 3}
+.pecorino-recipe ol.steps[start="9"]{counter-reset:step 8}
+.pecorino-recipe ol.steps[start="13"]{counter-reset:step 12}
+.pecorino-recipe ol.steps[start="16"]{counter-reset:step 15}
+.pecorino-recipe ol.steps[start="20"]{counter-reset:step 19}
+.pecorino-recipe ol.steps[start="21"]{counter-reset:step 20}

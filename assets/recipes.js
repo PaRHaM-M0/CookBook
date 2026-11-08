@@ -438,6 +438,23 @@ const RECIPES = [
   },
 
   {
+    name: "Home-Aged Pecorino-Style Sheep’s-Milk Cheese",
+    fa: "پنیر خانگی رسیده, پنیر شیر گوسفند, پنیر پکورینو, پنیر پکورینو خانگی",
+    desc: "پنیر رسیدهٔ خانگی با شیر گوسفند پاستوریزه، آب‌نمک ۲۰ درصدی و ۴ تا ۶ ماه رسیدن؛ الهام‌گرفته از <span class='en'>Pecorino Toscano</span>.",
+    desc_en: "Home-aged pasteurized sheep’s-milk cheese inspired by Pecorino Toscano, with 20% brine and 4–6 months of aging.",
+    page: "recipes/pecorino-style-sheeps-milk.html",
+    category: "basics",
+    image: "images/pecorino-style-sheeps-milk.webp",
+    meal: "appetizer",
+    cuisine: "italian",
+    main: "dairy",
+    time: "project",
+    level: "hard",
+    tags: ["پنیر", "پنیرسازی", "شیر گوسفند", "پکورینو", "مایه پنیر", "آب نمک", "pecorino", "sheep milk", "cheesemaking", "rennet", "aged cheese"],
+    featured: false,
+  },
+
+  {
     name: "Professional Homemade Ricotta",
     fa: "ریکوتای خانگی, ریکوتا, پنیر ریکوتا خانگی, پنیر خانگی با آبلیمو",
     desc: "<span class='en'>Ricotta</span>ی خانگی با کنترل دقیق دما؛ شیر در ۱۸۰ فارنهایت با آب‌لیمو، ۴۰ دقیقه استراحت و ۱ تا ۱٫۵ ساعت آویزان‌کردن برای بافت حرفه‌ای.",
