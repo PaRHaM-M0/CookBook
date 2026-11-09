@@ -1,6 +1,6 @@
 # PaRHaM's CookBook
 
-A static recipe site in Persian (RTL) and English (LTR), with 38 recipes, 14 food categories, search, filters, and a Progressive Web App shell.
+A static recipe site in Persian (RTL) and English (LTR), with 39 recipes, 15 food categories, search, filters, and a Progressive Web App shell.
 
 ## Features
 
@@ -57,5 +57,5 @@ This repository works from a GitHub Pages project path. Keep the site files at t
 2. Add the bilingual record to `RECIPES` in `assets/recipes.js`.
 3. Add the original image to `images/` and generate `-480.webp` and `-960.webp` derivatives for responsive use.
 4. Run `python3 tools/build-ingredient-index.py` to refresh bilingual ingredient search. Add both recipe pages to `CORE_URLS`, and increment `CACHE_VERSION` in `sw.js`.
-5. `time` is a broad manually assigned category, not a numeric duration; quick suggestions are alphabetical within that category. `featured` is also manually assigned (currently 29 of 38), without an established selection criterion. Do not infer either value from recipe order.
+5. `time` is a broad manually assigned category, not a numeric duration; quick suggestions are alphabetical within that category. `featured` is also manually assigned (currently 29 of 39), without an established selection criterion. Do not infer either value from recipe order.
 6. Keep `dir="rtl"` on Persian pages and `dir="ltr"` on English pages. Step markers use logical inline spacing so they remain clear in either direction.

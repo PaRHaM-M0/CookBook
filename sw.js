@@ -1,7 +1,7 @@
 /* PaRHaM's CookBook! — Two-Tier Resilient Service Worker (FA + EN)
    Tier 1 (CORE_URLS): lightweight shell + all HTML/CSS/JS/icons cached atomically on install.
    Photos are cached on demand in a separate persistent cache; core install stays lightweight. */
-const CACHE_VERSION = "cookbook-v2.8.20";
+const CACHE_VERSION = "cookbook-v2.8.21";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const IMAGE_CACHE = "cookbook-images-v1";
@@ -46,6 +46,7 @@ const CORE_URLS = [
   "./recipes/homemade-chicken-broth.html",
   "./recipes/homemade-ricotta.html",
   "./recipes/pecorino-style-sheeps-milk.html",
+  "./recipes/japanese-chicken-teriyaki.html",
   "./recipes/italian-seasoning.html",
   "./recipes/lacto-fermented-pizza-sauce.html",
   "./recipes/lemon-chicken-orzo-soup.html",
@@ -84,6 +85,7 @@ const CORE_URLS = [
   "./en/recipes/homemade-chicken-broth.html",
   "./en/recipes/homemade-ricotta.html",
   "./en/recipes/pecorino-style-sheeps-milk.html",
+  "./en/recipes/japanese-chicken-teriyaki.html",
   "./en/recipes/italian-seasoning.html",
   "./en/recipes/lacto-fermented-pizza-sauce.html",
   "./en/recipes/lemon-chicken-orzo-soup.html",
