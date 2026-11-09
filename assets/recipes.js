@@ -47,6 +47,7 @@ const FILTERS = {
       salad:        { label: "سالاد", label_en: "Salads" },
       bread:        { label: "نان و خمیر", label_en: "Bread & Dough" },
       appetizer:    { label: "پیش‌غذا و دورچین", label_en: "Sides & Starters" },
+      "main-dish": { label: "غذای اصلی", label_en: "Main Dishes" },
       basics:       { label: "سس، چاشنی و پایه‌ها", label_en: "Sauces & Basics" },
       dessert:      { label: "دسر", label_en: "Desserts" },
       drink:        { label: "نوشیدنی", label_en: "Drinks" },
@@ -435,6 +436,23 @@ const RECIPES = [
     level: "medium",
     tags: ["آلفردو","alfredo","چیکن آلفردو","فتوچینی","fettuccine","پارمزان","ادویه ایتالیایی","belly full","سس خامه‌ای"],
     featured: true,
+  },
+
+  {
+    name: "Japanese Chicken Teriyaki",
+    fa: "مرغ تریاکی ژاپنی, چیکن تریاکی, مرغ تریاکی سریع",
+    desc: "مرغ تریاکی با دو مسیر: لعاب کلاسیک سویا، ساکه و میرین یا نسخهٔ سریع سه‌ماده‌ای عسل و سویای تیره.",
+    desc_en: "Two paths: classic soy, sake and mirin teriyaki or a quick three-ingredient honey and dark-soy alternative.",
+    page: "recipes/japanese-chicken-teriyaki.html",
+    category: "main-dish",
+    image: "images/teriyaki-classic.webp",
+    meal: "dinner",
+    cuisine: "asian",
+    main: "chicken",
+    time: "quick",
+    level: "easy",
+    tags: ["مرغ", "تریاکی", "سویای ژاپنی", "عسل", "برنج", "chicken", "teriyaki", "soy sauce", "mirin", "sake", "honey", "joshua weissman"],
+    featured: false,
   },
 
   {
