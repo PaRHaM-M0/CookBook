@@ -33,9 +33,9 @@ No pure white or black surfaces are used. `manifest.json` uses the light canvas 
 
 - A restrained charcoal-green accent (#2D3837) highlights the search section and a recipe statistic, while softer stone tints distinguish recipe ingredient and statistic surfaces. The global green palette remains unchanged.
 - A thin, non-interactive reading indicator follows page scroll beneath the sticky header, with RTL/LTR-aware origin and no delayed motion.
-- The header keeps language and theme controls; a dedicated search section below the feature searches recipe metadata and the bilingual ingredient tables.
+- The shared header keeps the logo physically left and controls right in both languages. Its globe language link is 46 × 29 px and the day/night switch is 64 × about 29 px, separated by 8 px with invisible 44 px-high touch areas; the switch follows the supplied Hamzeh day/night design. A dedicated search section below the feature searches recipe metadata and the bilingual ingredient tables.
 - A large photographic feature opens with editorial copy and rotates through real recipes in random order, with previous, next and pause controls. Its play/pause control directly governs rotation, it suspends while the page is hidden, and it starts paused for reduced-motion users. Library counts and a quick-cook list follow the feature.
-- **Category navigation is photographic:** 14 category tiles use recipe photography, image overlays, counts, and an active state. “All” and “Featured” are compact controls above the rail.
+- **Category navigation is photographic:** 15 category tiles use recipe photography, image overlays, counts, and an active state. “All” and “Featured” are compact controls above the rail.
 - The recipe library retains photo cards, category group headings, sorting, and search.
 - The category rail supports native touch scrolling and mouse dragging; its own overflow is contained, with no page-level horizontal scrolling.
 - Promotional and implementation-explanation blocks are intentionally absent from the site UI.

@@ -93,32 +93,40 @@ function norm(str){
   document.body.classList.toggle("is-mobile", !!isMobile);
 })();
 
-/* Dark / Light theme toggle */
+/* Day/night switch and globe from the supplied header design. */
 (function theme(){
   const root=document.documentElement, key='kitchen-theme';
-  const saved=localStorage.getItem(key);
-  const prefersDark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
-  root.setAttribute('data-theme', saved||(prefersDark?'dark':'light'));
+  let saved=null;
+  try { saved=localStorage.getItem(key); } catch (_) {}
+  const prefersDark=window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initial=saved==='dark'||saved==='light' ? saved : (prefersDark?'dark':'light');
   const themeMeta=document.querySelector('meta[name="theme-color"]');
-  function syncThemeColor(){
-    if(themeMeta) themeMeta.content=root.getAttribute('data-theme')==='dark'?'#293B31':'#E5EDE1';
-  }
-  syncThemeColor();
   const btn=$('#themeToggle');
-  const sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
-  const moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 13.2A8.5 8.5 0 1 1 10.8 4a7 7 0 0 0 9.2 9.2Z"/></svg>';
-  function icon(){
-    if(!btn) return;
-    const dark=root.getAttribute('data-theme')==='dark';
-    btn.innerHTML=dark?sun:moon;
-    btn.setAttribute('aria-label', IS_EN
-      ? (dark?'Switch to light theme':'Switch to dark theme')
-      : (dark?'تغییر به تم روشن':'تغییر به تم تاریک'));
+  const lang=$('#langToggle');
+  if(lang) lang.innerHTML="<svg aria-hidden=\"true\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18\"/></svg>";
+  if(btn){
+    btn.innerHTML="<span class=\"dn-pill\"><span class=\"dn-layer dn-sky-night\"></span><svg class=\"dn-layer dn-stars\" viewBox=\"0 0 530 243\" aria-hidden=\"true\"><g transform=\"translate(70 70) scale(7)\"><g class=\"dn-star\" style=\"--i:0;--t:3.2s\"><path d=\"M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z\"/></g></g><g transform=\"translate(160 92) scale(5)\"><g class=\"dn-star\" style=\"--i:1;--t:2.6s\"><path d=\"M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z\"/></g></g><g transform=\"translate(232 72) scale(6)\"><g class=\"dn-star\" style=\"--i:2;--t:3.8s\"><path d=\"M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z\"/></g></g><g transform=\"translate(250 160) scale(8)\"><g class=\"dn-star\" style=\"--i:3;--t:3.1s\"><path d=\"M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z\"/></g></g><g transform=\"translate(120 175) scale(5)\"><g class=\"dn-star\" style=\"--i:4;--t:2.9s\"><path d=\"M0 -1 Q0.12 -0.12 1 0 Q0.12 0.12 0 1 Q-0.12 0.12 -1 0 Q-0.12 -0.12 0 -1Z\"/></g></g><g transform=\"translate(48 130)\"><g class=\"dn-star\" style=\"--i:5;--t:2.2s\"><circle r=\"2.4\"/></g></g><g transform=\"translate(110 40)\"><g class=\"dn-star\" style=\"--i:6;--t:2.7s\"><circle r=\"1.8\"/></g></g><g transform=\"translate(200 130)\"><g class=\"dn-star\" style=\"--i:7;--t:3.4s\"><circle r=\"2.2\"/></g></g><g transform=\"translate(296 108)\"><g class=\"dn-star\" style=\"--i:8;--t:2.4s\"><circle r=\"1.6\"/></g></g><g transform=\"translate(180 205)\"><g class=\"dn-star\" style=\"--i:9;--t:3s\"><circle r=\"1.8\"/></g></g><g transform=\"translate(82 205)\"><g class=\"dn-star\" style=\"--i:10;--t:2.5s\"><circle r=\"1.6\"/></g></g><g transform=\"translate(288 45)\"><g class=\"dn-star\" style=\"--i:11;--t:3.6s\"><circle r=\"1.4\"/></g></g></svg><span class=\"dn-shooting\"></span><span class=\"dn-knob-track\"><span class=\"dn-halo\"></span><span class=\"dn-knob\"><span class=\"dn-sun\"></span><span class=\"dn-moon\"><span class=\"dn-crater dn-c1\"></span><span class=\"dn-crater dn-c2\"></span><span class=\"dn-crater dn-c3\"></span></span></span></span><svg class=\"dn-cloud dn-cloud-1\" viewBox=\"0 0 530 243\" aria-hidden=\"true\"><g fill=\"var(--cloud-1)\"><circle cx=\"230\" cy=\"232\" r=\"42\"/><circle cx=\"310\" cy=\"205\" r=\"48\"/><circle cx=\"388\" cy=\"172\" r=\"54\"/><circle cx=\"462\" cy=\"110\" r=\"70\"/><circle cx=\"528\" cy=\"48\" r=\"72\"/><circle cx=\"480\" cy=\"262\" r=\"100\"/><circle cx=\"540\" cy=\"150\" r=\"60\"/></g></svg><svg class=\"dn-cloud dn-cloud-2\" viewBox=\"0 0 530 243\" aria-hidden=\"true\"><g fill=\"var(--cloud-2)\"><circle cx=\"180\" cy=\"248\" r=\"40\"/><circle cx=\"262\" cy=\"228\" r=\"44\"/><circle cx=\"345\" cy=\"212\" r=\"46\"/><circle cx=\"428\" cy=\"180\" r=\"54\"/><circle cx=\"505\" cy=\"118\" r=\"66\"/><circle cx=\"548\" cy=\"62\" r=\"58\"/><circle cx=\"500\" cy=\"252\" r=\"90\"/></g></svg><svg class=\"dn-cloud dn-cloud-3\" viewBox=\"0 0 530 243\" aria-hidden=\"true\"><g fill=\"var(--cloud-3)\"><circle cx=\"118\" cy=\"268\" r=\"42\"/><circle cx=\"200\" cy=\"254\" r=\"42\"/><circle cx=\"285\" cy=\"246\" r=\"44\"/><circle cx=\"370\" cy=\"238\" r=\"46\"/><circle cx=\"452\" cy=\"208\" r=\"52\"/><circle cx=\"530\" cy=\"150\" r=\"66\"/><circle cx=\"510\" cy=\"262\" r=\"85\"/></g></svg></span>";
+    btn.setAttribute('type','button');
+    btn.setAttribute('role','switch');
+    btn.setAttribute('aria-label',IS_EN?'Dark theme':'تم تاریک');
   }
-  icon();
+  function applyTheme(value){
+    root.setAttribute('data-theme',value);
+    if(themeMeta) themeMeta.content=value==='dark'?'#293B31':'#E5EDE1';
+    if(btn){
+      btn.setAttribute('aria-checked',String(value==='dark'));
+      btn.title=IS_EN?(value==='dark'?'Switch to light theme':'Switch to dark theme'):(value==='dark'?'تغییر به تم روشن':'تغییر به تم تاریک');
+    }
+  }
+  applyTheme(initial);
   if(btn) btn.addEventListener('click',()=>{
     const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
-    root.setAttribute('data-theme',next);localStorage.setItem(key,next);icon();syncThemeColor();
+    applyTheme(next);
+    try { localStorage.setItem(key,next); } catch (_) {}
+    const knob=btn.querySelector('.dn-knob');
+    if(knob && knob.animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      knob.animate([{transform:'scale(1,1)'},{transform:'scale(1.14,.88)',offset:.25},{transform:'scale(.94,1.06)',offset:.55},{transform:'scale(1.02,.98)',offset:.75},{transform:'scale(1,1)'}],{duration:800,easing:'ease-out'});
+    }
   });
 })();
 
