@@ -201,6 +201,7 @@ function norm(str){
 
   /* --- 2 & 3. Portion Scaler (0.5x | 1x | 2x) + Tap-to-Check State --- */
   const fixedBatch = ingCard.hasAttribute("data-no-scale");
+  const specificScale = ingCard.hasAttribute("data-specific-scale");
   const amtCells = $$("table.ing td.amt", ingCard);
   const ingRows = $$("table.ing tbody tr", ingCard);
   const stepItems = $$(".r-main ol.steps > li");
@@ -313,7 +314,7 @@ function norm(str){
         }
       }
     }
-    const clean = Number(val.toFixed(val < 10 ? 2 : 1)).toString();
+    const clean = Number(val.toFixed(val < 10 ? (specificScale ? 3 : 2) : 1)).toString();
     return useFaDigits ? toFaDigits(clean) : clean;
   }
 
@@ -344,6 +345,11 @@ function norm(str){
   }
 
   amtCells.forEach((td) => { td.dataset.rawHtml = td.innerHTML; });
+  const recipeQuantities = specificScale ? $$('[data-scale-quantity]') : [];
+  const recipeAlternates = specificScale ? $$('[data-scale-half][data-scale-double]') : [];
+  const recipeUnits = specificScale ? $$('[data-scale-unit]') : [];
+  recipeQuantities.forEach(el => { el.dataset.scaleOriginal = el.textContent; });
+  recipeAlternates.forEach(el => { el.dataset.scaleOriginal = el.textContent; });
 
   function applyScale(factor, syncUrl){
     amtCells.forEach((td) => {
@@ -353,8 +359,11 @@ function norm(str){
       const nodes = [];
       let n;
       while ((n = walker.nextNode())) nodes.push(n);
-      nodes.forEach((tn) => { tn.nodeValue = scaleTextNode(tn.nodeValue, factor); });
+      nodes.forEach((tn) => { tn.nodeValue = scaleTextNode(tn.nodeValue, factor); if (specificScale && IS_EN) tn.nodeValue = tn.nodeValue.replace(/\b2 cup\b/g, "2 cups"); });
     });
+    recipeQuantities.forEach(el => { el.textContent = factor === 1 ? el.dataset.scaleOriginal : scaleTextNode(el.dataset.scaleOriginal, factor); });
+    recipeAlternates.forEach(el => { el.textContent = factor === 0.5 ? el.dataset.scaleHalf : factor === 2 ? el.dataset.scaleDouble : el.dataset.scaleOriginal; });
+    recipeUnits.forEach(el => { el.textContent = el.dataset.scaleUnit + (factor === 2 ? 's' : ''); });
     $$(".scale-btn", toolsBar).forEach((b) => {
       b.classList.toggle("active", Number(b.dataset.scale) === factor);
     });
@@ -1053,5 +1062,149 @@ function norm(str){
   document.querySelectorAll('ol.steps[start]').forEach((ol) => {
     const n = parseInt(ol.getAttribute('start'), 10);
     if (Number.isInteger(n) && n > 1) ol.style.counterReset = 'step ' + (n - 1);
+  });
+})();
+
+/* Sharing: local QR matrix generation, rendered as an image so long-press works. */
+(function shareFeature(){
+  const appUrl = document.currentScript && document.currentScript.src;
+  const isRecipe = !!document.querySelector('.r-hero h1');
+  const nav = document.querySelector('#nav .nav-links');
+  const heading = document.querySelector('.r-hero h1');
+  if (!nav || (isRecipe && !heading)) return;
+  const shareIcon = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V3m0 0L8 7m4-4 4 4"/><path d="M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></svg>';
+  const qrIcon = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h2v2h-2zM19 14h2v3M14 19h3M20 20h1"/></svg>';
+  const trigger=document.createElement('button');
+  trigger.type='button';trigger.setAttribute('aria-label',IS_EN?'Share this page':'اشتراک‌گذاری این صفحه');
+  if(isRecipe){
+    trigger.className='recipe-share';trigger.innerHTML=shareIcon+'<span>'+(IS_EN?'Share recipe':'اشتراک‌گذاری دستور')+'</span>';
+    const row=document.createElement('div');row.className='recipe-share-row';row.appendChild(trigger);heading.insertAdjacentElement('afterend',row);
+  }else{
+    trigger.className='toggle header-share';trigger.innerHTML=shareIcon;trigger.title=IS_EN?'Share this page':'اشتراک‌گذاری این صفحه';
+    nav.insertBefore(trigger,document.getElementById('langToggle'));
+  }
+  const dialog=document.createElement('dialog');dialog.className='share-dialog';dialog.setAttribute('aria-labelledby','shareTitle');
+  dialog.innerHTML='<div class="share-dialog-head"><h2 id="shareTitle">'+(IS_EN?'Share this page':'اشتراک‌گذاری صفحه')+'</h2><button class="share-close" type="button" aria-label="'+(IS_EN?'Close':'بستن')+'">×</button></div>'+
+    '<p>'+(IS_EN?'Tap the link to copy it, or create its QR code.':'برای کپی، روی لینک بزن؛ یا کد QR آن را بساز.')+'</p>'+
+    '<div class="share-link-row"><button type="button" class="share-copy" dir="ltr"><span></span></button><button type="button" class="share-qr-button" aria-expanded="false" aria-controls="shareQrPanel" aria-label="'+(IS_EN?'Show QR code':'نمایش کد QR')+'">'+qrIcon+'</button></div>'+
+    '<p class="share-message" role="status" aria-live="polite"></p><div class="share-qr-panel" id="shareQrPanel" hidden><img class="share-qr-image" alt="'+(IS_EN?'QR code for this page':'کد QR این صفحه')+'"/><a class="share-download" download="cookbook-qr.png">'+(IS_EN?'Download QR code':'دانلود کد QR')+'</a></div>';
+  document.body.appendChild(dialog);
+  const copy=dialog.querySelector('.share-copy'), text=copy.querySelector('span'), msg=dialog.querySelector('.share-message');
+  const qrBtn=dialog.querySelector('.share-qr-button'), panel=dialog.querySelector('.share-qr-panel'), img=panel.querySelector('img'), download=panel.querySelector('a');
+  let qrLoader;
+  function loadQR(){
+    if(window.qrcode) return Promise.resolve();
+    if(!qrLoader){
+      qrLoader=new Promise((resolve,reject)=>{
+        if(!appUrl){reject(new Error('Missing app path'));return;}
+        const script=document.createElement('script');script.src=new URL('vendor/qrcode-generator.js',appUrl).href;
+        script.onload=()=>window.qrcode?resolve():reject(new Error('QR unavailable'));
+        script.onerror=()=>reject(new Error('QR unavailable'));document.head.appendChild(script);
+      }).catch(err=>{qrLoader=null;throw err;});
+    }
+    return qrLoader;
+  }
+  function rounded(ctx,x,y,w,h,r){
+    r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();ctx.fill();
+  }
+  function renderQR(url){
+    const code=window.qrcode(0,'M');code.addData(url);code.make();const n=code.getModuleCount();
+    if(n>85)throw new Error('Link too long for this QR display');
+    const unit=20, margin=4, size=(n+margin*2)*unit;
+    const canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,size,size);ctx.fillStyle='#000';
+    const isFinder=(r,c)=>(r<7&&c<7)||(r<7&&c>=n-7)||(r>=n-7&&c<7);
+    // Alignment markers retain their exact module geometry for reliable decoding.
+    const positions=[
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ][(n-17)/4-1], centers=[];
+    for(const row of positions)for(const col of positions){
+      if(!isFinder(row,col))centers.push([row,col]);
+    }
+    const isAlignment=(r,c)=>centers.some(([y,x])=>Math.abs(r-y)<=2 && Math.abs(c-x)<=2);
+    for(let r=0;r<n;r++){
+      for(let c=0;c<n;){
+        if(!code.isDark(r,c)||isFinder(r,c)){c++;continue;}
+        if(isAlignment(r,c)){ctx.fillRect((c+margin)*unit,(r+margin)*unit,unit,unit);c++;continue;}
+        const start=c;while(c<n&&code.isDark(r,c)&&!isFinder(r,c)&&!isAlignment(r,c))c++;
+        rounded(ctx,(start+margin+.05)*unit,(r+margin+.05)*unit,(c-start-.1)*unit,.9*unit,.45*unit);
+      }
+    }
+    function finder(col,row){
+      const x=(col+margin)*unit,y=(row+margin)*unit;
+      ctx.fillStyle='#000';rounded(ctx,x,y,7*unit,7*unit,2.2*unit);
+      ctx.fillStyle='#fff';rounded(ctx,x+unit,y+unit,5*unit,5*unit,1.4*unit);
+      ctx.fillStyle='#000';for(let i=0;i<3;i++)rounded(ctx,x+2*unit,y+(2+i+.01)*unit,3*unit,.98*unit,.46*unit);
+    }
+    finder(0,0);finder(n-7,0);finder(0,n-7);
+    const output=document.createElement('canvas');output.width=512;output.height=512;
+    const out=output.getContext('2d');out.imageSmoothingQuality='high';out.drawImage(canvas,0,0,512,512);
+    return output.toDataURL('image/png');
+  }
+  trigger.addEventListener('click',()=>{
+    const url=location.href;text.textContent=url;copy.title=url;copy.setAttribute('aria-label',IS_EN?'Copy page link':'کپی لینک صفحه');
+    msg.textContent='';panel.hidden=true;qrBtn.setAttribute('aria-expanded','false');img.removeAttribute('src');download.removeAttribute('href');
+    if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');
+    copy.focus();
+  });
+  dialog.querySelector('.share-close').addEventListener('click',()=>{if(dialog.close)dialog.close();else dialog.removeAttribute('open');});
+  dialog.addEventListener('close',()=>trigger.focus());
+  dialog.addEventListener('click',e=>{if(e.target===dialog && dialog.close)dialog.close();});
+  copy.addEventListener('click',async()=>{
+    const url=text.textContent;
+    try{
+      if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(url);
+      else {
+        const temp=document.createElement('textarea');temp.value=url;temp.style.position='fixed';temp.style.opacity='0';document.body.appendChild(temp);temp.select();
+        const ok=document.execCommand('copy');temp.remove();if(!ok)throw new Error('copy failed');
+      }
+      msg.textContent=IS_EN?'Link copied.':'لینک کپی شد.';
+    }catch(_){msg.textContent=IS_EN?'Copy failed. Select and copy the link below.':'کپی انجام نشد؛ لینک زیر را انتخاب و کپی کن.';const field=document.createElement('input');field.value=url;field.readOnly=true;field.className='share-manual-link';msg.replaceChildren(field);field.focus();field.select();}
+  });
+  qrBtn.addEventListener('click',async()=>{
+    if(!panel.hidden){panel.hidden=true;qrBtn.setAttribute('aria-expanded','false');return;}
+    msg.textContent=IS_EN?'Creating QR code…':'در حال ساخت کد QR…';qrBtn.disabled=true;
+    try{await loadQR();const data=renderQR(text.textContent);img.src=data;download.href=data;panel.hidden=false;qrBtn.setAttribute('aria-expanded','true');msg.textContent=IS_EN?'Press and hold the image to save it, or use Download.':'برای ذخیره، تصویر را نگه دار یا دکمهٔ دانلود را بزن.';}
+    catch(_){msg.textContent=IS_EN?'Could not create this QR code. Try a shorter link.':'ساخت کد ممکن نشد؛ لینک کوتاه‌تری را امتحان کن.';}
+    finally{qrBtn.disabled=false;}
   });
 })();

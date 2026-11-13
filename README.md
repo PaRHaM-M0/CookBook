@@ -5,7 +5,7 @@ A static recipe site in Persian (RTL) and English (LTR), with 39 recipes, 15 foo
 ## Features
 
 - A randomized recipe showcase with pause and manual controls, photo-led category browsing, searchable recipe cards, sorting, and faceted filters.
-- Separate Persian and English recipe pages, with language switching that preserves recipe state.
+- Separate Persian and English recipe pages, with language switching that preserves recipe state. Share links retain the current path and query state; the local QR generator can also work offline after installation.
 - Light and dark themes, plus recipe-side cooking tools: ingredient and step checklists, portion scaling, and screen wake lock where supported.
 - Service-worker caching for the app shell and images. Installation caches the shell and two fallback pizza images; other photos are cached when viewed, so unvisited photos may not be available offline. Cached photos are retained across app updates, subject to browser storage eviction.
 - No custom install button. The browser decides whether and when to offer its native install control.
@@ -35,6 +35,7 @@ The Web App Manifest and service worker make the site installable where the brow
 ├── assets/
 │   ├── app.js                  # Search, filters, themes, and recipe tools
 │   ├── pwa.js                  # Service-worker registration
+│   ├── vendor/                 # Local MIT-licensed QR encoder (Kazuhiko Arase)
 │   ├── home.css                # Home and photo-category layout
 │   ├── recipe.css              # Shared recipe-page styling
 │   ├── recipes.js              # Bilingual recipe and filter data

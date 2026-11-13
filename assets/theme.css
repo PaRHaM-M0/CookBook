@@ -352,3 +352,33 @@ html[data-theme="dark"] #nav .lang-toggle{box-shadow:0 0 0 1.408px #374D40,0 1.0
 #nav .lang-toggle svg{width:18px;height:18px;flex:none}
 #nav .lang-toggle::before{content:"";position:absolute;inset:-7.5px 0;z-index:5;background:transparent;border-radius:999px}
 @media(max-width:620px){#nav .nav-in{min-height:60px;gap:8px}#nav .nav-links{gap:8px}}
+
+/* Compact header actions: same 46×29 visual pill and 44px touch height. */
+#nav #wakeToggle,#nav .header-share{position:relative;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;width:46px;min-width:46px;height:29px;padding:0;flex:none;border-radius:999px;background:var(--surface-2);color:var(--ink-soft);box-shadow:0 0 0 1.408px #F3F6EE,0 1.024px 2.24px 1.28px rgba(0,0,0,.12)}
+html[data-theme="dark"] #nav #wakeToggle,html[data-theme="dark"] #nav .header-share{box-shadow:0 0 0 1.408px #374D40,0 1.024px 2.24px 1.28px rgba(0,0,0,.4)}
+#nav #wakeToggle svg,#nav .header-share svg{width:18px;height:18px}
+#nav #wakeToggle::before,#nav .header-share::before{content:"";position:absolute;inset:-7.5px 0;border-radius:999px}
+#nav #wakeToggle.on{background:var(--accent);color:var(--on-accent)}
+
+/* Share dialog; the QR itself keeps a white quiet zone in both themes. */
+.recipe-share-row{display:flex;justify-content:flex-start;margin:10px 0 12px}
+.recipe-share,.share-copy,.share-qr-button,.share-download{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 15px;border-radius:999px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:700;box-shadow:var(--shadow-sm)}
+.recipe-share svg,.header-share svg,.share-qr-button svg{width:18px;height:18px;flex:none}
+.share-dialog{position:fixed;inset:0;margin:auto;width:min(460px,calc(100vw - 32px));max-height:min(90dvh,760px);overflow:auto;padding:22px;border:1px solid var(--line);border-radius:var(--radius-lg);background:var(--surface);color:var(--ink);box-shadow:var(--shadow-lg)}
+.share-dialog::backdrop{background:rgba(12,23,16,.55)}
+.share-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.share-dialog-head h2{font-size:19px;line-height:1.4;margin:0}
+.share-close{width:44px;height:44px;border-radius:50%;background:var(--surface-2);font-size:24px;line-height:1}
+.share-dialog p{font-size:13px;color:var(--ink-soft);margin:0 0 14px;line-height:1.8}
+.share-link-row{display:flex;gap:8px;align-items:stretch;direction:ltr}
+.share-copy{min-width:0;flex:1;background:var(--surface-2);direction:ltr;text-align:left}
+.share-copy span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.share-qr-button{width:48px;padding:0;flex:none;background:var(--accent);color:var(--on-accent)}
+.share-message{min-height:1.6em;margin:8px 0 0!important;font-size:12px!important}
+.share-qr-panel{text-align:center;margin-top:8px}
+.share-qr-panel[hidden]{display:none}
+.share-qr-image{display:block;width:min(100%,300px);height:auto;margin:0 auto 12px;background:#fff;border-radius:10px;user-select:none;-webkit-touch-callout:default}
+.share-download{background:var(--accent);color:var(--on-accent);text-decoration:none}
+@media print{.recipe-share-row,.share-dialog{display:none!important}}
+
+.share-manual-link{width:100%;min-height:40px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface-2);color:var(--ink);padding:0 12px;direction:ltr;font:inherit}
