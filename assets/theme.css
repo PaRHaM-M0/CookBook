@@ -382,3 +382,231 @@ html[data-theme="dark"] #nav #wakeToggle,html[data-theme="dark"] #nav .header-sh
 @media print{.recipe-share-row,.share-dialog{display:none!important}}
 
 .share-manual-link{width:100%;min-height:40px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface-2);color:var(--ink);padding:0 12px;direction:ltr;font:inherit}
+
+
+/* ============================================================================
+   CookBook — dark theme «سنگ، خزه، آسمان» · rock lightness 4/5
+   Base colours come from the reference photo (k-means clusters):
+     rock  #1E2826 #222D2B #2B3635 #3D4847   (35% of the frame)
+     moss  #2B3F27 #394D32 #526644 #6D815B   (10%)
+     sky   #B9C3C5 #C4CCCE #CBD2D5 #D9DEE1   (55%)
+   Rock step 4 of 5: each surface three quarters of the way to the next lighter rock tone (page #293432).
+   Roles (learned from the references):
+     rock = every surface, tone-on-tone, ~80% of the screen
+     sky  = light: type, icons, the brightest marks — never a big block
+     moss = one block (library tile) + selected/primary states, ~5–8%
+   Paste after theme.css and home.css (or append to the end of theme.css).
+   ========================================================================== */
+
+html[data-theme="dark"]{
+  /* rock — surfaces step up in small, equal tones */
+  --bg:#293432;
+  --bg-soft:#444F4D;
+  --surface:#323D3C;
+  --surface-2:#3B4645;
+  --line:#444F4D;
+  --line-strong:#616C6B;
+
+  /* sky — type */
+  --ink:#D9DEE1;
+  --ink-soft:#B9C3C5;
+  --muted:#A8B2B4;
+
+  /* moss — text tones are the same hue (131°), lifted only for legibility */
+  --accent:#9FB38E;
+  --accent-hover:#A5B995;
+  --accent-strong:#B3C4A6;
+  --accent-soft:#2B3F27;
+  --accent-2:#9FB38E;
+  --accent-2-soft:#2B3F27;
+  --olive:#9FB38E;
+  --moss:#526644;
+  --moss-deep:#394D32;
+  --moss-shade:#2B3F27;
+  --moss-lit:#6D815B;
+
+  /* the photo has no saffron: highlights take the sky */
+  --saffron:#D9DEE1;
+  --saffron-soft:#3B4645;
+  --saffron-ink:#1E2826;
+  --espresso:#394D32;
+  --on-espresso:#D9DEE1;
+
+  --badge-bg:#D9DEE1; --badge-ink:#1E2826;
+  --on-accent:#1E2826;
+  --on-photo:#D9DEE1;
+  --footer-bg:#212C2A; --footer-ink:#A8B2B4;
+  --warning:#D9DEE1; --warning-bg:#3B4645;
+  --success:#9FB38E;
+  --scrim:rgba(24,35,34,.62);
+  --card:var(--surface);
+
+  /* dark surfaces separate by tone and a lit edge, not by heavy shadow */
+  --edge:inset 0 1px 0 rgba(217,222,225,.045);
+  --shadow-sm:0 1px 2px rgba(12,18,17,.28);
+  --shadow:0 1px 2px rgba(12,18,17,.30),0 14px 30px -20px rgba(12,18,17,.60);
+  --shadow-lg:0 2px 4px rgba(12,18,17,.32),0 28px 56px -28px rgba(12,18,17,.70);
+  --shadow-sheet:0 -20px 60px rgba(12,18,17,.55);
+  color-scheme:dark;
+}
+
+/* ---- global --------------------------------------------------------------- */
+html[data-theme="dark"] ::selection{background:#526644;color:#D9DEE1}
+html[data-theme="dark"] :focus-visible{outline-color:#9FB38E}
+html[data-theme="dark"] nav#nav.is-stuck,
+html[data-theme="dark"] nav#nav.scrolled{box-shadow:0 1px 0 var(--line),0 10px 26px -20px rgba(12,18,17,.7)}
+html[data-theme="dark"] #themeToggle{--bezel-night:#444F4D}
+html[data-theme="dark"] #nav .lang-toggle,
+html[data-theme="dark"] #nav #wakeToggle,
+html[data-theme="dark"] #nav .header-share{background:var(--surface);color:var(--ink-soft);box-shadow:0 0 0 1px var(--line)}
+html[data-theme="dark"] #nav .lang-toggle:hover,
+html[data-theme="dark"] #nav .header-share:hover{color:var(--ink)}
+/* the brand mark is the one green thing in the bar */
+html[data-theme="dark"] .logo-mark::before{background:#9FB38E}
+html[data-theme="dark"] .share-dialog::backdrop{background:rgba(18,26,25,.62)}
+
+html[data-theme="dark"] .btn:not(.btn-primary),
+html[data-theme="dark"] .category-action,
+html[data-theme="dark"] #sortSelect{background:var(--surface);border-color:var(--line);box-shadow:none}
+html[data-theme="dark"] .btn:not(.btn-primary):hover,
+html[data-theme="dark"] .category-action:hover,
+html[data-theme="dark"] #sortSelect:hover{border-color:var(--line-strong);box-shadow:none}
+
+/* moss pills: every selected / primary control (Sky Lagoon, Highland Base) */
+html[data-theme="dark"] .btn-primary,
+html[data-theme="dark"] .cta,
+html[data-theme="dark"] .category-action.is-active,
+html[data-theme="dark"] #filtersToggle[aria-expanded="true"],
+html[data-theme="dark"] .chip.on,
+html[data-theme="dark"] .toggle.on,
+html[data-theme="dark"] #nav #wakeToggle.on,
+html[data-theme="dark"] .share-qr-button,
+html[data-theme="dark"] .share-download,
+html[data-theme="dark"] .active-filter:hover,
+html[data-theme="dark"] .mode-tab.active,
+html[data-theme="dark"] .mode-tab[aria-pressed="true"],
+html[data-theme="dark"] .scale-btn.active{
+  background:#526644;color:#D9DEE1;border-color:transparent;box-shadow:none;
+}
+html[data-theme="dark"] .btn-primary:hover,
+html[data-theme="dark"] .cta:hover{background:#394D32;color:#D9DEE1}
+html[data-theme="dark"] .category-action.is-active small,
+html[data-theme="dark"] .chip.on .chip-count{color:#D9DEE1}
+html[data-theme="dark"] ol.steps > li.checked::before{background:#526644;color:#D9DEE1}
+
+/* ---- tiles & cards: tone-on-tone rock with a lit top edge ------------------ */
+html[data-theme="dark"] .tile,
+html[data-theme="dark"] .bento-fast,
+html[data-theme="dark"] .rcard,
+html[data-theme="dark"] .filters-panel.open{
+  border-color:var(--line);box-shadow:var(--edge),var(--shadow-sm);
+}
+html[data-theme="dark"] .rcard:hover{box-shadow:var(--edge),var(--shadow-lg);border-color:var(--line-strong)}
+
+/* ---- hero: the photo leads; rock scrim, sky type --------------------------- */
+html[data-theme="dark"] .bento-feature{background:#323D3C}
+html[data-theme="dark"] .bento-hero::after{
+  background:
+    linear-gradient(0deg,rgba(24,35,34,.88),rgba(24,35,34,.12) 55%,rgba(24,35,34,.55)),
+    linear-gradient(90deg,rgba(24,35,34,.22),rgba(24,35,34,.30));
+}
+html[data-theme="dark"] .hero-intro{color:#D9DEE1}
+html[data-theme="dark"] .hero-intro-label{color:#C4CCCE}
+html[data-theme="dark"] .hero-intro h1{color:#D9DEE1;text-shadow:0 2px 18px rgba(18,26,25,.45)}
+html[data-theme="dark"] .hero-intro h1 em{color:#B9C3C5}
+html[data-theme="dark"] .hero-intro p{color:#D9DEE1;text-shadow:0 1px 10px rgba(18,26,25,.8)}
+html[data-theme="dark"] .bh-body h2{text-shadow:0 2px 18px rgba(18,26,25,.5)}
+html[data-theme="dark"] .bh-tag{background:#D9DEE1;color:#1E2826}
+html[data-theme="dark"] .bh-meta span{background:rgba(217,222,225,.12);border-color:rgba(217,222,225,.24)}
+html[data-theme="dark"] .showcase-controls{color:#D9DEE1}
+html[data-theme="dark"] .showcase-index,
+html[data-theme="dark"] .showcase-buttons button{background:rgba(24,35,34,.72);color:#D9DEE1;border-color:rgba(217,222,225,.32)}
+html[data-theme="dark"] .showcase-buttons button:hover{background:#D9DEE1;color:#1E2826}
+
+/* ---- the moss block: the only large green surface, like the hill ---------- */
+html[data-theme="dark"] .bento-stats{
+  background:linear-gradient(165deg,#394D32 0%,#2B3F27 100%);
+  border-color:rgba(109,129,91,.35);box-shadow:var(--edge),var(--shadow-sm);
+}
+html[data-theme="dark"] .bento-stats::before{display:none}
+html[data-theme="dark"] .bento-stats .stats-head .label{color:#C4CCCE;opacity:1}
+html[data-theme="dark"] .stats-head p{color:#B9C3C5}
+html[data-theme="dark"] .stats-mark{background:#6D815B;opacity:1}
+html[data-theme="dark"] .stats{border-top-color:rgba(217,222,225,.16)}
+html[data-theme="dark"] .stats li{border-inline-start-color:rgba(217,222,225,.14)}
+html[data-theme="dark"] .stats span{color:#B9C3C5}
+
+/* ---- quick list -------------------------------------------------------------- */
+html[data-theme="dark"] .tile-head .label{color:var(--accent)}
+html[data-theme="dark"] .fast-item:hover{color:var(--ink)}
+html[data-theme="dark"] .fast-item .fi-time{background:var(--surface-2);color:var(--ink-soft)}
+
+/* ---- search: same rock, one step deeper; the field is the lit part --------- */
+html[data-theme="dark"] .discovery-search{
+  --ink:#D9DEE1;--ink-soft:#B9C3C5;--muted:#A8B2B4;
+  --line:#444F4D;--line-strong:#616C6B;--surface-2:#293432;
+  --accent:#9FB38E;--accent-soft:#2B3F27;
+  /* lava → mist, like the Retreat at Blue Lagoon (#303C3D → #545C63) but in the photo's rock */
+  background:linear-gradient(to left,#212C2A 0%,#293432 45%,#394443 100%);
+  border-color:var(--line);box-shadow:var(--edge);
+}
+html[data-theme="dark"] .discovery-search .search{background:#212C2A;border-color:#444F4D;box-shadow:none}
+html[data-theme="dark"] .discovery-search .search:focus-within{border-color:#6D815B;box-shadow:0 0 0 4px rgba(82,102,68,.35)}
+html[data-theme="dark"] .search kbd{background:#293432;border-color:#444F4D;color:#A8B2B4}
+
+/* ---- photo cards: rock scrims instead of green ----------------------------- */
+html[data-theme="dark"] .category-card{border-color:var(--line);background:#323D3C}
+html[data-theme="dark"] .category-card::after{background:linear-gradient(to top,rgba(24,35,34,.84) 0%,rgba(24,35,34,.18) 68%,rgba(24,35,34,.04) 100%)}
+html[data-theme="dark"] .category-card .cat-count{background:rgba(24,35,34,.7);border-color:rgba(217,222,225,.2)}
+html[data-theme="dark"] .category-card .cat-title{text-shadow:0 1px 8px rgba(18,26,25,.4)}
+html[data-theme="dark"] .category-card[aria-pressed="true"]{border:2px solid #D9DEE1;box-shadow:0 0 0 3px rgba(217,222,225,.14)}
+html[data-theme="dark"] .rcard .ph{background:#323D3C}
+html[data-theme="dark"] .rcard .ph::after{background:linear-gradient(to top,rgba(24,35,34,.42),rgba(24,35,34,0) 44%)}
+html[data-theme="dark"] .rdot{background:#D9DEE1;box-shadow:0 0 0 3px rgba(24,35,34,.35),0 2px 8px rgba(18,26,25,.5)}
+html[data-theme="dark"] .rcard-cat{text-shadow:0 1px 8px rgba(18,26,25,.7)}
+html[data-theme="dark"] .rcard-meta span + span::before{color:#616C6B}
+
+/* ---- filters, chips, sheet ------------------------------------------------- */
+html[data-theme="dark"] .chip{background:var(--surface-2);color:var(--ink-soft)}
+html[data-theme="dark"] .chip:hover{background:#444F4D;color:var(--ink)}
+html[data-theme="dark"] .active-filter{background:#2B3F27;color:#B3C4A6}
+html[data-theme="dark"] .filters-backdrop{background:rgba(18,26,25,.6)}
+html[data-theme="dark"] .mobile-bar{background:color-mix(in srgb,#323D3C 82%,transparent);border-top-color:var(--line);box-shadow:0 -12px 30px -18px rgba(12,18,17,.7)}
+html[data-theme="dark"] .mbar-btn[aria-pressed="true"],
+html[data-theme="dark"] .mbar-btn.on{color:#D9DEE1;background:#394D32}
+
+/* ---- footer: the ground — deepest rock ------------------------------------- */
+html[data-theme="dark"] footer.site{background:#212C2A;color:#A8B2B4;border-top:1px solid #323D3C}
+html[data-theme="dark"] footer.site .foot-mark{color:#B9C3C5}
+html[data-theme="dark"] footer.site a{color:#D9DEE1;border-bottom-color:rgba(217,222,225,.3)}
+html[data-theme="dark"] footer.site a:hover{color:#D9DEE1;border-bottom-color:#D9DEE1}
+
+/* ---- recipe pages (recipe.css hard-codes a few dark greens) --------------- */
+html[data-theme="dark"] body .r-stat{background:#323D3C;border-color:#444F4D}
+html[data-theme="dark"] body .r-stat:first-child{background:#394D32;border-color:rgba(109,129,91,.4)}
+html[data-theme="dark"] body .r-stat:first-child .k{color:#C4CCCE}
+html[data-theme="dark"] body .r-stat:first-child .v{color:#D9DEE1}
+html[data-theme="dark"] body .ing-card{background:#323D3C;--surface-2:#3B4645}
+html[data-theme="dark"] body .reset-checks{color:var(--accent-strong)}
+
+
+/* ============================================================================
+   Optional dial (off by default). The theme above is the recommendation.
+   ========================================================================== */
+
+/* ---- OPTIONAL · more moss: the row under the hero becomes one moss band -------------------------------------------
+   To use it, delete this opening line and the closing line below.
+html[data-theme="dark"] .bento-fast{background:linear-gradient(165deg,#334730 0%,#2B3F27 100%);border-color:rgba(109,129,91,.32)}
+html[data-theme="dark"] .bento-fast .tile-head .label{color:#B3C4A6}
+html[data-theme="dark"] .bento-fast .fast-list li + li{border-top-color:rgba(217,222,225,.13)}
+html[data-theme="dark"] .bento-fast .fast-item .fi-time{background:rgba(217,222,225,.09);color:#C4CCCE}
+html[data-theme="dark"] .hero-intro h1 em{color:#B3C4A6}
+   ---- end of optional block --------------------------------------------- */
+
+/* Keep printed recipe cards legible regardless of the selected on-screen theme. */
+@media print{
+  html[data-theme="dark"]{--bg:#fff;--bg-soft:#fff;--surface:#fff;--surface-2:#fff;--ink:#111;--ink-soft:#222;--muted:#444;--line:#777;--line-strong:#555;--accent:#222;--accent-strong:#222}
+  html[data-theme="dark"] body{background:#fff;color:#111}
+  html[data-theme="dark"] body .r-stat,html[data-theme="dark"] body .r-stat:first-child,html[data-theme="dark"] body .ing-card{background:white;color:black}
+  html[data-theme="dark"] body .r-stat:first-child .k,html[data-theme="dark"] body .r-stat:first-child .v{color:black}
+}
