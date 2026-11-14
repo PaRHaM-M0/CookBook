@@ -112,7 +112,7 @@ function norm(str){
   }
   function applyTheme(value){
     root.setAttribute('data-theme',value);
-    if(themeMeta) themeMeta.content=value==='dark'?'#293B31':'#E5EDE1';
+    if(themeMeta) themeMeta.content=value==='dark'?'#293432':'#E5EDE1';
     if(btn){
       btn.setAttribute('aria-checked',String(value==='dark'));
       btn.title=IS_EN?(value==='dark'?'Switch to light theme':'Switch to dark theme'):(value==='dark'?'تغییر به تم روشن':'تغییر به تم تاریک');

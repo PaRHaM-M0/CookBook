@@ -8,26 +8,26 @@ A bilingual recipe library for Persian RTL and English LTR. The interface uses a
 
 ## 1. Palette
 
-The light theme is a green-tinted field rather than neutral gray or white. The dark theme is a lifted forest green, not black. Both use restrained sunlight accents for selected states and step markers.
+The light theme is a green-tinted field rather than neutral gray or white. The dark theme uses the selected Rock, Moss, Sky palette at rock lightness 4: layered stone surfaces, sky-toned text, and moss for the library and selected controls. The light theme keeps its existing palette.
 
 | Token | Light | Dark |
 | --- | --- | --- |
-| `--bg` | `#E5EDE1` | `#293B31` |
-| `--bg-soft` | `#D8E4D5` | `#304438` |
-| `--surface` | `#F3F6EE` | `#374D40` |
-| `--surface-2` | `#EAF0E4` | `#3B5143` |
-| `--line` | `#CEDBCB` | `#4B6252` |
-| `--ink` | `#24352B` | `#E2EBDD` |
-| `--ink-soft` | `#415548` | `#C4D1C4` |
-| `--muted` | `#5B6D60` | `#B2C2B3` |
-| `--accent` | `#4B7153` | `#9BBF98` |
-| `--accent-strong` | `#365B40` | `#BED7B7` |
-| `--accent-soft` | `#D6E4D3` | `#3F5A45` |
-| `--saffron` | `#D7AD56` | `#E4C97C` |
-| `--saffron-soft` | `#F0E4C6` | `#5B4F30` |
-| `--espresso` | `#31483A` | `#405A44` |
+| `--bg` | `#E5EDE1` | `#293432` |
+| `--bg-soft` | `#D8E4D5` | `#444F4D` |
+| `--surface` | `#F3F6EE` | `#323D3C` |
+| `--surface-2` | `#EAF0E4` | `#3B4645` |
+| `--line` | `#CEDBCB` | `#444F4D` |
+| `--ink` | `#24352B` | `#D9DEE1` |
+| `--ink-soft` | `#415548` | `#B9C3C5` |
+| `--muted` | `#5B6D60` | `#A8B2B4` |
+| `--accent` | `#4B7153` | `#9FB38E` |
+| `--accent-strong` | `#365B40` | `#B3C4A6` |
+| `--accent-soft` | `#D6E4D3` | `#2B3F27` |
+| `--saffron` | `#D7AD56` | `#D9DEE1` |
+| `--saffron-soft` | `#F0E4C6` | `#3B4645` |
+| `--espresso` | `#31483A` | `#394D32` |
 
-No pure white or black surfaces are used. `manifest.json` uses the light canvas as its default browser theme color; `assets/app.js` synchronizes the browser chrome with the selected theme.
+The standard theme surfaces avoid pure white and black (the QR image remains high-contrast black on white for scanning). `manifest.json` uses the light canvas as its default browser theme color; `assets/app.js` synchronizes the browser chrome with the selected theme.
 
 ## 2. Home page
 
