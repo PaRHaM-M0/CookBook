@@ -116,6 +116,19 @@ const FILTERS = {
 const RECIPES = [
 
   {
+    name: "Five-Cheese Baked Cavatappi Mac and Cheese",
+    fa: "مک اند چیز, مک‌اندچیز پنج پنیره, کاواتاپی, پاستا پنیر, بونیتو",
+    desc: "کاواتاپی با سس پنج‌پنیره و لبنیات معطر به سیر، آویشن و بونیتو، لایه‌چینی‌شده و برشته زیر گریل.",
+    desc_en: "Cavatappi in five-cheese sauce with garlic, thyme and bonito-infused dairy, layered and broiled until golden.",
+    page: "recipes/five-cheese-baked-cavatappi.html",
+    category: "pasta", image: "images/five-cheese-cavatappi.webp",
+    meal: "dinner", cuisine: "western", main: "pasta", time: "medium", level: "medium",
+    tags: ["مک اند چیز", "پنیر", "کاواتاپی", "بونیتو", "گودا", "چدار", "cavatappi", "mac and cheese", "bonito", "cheese", "gouda", "cheddar"],
+    featured: false,
+  },
+
+
+  {
     name: "Neapolitan Pizza",
     fa: "پیتزا, پیتزای ناپولی, پیتزا ناپولیتن, خمیر ۷۲ ساعته",
     desc: "راهنمای قدم‌به‌قدم و وسواسی برای پیتزای خانگی در سطح رستوران — از خمیر ۷۲ ساعته تا تحویل کاملاً داغ.",

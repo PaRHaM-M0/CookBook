@@ -1,7 +1,7 @@
 /* PaRHaM's CookBook! — Two-Tier Resilient Service Worker (FA + EN)
    Tier 1 (CORE_URLS): lightweight shell + all HTML/CSS/JS/icons cached atomically on install.
    Photos are cached on demand in a separate persistent cache; core install stays lightweight. */
-const CACHE_VERSION = "cookbook-v2.8.24";
+const CACHE_VERSION = "cookbook-v2.8.25";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const IMAGE_CACHE = "cookbook-images-v1";
@@ -41,6 +41,7 @@ const CORE_URLS = [
   "./recipes/deviled-egg-dip.html",
   "./recipes/easy-chicken-alfredo-penne.html",
   "./recipes/fast-food-sauce-copycat-collection.html",
+  "./recipes/five-cheese-baked-cavatappi.html",
   "./recipes/grand-unified-burger.html",
   "./recipes/harira.html",
   "./recipes/herb-compound-butter.html",
@@ -80,6 +81,7 @@ const CORE_URLS = [
   "./en/recipes/deviled-egg-dip.html",
   "./en/recipes/easy-chicken-alfredo-penne.html",
   "./en/recipes/fast-food-sauce-copycat-collection.html",
+  "./en/recipes/five-cheese-baked-cavatappi.html",
   "./en/recipes/grand-unified-burger.html",
   "./en/recipes/harira.html",
   "./en/recipes/herb-compound-butter.html",
