@@ -116,6 +116,22 @@ const FILTERS = {
 const RECIPES = [
 
   {
+    name: "Green Bean Casserole", fa: "کسرول لوبیا سبز, لوبیاسبز, گرین بین کسرول, خوراک لوبیا سبز",
+    desc: "لوبیاسبز با سس خامه و قارچ و رویهٔ ترد شالوت سرخ‌شده و چیپس کِتِل.",
+    desc_en: "Blanched green beans in homemade mushroom cream sauce with crispy fried shallots and kettle chips.",
+    page: "recipes/green-bean-casserole.html", image: "images/green-bean-casserole.webp", category: "appetizer", meal: "appetizer", cuisine: "western", main: "veggie", time: "medium", level: "medium",
+    tags: ["لوبیا سبز", "قارچ", "شالوت", "کسرول", "green bean", "mushroom", "shallot", "casserole"], featured: false,
+  },
+  {
+    name: "Five-Spice Cranberry Sauce", fa: "سس کرنبری, سس کرن بری, سس زغال اخته آمریکایی, سس پنج ادویه",
+    desc: "سس کرنبری صاف و ترش‌وشیرین با پرتقال، شامپاین، کنیاک، هل و پنج‌ادویهٔ چینی.",
+    desc_en: "Smooth sweet-tart cranberry sauce with orange, champagne, cognac, cardamom and Chinese five-spice.",
+    page: "recipes/five-spice-cranberry-sauce.html", image: "images/five-spice-cranberry-sauce.webp", category: "basics", meal: "appetizer", cuisine: "western", main: "veggie", time: "medium", level: "easy",
+    tags: ["سس", "کرنبری", "پنج ادویه", "پرتقال", "cranberry", "sauce", "five spice", "orange"], featured: false,
+  },
+
+
+  {
     name: "Five-Cheese Baked Cavatappi Mac and Cheese",
     fa: "مک اند چیز, مک‌اندچیز پنج پنیره, کاواتاپی, پاستا پنیر, بونیتو",
     desc: "کاواتاپی با سس پنج‌پنیره و لبنیات معطر به سیر، آویشن و بونیتو، لایه‌چینی‌شده و برشته زیر گریل.",
