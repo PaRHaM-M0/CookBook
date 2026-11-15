@@ -68,6 +68,12 @@ Recipe covers use existing originals plus `-960.webp` and `-480.webp` derivative
 - `prefers-reduced-motion` disables nonessential transitions.
 - Representative text-color pairs across both themes were contrast-checked; the lowest audited ratio is 4.61:1, meeting WCAG AA for normal text.
 
+## Ingredient choices
+
+- Ingredient alternatives with different quantities are adjacent rows under a “choose one” heading; each amount remains in an `.amt` cell so scaling and unit conversion continue to work. Alternatives that share one amount are visibly labeled in the existing row.
+- Alternative recipe methods are identified at their tables. Ingredients that are combined, such as the two milks in cultured mozzarella, are labeled as a combined total rather than as alternatives.
+- Choice headings are not checklist items or search terms. Stable `data-check-key` values preserve existing ingredient checks across row reordering and both languages. Validate with `python3 tests/ingredient-choices.test.py` and rebuild the ingredient index when table labels change.
+
 ## 7. Source of truth
 
 - `assets/recipes.js` — recipes, image paths, and localized facet labels.
