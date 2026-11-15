@@ -52,6 +52,7 @@ The existing bilingual recipe pages keep their established hooks and data. `asse
 - The text reserves 42 px at logical `inline-start`, leaving a 6 px gap after the 26 px badge.
 - The same spacing is used at mobile and desktop widths, so the number does not cover text in either RTL or LTR pages.
 - Lists with a `start` attribute seed the same `step` counter used by the badge.
+- Explanatory lists and standalone paragraphs use gently framed reading cards; body copy is justified with a natural last line on wider screens, and start-aligned on phones to avoid large gaps in mixed-script text. Preparation inventories can use labelled cards and responsive equipment lists. The styles share theme tokens and remain legible in print.
 
 ## 5. Responsive image ladder and offline cache
 
