@@ -114,6 +114,16 @@ const FILTERS = {
    🍲 لیست غذاها
    --------------------------------------------------------------------- */
 const RECIPES = [
+  {
+    name: "Iranian-Style Joojeh Chini",
+    fa: "جوجه چینی, جوجه‌چینی, مرغ بنیه, مرغ سوخاری ایرانی",
+    desc: "نوار مرغ مزه‌دارشده با پوشش بنیهٔ ترد، همراه با لیمو و سس تارتار اختیاری.",
+    desc_en: "Marinated chicken strips in a crisp beniye-style batter, served with lemon and optional quick tartar sauce.",
+    page: "recipes/iranian-joojeh-chini.html", image: "images/joojeh-chini.webp",
+    category: "fried-chicken", meal: "dinner", cuisine: "iranian", main: "chicken", time: "medium", level: "medium",
+    tags: ["جوجه چینی", "جوجه‌چینی", "بنیه", "مرغ", "joojeh chini", "beniye", "fried chicken", "tartar"], featured: false,
+  },
+
   {name: "Homemade Mozzarella", fa: "موزارلا, موزارلای تازه, پنیر پیتزا, پنیر موزارلا", desc: "موزارلای تازه و موزارلای کشت‌داده‌شده برای پیتزا، با دو روش و راهنمای کامل پنیرسازی.", desc_en: "Fresh stovetop mozzarella and cultured pizza-style mozzarella, with detailed cheesemaking guidance.", page: "recipes/homemade-mozzarella.html", image: "images/mozzarella-cheese.webp", category: "basics", meal: "appetizer", cuisine: "italian", main: "dairy", time: "long", level: "hard", tags: ["موزارلا", "پنیر", "پیتزا", "mozzarella", "cheese", "pizza"], featured: false},
 
 
