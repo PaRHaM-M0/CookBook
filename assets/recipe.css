@@ -309,3 +309,77 @@ html[data-theme="dark"] .ing-card{background:#34423e;--surface-2:#415149}
 .custom-scale input{width:52px;min-height:32px;padding:3px 6px;border:1px solid var(--line-strong);border-radius:8px;color:var(--ink);background:var(--surface);font:inherit;direction:ltr;text-align:center}
 .custom-scale input:focus-visible,.unit-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 @media print{.unit-wrap,.custom-scale{display:none!important}}
+
+/* Recipe reading system: quieter structure for explanations and long notes. */
+.r-main .phase{margin-block-end:clamp(28px,4vw,42px)}
+.r-main .phase-head{gap:6px;margin-bottom:15px}
+.r-main .phase-head h2,.r-main .phase > h2{line-height:1.45;letter-spacing:-.01em}
+.r-main .phase > h2{margin-block:0 14px}
+.r-main .phase p,.r-main .phase > ul > li,.r-main .callout,
+.r-main .phase ol.steps > li,.r-main > .note{
+  text-align:justify;text-align-last:start;overflow-wrap:break-word;
+}
+.r-main .phase p,.r-main .phase > ul > li{line-height:1.95}
+.r-main .phase > ul:not(.sub){
+  display:grid;gap:9px;list-style:disc outside;
+  margin-block:12px 16px;padding-inline-start:1.15rem;
+}
+.r-main .phase > ul:not(.sub) > li{
+  margin:0;padding:14px 16px;background:var(--surface);
+  border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--shadow-sm);color:var(--ink-soft);font-size:14px;
+}
+.r-main .phase > ul:not(.sub) > li::marker{color:var(--accent)}
+.r-main .phase > ul:not(.sub) > li strong,
+.r-main .phase > ul:not(.sub) > li b{color:var(--ink)}
+.r-main .phase > ul:not(.sub) > li a{overflow-wrap:anywhere}
+.r-main .phase > p:not(.muted):not(.note){
+  padding:14px 16px;background:var(--surface);border:1px solid var(--line);
+  border-radius:12px;box-shadow:var(--shadow-sm);margin-block:12px;
+}
+.r-main ol.steps > li{border:1px solid var(--line);padding-block:14px}
+.r-main ol.steps > li::before{top:14px}
+.r-main ol.steps h4{margin-bottom:6px;line-height:1.65}
+.r-main ol.steps > li p{margin-block:5px 0}
+/* The mozzarella preparation checklist uses short editorial labels and paragraphs. */
+.prep-label,.detail-label{display:block;margin-bottom:7px;color:var(--accent-strong);font-size:12px;font-weight:800;line-height:1.55;text-align:start}
+.r-main .phase > ul > li .prep-copy p,.r-main #culture-alternatives > ul > li p{margin:0;line-height:1.95}
+.r-main .phase > ul > li .prep-copy p + p,.r-main #culture-alternatives > ul > li p + p{margin-top:10px}
+.r-main .equipment-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 18px;margin:0;padding-inline-start:1.15rem;list-style:disc outside}
+.r-main .equipment-list > li{margin:0;line-height:1.8}
+.r-main .equipment-list > li::marker{color:var(--accent)}
+.r-main #culture-alternatives > ul > li > b:first-child{display:block;margin-bottom:8px;line-height:1.6;text-align:start}
+.r-main #culture-alternatives > p:last-child{line-height:2.1}
+.r-main #culture-alternatives a{overflow-wrap:anywhere}
+@media (max-width:600px){
+  .r-main .phase > ul:not(.sub) > li{padding:12px 13px}
+  .r-main .phase > p:not(.muted):not(.note){padding:12px 13px}
+  .r-main .equipment-list{grid-template-columns:1fr}
+  .r-main .phase p,.r-main .phase > ul > li{line-height:1.9}
+}
+@media print{
+  .r-main .phase > ul:not(.sub) > li,.r-main .phase > p:not(.muted):not(.note),.r-main ol.steps > li{background:#fff;border-color:#999;box-shadow:none;color:#111}
+  .r-main .phase > ul:not(.sub) > li{break-inside:auto}
+  .prep-label,.detail-label{color:#111}
+}
+/* Short, clear reading labels and links inside recipe notes. */
+.r-main #culture-alternatives > ul > li > p:first-child > b:first-child{
+  display:block;margin-bottom:8px;color:var(--accent-strong);font-size:12px;font-weight:800;line-height:1.6;text-align:start;
+}
+.r-main .phase a{color:var(--accent-strong);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.r-main .phase a:hover{text-decoration-thickness:2px}
+.r-main .callout{
+  margin-block:14px;padding:14px 16px;border:1px solid var(--line);
+  border-inline-start:3px solid var(--accent);border-radius:12px;
+  background:var(--surface-2);color:var(--ink-soft);line-height:1.95;
+}
+.r-main .callout strong,.r-main .callout b{color:var(--ink)}
+@media print{.r-main .callout{background:#fff;border-color:#999;color:#111}.r-main .phase a{color:#111}}
+/* At phone widths, ragged alignment avoids excessive gaps in mixed Persian/Latin text. */
+@media (max-width:600px){
+  .r-main .phase p,.r-main .phase > ul > li,.r-main .callout,
+  .r-main .phase ol.steps > li,.r-main > .note{text-align:start}
+}
+/* Keep long isolated Latin labels inside narrow recipe cards. */
+.r-main .phase .en{max-width:100%;overflow-wrap:anywhere;word-break:break-word}
+.r-main a{overflow-wrap:anywhere;word-break:break-word}
