@@ -203,7 +203,7 @@ function norm(str){
   const fixedBatch = ingCard.hasAttribute("data-no-scale");
   const specificScale = ingCard.hasAttribute("data-specific-scale");
   const amtCells = $$("table.ing td.amt", ingCard);
-  const ingRows = $$("table.ing tbody tr", ingCard);
+  const ingRows = $$("table.ing tbody tr:not(.choice-heading)", ingCard);
   const stepItems = $$(".r-main ol.steps > li");
 
   const toolsBar = document.createElement("div");
@@ -257,11 +257,12 @@ function norm(str){
   }
 
   ingRows.forEach((tr, idx) => {
-    if (savedState.r.includes(idx)) tr.classList.add("checked");
+    const key = tr.hasAttribute("data-check-key") ? (/^\d+$/.test(tr.dataset.checkKey) ? Number(tr.dataset.checkKey) : tr.dataset.checkKey) : idx;
+    if (savedState.r.includes(key)) tr.classList.add("checked");
     tr.addEventListener("click", (e) => {
       if (e.target.closest("a, button, input, select")) return;
       const on = tr.classList.toggle("checked");
-      savedState.r = on ? [...new Set([...savedState.r, idx])] : savedState.r.filter((x) => x !== idx);
+      savedState.r = on ? [...new Set([...savedState.r, key])] : savedState.r.filter((x) => x !== key);
       saveChecks();
     });
   });

@@ -13,6 +13,7 @@ class Ingredients(HTMLParser):
         self.table_depth = 0
         self.in_tbody = False
         self.capture = False
+        self.choice_heading = False
         self.parts = []
         self.items = []
 
@@ -27,7 +28,9 @@ class Ingredients(HTMLParser):
             return
         if tag == 'tbody':
             self.in_tbody = True
-        if self.in_tbody and tag in ('th', 'td') and 'amt' not in attrs.get('class', '').split():
+        if self.in_tbody and tag == 'tr':
+            self.choice_heading = 'choice-heading' in attrs.get('class', '').split()
+        if self.in_tbody and not self.choice_heading and tag in ('th', 'td') and 'amt' not in attrs.get('class', '').split():
             self.capture = True
             self.parts = []
 
@@ -43,6 +46,8 @@ class Ingredients(HTMLParser):
             if text:
                 self.items.append(text)
             self.capture = False
+        if tag == 'tr':
+            self.choice_heading = False
         if tag == 'tbody':
             self.in_tbody = False
         if tag == 'table':
