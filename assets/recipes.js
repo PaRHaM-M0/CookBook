@@ -114,6 +114,8 @@ const FILTERS = {
    🍲 لیست غذاها
    --------------------------------------------------------------------- */
 const RECIPES = [
+  {name: "Homemade Mozzarella", fa: "موزارلا, موزارلای تازه, پنیر پیتزا, پنیر موزارلا", desc: "موزارلای تازه و موزارلای کشت‌داده‌شده برای پیتزا، با دو روش و راهنمای کامل پنیرسازی.", desc_en: "Fresh stovetop mozzarella and cultured pizza-style mozzarella, with detailed cheesemaking guidance.", page: "recipes/homemade-mozzarella.html", image: "images/mozzarella-cheese.webp", category: "basics", meal: "appetizer", cuisine: "italian", main: "dairy", time: "long", level: "hard", tags: ["موزارلا", "پنیر", "پیتزا", "mozzarella", "cheese", "pizza"], featured: false},
+
 
   {
     name: "Green Bean Casserole", fa: "کسرول لوبیا سبز, لوبیاسبز, گرین بین کسرول, خوراک لوبیا سبز",

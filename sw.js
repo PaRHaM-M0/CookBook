@@ -1,7 +1,7 @@
 /* PaRHaM's CookBook! — Two-Tier Resilient Service Worker (FA + EN)
    Tier 1 (CORE_URLS): lightweight shell + all HTML/CSS/JS/icons cached atomically on install.
    Photos are cached on demand in a separate persistent cache; core install stays lightweight. */
-const CACHE_VERSION = "cookbook-v2.8.26";
+const CACHE_VERSION = "cookbook-v2.8.27";
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const IMAGE_CACHE = "cookbook-images-v1";
@@ -19,6 +19,7 @@ const CORE_URLS = [
   "./assets/recipes.js",
   "./assets/ingredients.js",
   "./assets/app.js",
+  "./assets/culinary-units.js",
   "./assets/vendor/qrcode-generator.js",
   "./assets/pwa.js",
   "./images/pizza-480.webp",
@@ -49,6 +50,7 @@ const CORE_URLS = [
   "./recipes/herb-compound-butter.html",
   "./recipes/homemade-chicken-broth.html",
   "./recipes/homemade-ricotta.html",
+  "./recipes/homemade-mozzarella.html",
   "./recipes/pecorino-style-sheeps-milk.html",
   "./recipes/japanese-chicken-teriyaki.html",
   "./recipes/italian-seasoning.html",
@@ -91,6 +93,7 @@ const CORE_URLS = [
   "./en/recipes/herb-compound-butter.html",
   "./en/recipes/homemade-chicken-broth.html",
   "./en/recipes/homemade-ricotta.html",
+  "./en/recipes/homemade-mozzarella.html",
   "./en/recipes/pecorino-style-sheeps-milk.html",
   "./en/recipes/japanese-chicken-teriyaki.html",
   "./en/recipes/italian-seasoning.html",
