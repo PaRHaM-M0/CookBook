@@ -209,6 +209,9 @@ function norm(str){
   const toolsBar = document.createElement("div");
   toolsBar.className = "ing-tools";
   toolsBar.innerHTML = `
+    <div class="unit-wrap" role="group" aria-label="${IS_EN ? "Measurement units" : "واحد اندازه‌گیری"}">
+      <button type="button" class="unit-btn" data-unit="metric">Metric</button><button type="button" class="unit-btn" data-unit="imperial">Imperial</button>
+    </div>
     <div class="scale-wrap">
       <span class="scale-lbl">${IS_EN ? "Scale" : "مقیاس"}</span>
       <div class="scale-group" role="group" aria-label="${IS_EN ? "Recipe scale" : "مقیاس مواد اولیه"}">
@@ -216,6 +219,7 @@ function norm(str){
         <button type="button" class="scale-btn active" data-scale="1">1×</button>
         <button type="button" class="scale-btn" data-scale="2">2×</button>
       </div>
+      <label class="custom-scale"><input id="customScale" type="text" inputmode="decimal" placeholder="× …" aria-label="${IS_EN ? "Custom scale" : "ضریب دلخواه"}"/></label>
     </div>
     <button type="button" class="reset-checks" hidden>${IS_EN ? "Clear checks" : "پاک‌کردن تیک‌ها"}</button>
   `;
@@ -300,7 +304,7 @@ function norm(str){
   function formatScaled(val, useFaDigits, preferFraction){
     if (!isFinite(val)) return "";
     const roundedInt = Math.round(val);
-    if (Math.abs(val - roundedInt) < 0.015) {
+    if (Math.abs(val - roundedInt) < 1e-9) {
       const out = String(roundedInt);
       return useFaDigits ? toFaDigits(out) : out;
     }
@@ -308,13 +312,13 @@ function norm(str){
       const whole = Math.floor(val + 0.01);
       const rem = val - whole;
       for (const [fv, sym] of NICE_FRACS) {
-        if (Math.abs(rem - fv) < 0.03) {
+        if (Math.abs(rem - fv) < 1e-8) {
           const wStr = whole > 0 ? (useFaDigits ? toFaDigits(String(whole)) + " " : String(whole)) : "";
           return wStr + sym;
         }
       }
     }
-    const clean = Number(val.toFixed(val < 10 ? (specificScale ? 3 : 2) : 1)).toString();
+    const clean = Number(val.toPrecision(6)).toString();
     return useFaDigits ? toFaDigits(clean) : clean;
   }
 
@@ -322,6 +326,7 @@ function norm(str){
   const QTY_TOKEN_RE = /([0-9۰-۹]+(?:[.,٫][0-9۰-۹]+)?(?:\s*[½⅓⅔¼¾⅛⅜⅝⅞])?|[½⅓⅔¼¾⅛⅜⅝⅞])/g;
 
   function scaleTextNode(text, factor){
+    text = text.replace(/نصف\s+یک(?=\s)/g, "½").replace(/(?:نصف|نیم)(?=\s)/g, "½").replace(/\bhalf(?=\s)/gi, "½");
     return text.replace(QTY_TOKEN_RE, (match, _g1, offset, fullStr) => {
       const after = fullStr.slice(offset + match.length);
       /* Never scale temperatures (°C/°F), percentages (%/٪), or dimensional thicknesses (mm/cm/inch) */
@@ -351,22 +356,33 @@ function norm(str){
   recipeQuantities.forEach(el => { el.dataset.scaleOriginal = el.textContent; });
   recipeAlternates.forEach(el => { el.dataset.scaleOriginal = el.textContent; });
 
+  let currentFactor = 1;
+  let unitSystem;
+  try { unitSystem = localStorage.getItem("cookbook-units") || "metric"; } catch (_) { unitSystem = "metric"; }
+  if (!["metric", "imperial"].includes(unitSystem)) unitSystem = "metric";
+  const customInput = toolsBar.querySelector("#customScale");
   function applyScale(factor, syncUrl){
+    currentFactor = factor;
     amtCells.forEach((td) => {
       td.innerHTML = td.dataset.rawHtml;
-      if (factor === 1) return;
       const walker = document.createTreeWalker(td, NodeFilter.SHOW_TEXT);
       const nodes = [];
       let n;
       while ((n = walker.nextNode())) nodes.push(n);
-      nodes.forEach((tn) => { tn.nodeValue = scaleTextNode(tn.nodeValue, factor); if (specificScale && IS_EN) tn.nodeValue = tn.nodeValue.replace(/\b2 cup\b/g, "2 cups"); });
+      nodes.forEach((tn) => {
+        if (factor !== 1) tn.nodeValue = scaleTextNode(tn.nodeValue, factor);
+        if (specificScale && IS_EN) tn.nodeValue = tn.nodeValue.replace(/\b2 cup\b/g, "2 cups");
+        if (window.CookBookUnits) tn.nodeValue = window.CookBookUnits.convertText(tn.nodeValue, unitSystem, !IS_EN);
+      });
     });
     recipeQuantities.forEach(el => { el.textContent = factor === 1 ? el.dataset.scaleOriginal : scaleTextNode(el.dataset.scaleOriginal, factor); });
-    recipeAlternates.forEach(el => { el.textContent = factor === 0.5 ? el.dataset.scaleHalf : factor === 2 ? el.dataset.scaleDouble : el.dataset.scaleOriginal; });
-    recipeUnits.forEach(el => { el.textContent = el.dataset.scaleUnit + (factor === 2 ? 's' : ''); });
+    recipeAlternates.forEach(el => { el.textContent = factor === 0.5 ? el.dataset.scaleHalf : factor === 2 ? el.dataset.scaleDouble : factor === 1 ? el.dataset.scaleOriginal : scaleTextNode(el.dataset.scaleOriginal, factor); });
+    recipeUnits.forEach(el => { el.textContent = el.dataset.scaleUnit + (factor > 1 ? 's' : ''); });
     $$(".scale-btn", toolsBar).forEach((b) => {
       b.classList.toggle("active", Number(b.dataset.scale) === factor);
     });
+    $$(".unit-btn", toolsBar).forEach(b => { const selected = b.dataset.unit === unitSystem; b.classList.toggle("active", selected); b.setAttribute("aria-pressed", String(selected)); });
+    if (customInput) customInput.value = [0.5,1,2].includes(factor) ? "" : String(factor);
     if (syncUrl) {
       window.CookBookURL.set({ scale: factor === 1 ? null : factor });
     }
@@ -376,8 +392,24 @@ function norm(str){
     btn.addEventListener("click", () => applyScale(Number(btn.dataset.scale), true));
   });
 
-  const urlScale = parseFloat(window.CookBookURL.get("scale") || "1");
-  if (!fixedBatch && (urlScale === 0.5 || urlScale === 2)) applyScale(urlScale, false);
+  $$(".unit-btn", toolsBar).forEach(btn => btn.addEventListener("click", () => {
+    unitSystem = btn.dataset.unit;
+    try { localStorage.setItem("cookbook-units", unitSystem); } catch (_) {}
+    applyScale(currentFactor, false);
+  }));
+  if (customInput) {
+    customInput.addEventListener("change", () => {
+      const value = Number(toAsciiDigits(customInput.value.trim()).replace(',', '.'));
+      if (!Number.isFinite(value) || value < 0.01 || value > 100) {
+        customInput.setCustomValidity(IS_EN ? "Enter a number between 0.01 and 100" : "عددی بین ۰٫۰۱ و ۱۰۰ وارد کن");
+        customInput.reportValidity(); return;
+      }
+      customInput.setCustomValidity(""); applyScale(value, true);
+    });
+    customInput.addEventListener("input", () => customInput.setCustomValidity(""));
+  }
+  const urlScale = Number(window.CookBookURL.get("scale") || "1");
+  applyScale(!fixedBatch && Number.isFinite(urlScale) && urlScale >= .01 && urlScale <= 100 ? urlScale : 1, false);
 })();
 
 /* Navbar scroll border */

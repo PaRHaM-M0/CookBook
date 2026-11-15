@@ -301,3 +301,11 @@ html[data-theme="dark"] .ing-card{background:#34423e;--surface-2:#415149}
 .pecorino-recipe ol.steps[start="16"]{counter-reset:step 15}
 .pecorino-recipe ol.steps[start="20"]{counter-reset:step 19}
 .pecorino-recipe ol.steps[start="21"]{counter-reset:step 20}
+/* Compact unit and custom scale controls */
+.scale-wrap{flex-wrap:wrap}
+.unit-wrap{display:inline-flex;background:var(--surface-2);border-radius:999px;padding:3px;gap:2px;direction:ltr}
+.unit-btn{border:0;background:transparent;border-radius:999px;padding:5px 9px;color:var(--ink-soft);font:700 10px var(--latin);cursor:pointer}
+.unit-btn.active{background:var(--accent-strong);color:var(--bg)}
+.custom-scale input{width:52px;min-height:32px;padding:3px 6px;border:1px solid var(--line-strong);border-radius:8px;color:var(--ink);background:var(--surface);font:inherit;direction:ltr;text-align:center}
+.custom-scale input:focus-visible,.unit-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media print{.unit-wrap,.custom-scale{display:none!important}}
